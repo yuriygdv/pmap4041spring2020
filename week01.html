@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Yuriy Davydenko" />
+<meta name="author" content="YD" />
 
 
-<title>Data Analysis Project</title>
+<title>01. Intro to R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -371,15 +371,41 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Data Analysis Project</h1>
-<h4 class="author">Yuriy Davydenko</h4>
+<h1 class="title toc-ignore">01. Intro to R</h1>
+<h4 class="author">YD</h4>
 
 </div>
 
 
-<p>Data Analysis Project example:</p>
-<p><a href="https://s3.amazonaws.com/coursera-uploads/peer-review/09b037759369477ad351fa552b247dbb/intro_data_prob_project.html">Exploring links between sleep duration and individual health and behaviors.</a></p>
-<hr />
+<div id="installing-r-rstudio" class="section level1">
+<h1>Installing R &amp; RStudio</h1>
+</div>
+<div id="rstudio-interface-console-source-environment-viewer" class="section level1">
+<h1>RStudio Interface: Console, Source, Environment, Viewer</h1>
+<p>###~~~ WORK DIRECTORY ~~~####</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;C:/Users/admin/Dropbox/myWebsite/yuriygdv.rmarkdown&quot;</code></pre>
+<pre class="r"><code>setwd(&quot;.&quot;)</code></pre>
+<p>###~~~ DATA STRUCTURES ~~~### # Four primary data structures in R: # Vectors # Matrices # Data Frames # Lists</p>
+<p>#Vectors: # Numeric # Integer # Character # Factor # Logical</p>
+<p>###~~~ SCALARS ~~~###</p>
+<pre class="r"><code>2 + 2   # Basic Math</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>sqrt(4)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>1:10    # Prints numbers 1 to 10</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>print(&quot;Hello World!&quot;)</code></pre>
+<pre><code>## [1] &quot;Hello World!&quot;</code></pre>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+</div>
 
 
 
