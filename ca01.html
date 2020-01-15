@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Yuriy Davydenko" />
 
+<meta name="date" content="2020-01-15" />
 
-<title>Policy Data Analysis, Spring 2020</title>
+<title>Computer Assignment 1</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +26,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -381,29 +382,79 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Policy Data Analysis, Spring 2020</h1>
+<h1 class="title toc-ignore">Computer Assignment 1</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">January 15, 2020</h4>
 
 </div>
 
 
-<div id="andrew-young-school-of-policy-studies-georgia-state-university" class="section level5">
-<h5>Andrew Young School of Policy Studies, Georgia State University</h5>
-<p><img src="img/piedmont.jpg" width="100%" /></p>
-<blockquote>
-<p>If you learn how to look at data in the right way, you can explain riddles that otherwise might have seemed impossible —Dubner &amp; Levitt, 2014</p>
-</blockquote>
-<p>Does gun ownership affect the level of violence? Which schools provide better education? Do cell phones contribute to auto accidents? Is global warming real? Do genetically modified foods create health risk? Every day, policymakers, business leaders, and citizens face countless questions and need to make important decisions. How can we answer those questions? How should we act? The way we approach such questions determine the quality of the decisions we make and our ability to solve the problems we face.</p>
-<p>Oftentimes, we make decisions based on intuition, seat-of-the-pants guesses, convenient assumptions, anecdotal claims, or beliefs. But beliefs and anecdotes are not backed by evidence and often misleading. Data, on the other hand, are a more reliable ground for decision making. Data analysis helps us understand complex situations and make informed decisions.</p>
-<p>This course is about the process of reasoning and learning from data. It is the introduction to the art and science of extracting insights from data using graphs and numerical summaries. It focuses on statistical analysis methods applicable to the study of policy and management in the public and nonprofit sectors. It introduces the students to the use of descriptive statistics as well as to the development and testing of empirical hypotheses using basic inferential statistical methods. In the course, students learn how to ask the right questions, manipulate datasets, and draw valid conclusions.</p>
-<p>This course heavily relies on statistical ideas, which often are very abstract and difficult to understand. To facilitate comprehension, I rely on a mix of teaching strategies and materials. Those include interactive graphical training applications that I develop to illustrate statistical concepts in a way that makes them more intuitive and fun to experiment with.</p>
 <hr />
-<div class="figure">
-<img src="img/icon.jpg" alt="Yuriy Davydenko, Course Instructor" />
-<p class="caption">Yuriy Davydenko, Course Instructor</p>
+<pre><code>[Assignment must be completed between Wed, Jan 15 - Wed, Jan 29]</code></pre>
+<p><br></p>
+<div id="part-1-required" class="section level2">
+<h2>Part 1 [REQUIRED]</h2>
+<p>Complete RStudio Cloud Primer “The Basics”:</p>
+<pre class="r"><code># Direct link to &quot;The Basics&quot; primer:
+browseURL(&quot;https://rstudio.cloud/learn/primers/1.2&quot;)
+
+# Link to all primers FYI: 
+browseURL(&quot;https://rstudio.cloud/learn/primers&quot;)  # or simply click on &quot;Primers&quot; button in the left pane</code></pre>
+<p><br></p>
 </div>
-<hr />
+<div id="part-2-required" class="section level2">
+<h2>Part 2 [REQUIRED]</h2>
+<p><strong>R Programming E swirl-based training:</strong></p>
+<pre class="r"><code>install.packages(&#39;swirl&#39;)   # install swirl package if it&#39;s not yet installed
+library(swirl)              # load library swirl
+install_course_github(&quot;swirldev&quot;, &quot;R_Programming_E&quot;)  # install R_Programming_E course 
+swirl()                     # run swirl</code></pre>
+<p>Complete the following sections of the course:</p>
+<ol style="list-style-type: decimal">
+<li>Basic Building Blocks</li>
+<li>Workspace and Files</li>
+<li>Sequences of Numbers</li>
+<li>Vectors</li>
+<li>Missing Values</li>
+<li>Subsetting Vectors</li>
+<li>Matrices and Data Frames</li>
+<li>Logic</li>
+<li>Looking at Data</li>
+<li>Base Graphics</li>
+</ol>
+<p><br></p>
+</div>
+<div id="part-3-strongly-recommended" class="section level2">
+<h2>Part 3 [STRONGLY RECOMMENDED]</h2>
+<p><strong>A (very) short introduction to R swirl-based training:</strong></p>
+<pre class="r"><code>swirl::install_course(&quot;A_(very)_short_introduction_to_R&quot;)
+library(swirl)
+swirl()</code></pre>
+<p>Complete the following modules of the course:</p>
+<ol style="list-style-type: decimal">
+<li>Module 1</li>
+<li>Module 2</li>
+<li>Module 3</li>
+</ol>
+<p><br></p>
+</div>
+<div id="part-4-strongly-recommended" class="section level2">
+<h2>Part 4 [STRONGLY RECOMMENDED]</h2>
+<p><strong>Getting and Cleaning Data</strong></p>
+<pre class="r"><code>swirl::install_course(&quot;Getting and Cleaning Data&quot;)
+library(swirl)
+swirl()</code></pre>
+<p>Complete the following modules of the course:</p>
+<ol style="list-style-type: decimal">
+<li>Manipulating Data with dplyr</li>
+<li>Grouping and Chaining with dplyr</li>
+</ol>
+<p><br></p>
+<p>All swirl courses FYI:</p>
+<pre class="r"><code>browseURL(&quot;https://swirlstats.com/scn/title.html&quot;)</code></pre>
 </div>
 
+<p style = "text-align: right;"> Copyright &copy; 2019 </p>
 
 
 

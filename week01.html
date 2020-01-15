@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="YD" />
+<meta name="author" content="Yuriy Davydenko" />
 
+<meta name="date" content="2020-01-15" />
 
-<title>01. Intro to R</title>
+<title>Week 1. Introduction to R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -301,7 +302,18 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R Starter</li>
     <li>
-      <a href="week01.html">Week 1</a>
+      <a href="week01.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 1
+      </a>
+    </li>
+    <li>
+      <a href="ca01.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 1
+      </a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Exploratory Data Analysis</li>
@@ -371,40 +383,343 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">01. Intro to R</h1>
-<h4 class="author">YD</h4>
+<h1 class="title toc-ignore">Week 1. Introduction to R</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">January 15, 2020</h4>
 
 </div>
 
 
-<div id="installing-r-rstudio" class="section level1">
-<h1>Installing R &amp; RStudio</h1>
+<hr />
+<p><br></p>
+<div id="installing-r-rstudio" class="section level4">
+<h4>Installing R &amp; RStudio</h4>
+<p><strong>Step 1:</strong> Go to the <em>R Project for Statistical Computing</em> at <a href="www.r-project.org" class="uri">www.r-project.org</a>, download and install R</p>
+<p><strong>Step 2:</strong> Go to RStudio at <a href="https://rstudio.com/products/rstudio/" class="uri">https://rstudio.com/products/rstudio/</a>, download and install RStudio Desktop (Open Source Edition)</p>
+<p><br></p>
+<p><strong><em>ALTERNATIVELY:</em></strong></p>
+<p>Use RStudio Cloud at <a href="https://rstudio.cloud" class="uri">https://rstudio.cloud</a></p>
+<ul>
+<li>Create personal account</li>
+<li>In every class, use the link that I provide to access the class material. Today’s R workshop can be accessed <a href="https://rstudio.cloud/project/802723">here</a></li>
+</ul>
+<p><br></p>
 </div>
-<div id="rstudio-interface-console-source-environment-viewer" class="section level1">
-<h1>RStudio Interface: Console, Source, Environment, Viewer</h1>
-<p>###~~~ WORK DIRECTORY ~~~####</p>
+<div id="r-primer" class="section level3">
+<h3>R Primer</h3>
+<hr />
+<div id="rstudio-cloud" class="section level4">
+<h4>RStudio Cloud</h4>
+<p>Use the following <a href="https://rstudio.cloud/project/802723">link</a> to access today’s workshop on RStudio Cloud.</p>
+<p><br></p>
+</div>
+<div id="rstudio-interface" class="section level4">
+<h4>RStudio Interface</h4>
+<ul>
+<li>Console,</li>
+<li>Source,</li>
+<li>Environment,</li>
+<li>Viewer</li>
+</ul>
+<p><br></p>
+</div>
+<div id="setting-work-directory" class="section level4">
+<h4>Setting work directory</h4>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;C:/Users/admin/Dropbox/myWebsite/yuriygdv.rmarkdown&quot;</code></pre>
+<pre><code>## [1] &quot;C:/Users/admin/Dropbox/myWebsite/yuriygdv.pmap4041spring2020.Rproj&quot;</code></pre>
 <pre class="r"><code>setwd(&quot;.&quot;)</code></pre>
-<p>###~~~ DATA STRUCTURES ~~~### # Four primary data structures in R: # Vectors # Matrices # Data Frames # Lists</p>
-<p>#Vectors: # Numeric # Integer # Character # Factor # Logical</p>
-<p>###~~~ SCALARS ~~~###</p>
+<p>Commenting and executing commands:</p>
+<pre class="r"><code># This is a comment
+# There is no capacity for multi-line comments although you can highlight multiple lines by pressing Shift+Ctl+C
+# Execute command with Ctrl+Enter</code></pre>
+<p><br></p>
+</div>
+<div id="data-structures" class="section level4">
+<h4>Data Structures</h4>
+<p>Four primary data structures in R:</p>
+<ul>
+<li>Vectors</li>
+<li>Matrices</li>
+<li>Data Frames</li>
+<li>Lists</li>
+</ul>
+<p>Vectors:</p>
+<ul>
+<li>Numeric</li>
+<li>Integer</li>
+<li>Character</li>
+<li>Factor</li>
+<li>Logical</li>
+</ul>
+</div>
+<div id="scalars" class="section level4">
+<h4>Scalars</h4>
 <pre class="r"><code>2 + 2   # Basic Math</code></pre>
 <pre><code>## [1] 4</code></pre>
-<pre class="r"><code>sqrt(4)</code></pre>
+<pre class="r"><code>sqrt(4)  # Square root of four</code></pre>
 <pre><code>## [1] 2</code></pre>
+</div>
+<div id="variables-assignment-operator" class="section level4">
+<h4>Variables &amp; assignment operator</h4>
+<pre class="r"><code>x &lt;- 1      # &lt;- &quot;gets&quot; operator
+x           # Displays the values in x</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>y &lt;- 2
+y</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>z &lt;- x+y
+z</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="other-operators" class="section level4">
+<h4>Other Operators</h4>
+<pre class="r"><code>1:10    # &quot;:&quot; produces integers</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>c(1, 2, 3, 4)     # produces floating-point numbers</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<pre class="r"><code>1==1    # Test for equality</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>1!=1    # Test for inequality</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code># &lt;, &gt;, &lt;=, &gt;=   # more tests</code></pre>
 <pre class="r"><code>1:10    # Prints numbers 1 to 10</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code>print(&quot;Hello World!&quot;)</code></pre>
 <pre><code>## [1] &quot;Hello World!&quot;</code></pre>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+</div>
+<div id="vectors" class="section level4">
+<h4>Vectors</h4>
+<p>Vectors - the R workhorse, a container for values Let’s make a simple dataset (vector):</p>
+<pre class="r"><code>scores1 &lt;- c(1, 2, 3, 4, 5)   # Puts the numbers 1-5 in the variable x
+scores2 &lt;- 1:5                # Puts the numbers 1-5 in the variable x
+scores3 &lt;- c(scores1, scores2, 1, 2, 3, 5)
+seq(from=1, to=5, by=1)</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>rep(1, times=5) </code></pre>
+<pre><code>## [1] 1 1 1 1 1</code></pre>
+</div>
+<div id="vector-math" class="section level4">
+<h4>Vector Math</h4>
+<pre class="r"><code>x * 2  # Multiplies each element in x by 2</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>x + y  # Adds corresponding elements in x and y</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="applying-functions-to-vectors" class="section level4">
+<h4>Applying functions to vectors:</h4>
+<pre class="r"><code>max(x)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>min(scores3)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>length(x)</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="indexingsubsetting-vectors" class="section level4">
+<h4>Indexing/subsetting vectors:</h4>
+<pre class="r"><code>x[1]  # chooses 1st element of the vector x</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>x[2:3]</code></pre>
+<pre><code>## [1] NA NA</code></pre>
+<pre class="r"><code>v &lt;- c(1, 15, 2020); names(v) &lt;- c(&quot;Month&quot;, &quot;Day&quot;, &quot;Year&quot;)
+v[&quot;Year&quot;]   # If vector elements have names - select by name</code></pre>
+<pre><code>## Year 
+## 2020</code></pre>
+</div>
+<div id="negative-subscripts-mean-that-we-want-to-exclude-the-given-elements-in-our-output." class="section level4">
+<h4>Negative subscripts mean that we want to exclude the given elements in our output.</h4>
+<pre class="r"><code>x[-1]    # exclude element 1</code></pre>
+<pre><code>## numeric(0)</code></pre>
+<pre class="r"><code>x[-1:-2] # exclude elements 1 through 2</code></pre>
+<pre><code>## numeric(0)</code></pre>
+</div>
+<div id="logical-operations" class="section level4">
+<h4>Logical operations</h4>
+<pre class="r"><code>v &lt;- 1:10
+v&gt;5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+<div id="filtering" class="section level4">
+<h4>Filtering</h4>
+<pre class="r"><code>v &lt;- seq(from = 1, to = 20, by = 2)
+v[v&gt;5]</code></pre>
+<pre><code>## [1]  7  9 11 13 15 17 19</code></pre>
+<pre class="r"><code>subset(v,v &gt; 5)  # NA values are removed when using subset()</code></pre>
+<pre><code>## [1]  7  9 11 13 15 17 19</code></pre>
+<pre class="r"><code>which(v&gt;5)       # find the positions within v at which the condition occurs</code></pre>
+<pre><code>## [1]  4  5  6  7  8  9 10</code></pre>
+</div>
+<div id="transforming" class="section level4">
+<h4>Transforming</h4>
+<pre class="r"><code>v &lt;- 1:10
+v</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>v.dummy &lt;- ifelse(v&gt;5, 1,0)  # creating a binary variable </code></pre>
+</div>
+<div id="characters" class="section level4">
+<h4>Characters</h4>
+<pre class="r"><code>a &lt;- c(1,2,3)
+b &lt;- &quot;1,2,3&quot;
+c &lt;- paste(&quot;abc&quot;,&quot;de&quot;,&quot;f&quot;) # concatenate the strings
+d &lt;- strsplit(c,&quot; &quot;) # split the string according to blanks
+
+length(a); length(b)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="matrices" class="section level4">
+<h4>Matrices</h4>
+<p>A matrix - a rectangular array of numbers</p>
+<pre class="r"><code>m &lt;- matrix(1:4, nrow = 2)    # Create a 2x2 matrix
+m &lt;- matrix(1:4, ncol = 2)
+m &lt;- rbind(c(1,4),c(2,2))</code></pre>
+<p>Indexing/subsetting a matrix:</p>
+<pre class="r"><code>m[1,]      # select firs row</code></pre>
+<pre><code>## [1] 1 4</code></pre>
+<pre class="r"><code>m[,2]      # select second column</code></pre>
+<pre><code>## [1] 4 2</code></pre>
+<pre class="r"><code>m[2,1]     # select the element in the second row, first column</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="lists" class="section level4">
+<h4>Lists</h4>
+<p>An R list is a container for values, but its contents can be items of different data types.</p>
+<pre class="r"><code>l &lt;- list(test_scores=25, student_names=&quot;xyz&quot;)
+l</code></pre>
+<pre><code>## $test_scores
+## [1] 25
+## 
+## $student_names
+## [1] &quot;xyz&quot;</code></pre>
+<p>The expression <code>l$name1</code> refers to the name1 component in the list l:</p>
+<pre class="r"><code>l$name1</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code>str(l)</code></pre>
+<pre><code>## List of 2
+##  $ test_scores  : num 25
+##  $ student_names: chr &quot;xyz&quot;</code></pre>
+</div>
+<div id="data-frames" class="section level4">
+<h4>Data Frames</h4>
+<p>A data frame in R is a list, each element of which is a vector of the same lenght</p>
+<pre class="r"><code>df &lt;- data.frame(Month = c(&quot;Jan&quot;, &quot;Feb&quot;, &quot;March&quot;), Day = c(15, 20, 22), Year = rep(2020, times = 3))
+df</code></pre>
+<pre><code>##   Month Day Year
+## 1   Jan  15 2020
+## 2   Feb  20 2020
+## 3 March  22 2020</code></pre>
+</div>
+<div id="na-and-null-values" class="section level4">
+<h4>NA and NULL Values</h4>
+<pre class="r"><code>v &lt;- c(1,NA,3,4,5)
+max(v)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>max(v,na.rm=T)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>v &lt;- NA
+c(v, 1)</code></pre>
+<pre><code>## [1] NA  1</code></pre>
+<pre class="r"><code>v0 &lt;- NULL
+c(v0, 1)   # NULL values really are counted as nonexistent</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="checking-data-types" class="section level4">
+<h4>Checking Data Types</h4>
+<pre class="r"><code>a &lt;- 1:10; b &lt;- &quot;1 to 10&quot;
+
+typeof(a)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>typeof(b)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>mode(a)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>mode(b)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(a)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>class(b)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>df &lt;- data.frame(Month = c(&quot;Jan&quot;, &quot;Feb&quot;, &quot;March&quot;), Day = c(15, 20, 22), Year = rep(2020, times = 3))
+typeof(df)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>mode(df)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>class(df)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+</div>
+<div id="clean-up" class="section level4">
+<h4>Clean Up</h4>
+<pre class="r"><code>rm(x)  # Remove an object from workspace
+rm(a, b)  # Remove more than one
+rm(list = ls())  # Clear entire workspace</code></pre>
+</div>
+<div id="r-style-guide" class="section level4">
+<h4>R-Style Guide</h4>
+<pre class="r"><code>browseURL(&quot;https://jef.works/R-style-guide/&quot;)</code></pre>
+</div>
+<div id="help" class="section level4">
+<h4>Help</h4>
+<pre class="r"><code>help(functionname) 
+help(mean)
+?mean
+example(max) 
+?&quot;&lt;&quot;</code></pre>
+</div>
+<div id="r-packages" class="section level4">
+<h4>R Packages</h4>
+<p>See existing packages online:</p>
+<pre class="r"><code>browseURL(&quot;https://cran.r-project.org/web/packages/available_packages_by_name.html&quot;)</code></pre>
+<pre class="r"><code>library()  # List of installed packages
+search()   # Shows packages that are currently loaded</code></pre>
+<p>Installing &amp; loading packages:</p>
+<pre class="r"><code>install.packages(&quot;summarytools&quot;)  # Download and install package in R
+library(&quot;ggplot2&quot;)  # Load a package into R
+require(&quot;ggplot2&quot;)  # Load a package into R</code></pre>
+<pre class="r"><code>library(help = &quot;ggplot2&quot;)  # Brings up documentation on a package
+vignette(package = &quot;grid&quot;)  # Brings up list of vignettes (examples) in editor window
+browseVignettes(package = &quot;grid&quot;)  # Open web page with hyperlinks for vignette PDFs etc.
+
+update.packages()  # Checks for updates
+
+detach(&quot;package:ggplot2&quot;, unload = TRUE)  # detach package
+
+remove.packages(&quot;psytabs&quot;)   # Deletes it</code></pre>
+</div>
+<div id="built-in-datasets" class="section level4">
+<h4>Built-in Datasets</h4>
+<p>See the available datasets online:</p>
+<pre class="r"><code>browseURL(&quot;http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html&quot;)</code></pre>
+<pre class="r"><code>library(help = &quot;datasets&quot;)     # See the list of available datasets
+data()                         # See the list of available datasets
+try(data(package = &quot;rpart&quot;) )  # list the data sets in the rpart package
+?datasets::cars                # Information about a particular dataset in the package
+
+library(datasets)  # Load the library with the built-in datasets
+require(datasets)  # Load the library with the built-in datasets
+
+data(cars)   # Load dataset cars
+str(cars)    # See the structure of the dataset cars
+
+data(Cars93, package=&quot;MASS&quot;) </code></pre>
+</div>
+<div id="import-data" class="section level4">
+<h4>Import Data</h4>
+<pre class="r"><code>txt.file &lt;- read.table(&quot;Data/file.txt&quot;, header = TRUE)           
+txt.file &lt;- read.table(&quot;Data/file.txt&quot;, header = TRUE, sep = &quot;\t&quot;)
+csv.file &lt;- read.csv(&quot;Data/file.csv&quot;, header = TRUE)</code></pre>
+</div>
+<div id="saving-data" class="section level4">
+<h4>Saving Data</h4>
+<pre class="r"><code>save(myData, file = &quot;myData.RData&quot;)  # save the object to a file 
+load(file = &quot;myData.RData&quot;)          # load previously saved data from .RData file</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+<p>Download this source file:</p>
+<ul>
+<li><a href="docs/01_Intro.R">R Script</a></li>
+<li><a href="docs/01_Intro.Rmd">R Markdown</a></li>
+</ul>
+</div>
 </div>
 
 
