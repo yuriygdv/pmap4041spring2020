@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yuriy Davydenko" />
+
+<meta name="date" content="2020-01-29" />
+
+<title>Class 3. FREQUENCY DISTRIBUTIONS: In-Class Practice</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/gsu_ico.png">
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PMAP 4041</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-info"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    R Workshops
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R Starter</li>
+    <li>
+      <a href="week01.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 1
+      </a>
+    </li>
+    <li>
+      <a href="ca01.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 1
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Exploratory Data Analysis</li>
+    <li>
+      <a href="week03.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 3
+      </a>
+    </li>
+    <li>
+      <a href="ca03.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 3
+      </a>
+    </li>
+    <li>
+      <a href="week4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="week5.html">Week 5</a>
+    </li>
+    <li>
+      <a href="week6.html">Week 6</a>
+    </li>
+    <li>
+      <a href="week7.html">Week 7</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inference</li>
+    <li>
+      <a href="week10.html">Week 10</a>
+    </li>
+    <li>
+      <a href="week11.html">Week 11</a>
+    </li>
+    <li>
+      <a href="week12.html">Week 12</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project.html">
+    <span class="fa fa-tasks"></span>
+     
+    Course Project
+  </a>
+</li>
+<li>
+  <a href="https://rstudio.cloud">
+    <span class="fa fa-cloud"></span>
+     
+    RStudio.cloud
+  </a>
+</li>
+<li>
+  <a href="https://rpubs.com">
+    <span class="fa fa-pencil"></span>
+     
+    RPubs
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://calendly.com/ydavydenko1">
+    <span class="fa fa-question fa-lg"></span>
+     
+    Appointment
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Class 3. FREQUENCY DISTRIBUTIONS: In-Class Practice</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">January 29, 2020</h4>
+
+</div>
+
+
+<p><br></p>
+<p>Download the datasets for this class:</p>
+<ul>
+<li><a href="docs/Class3_Datasets.zip">Datasets</a></li>
+</ul>
+<p><br></p>
+<pre class="r"><code>library(dplyr)
+library(knitr)
+library(summarytools)</code></pre>
+<p><br></p>
+<div id="frequency-distribution-tables" class="section level1">
+<h1>3.1 Frequency Distribution Tables</h1>
+<p><strong>(See Lecture Notes 1)</strong></p>
+<div id="example-1-two-sets-of-rated-charities" class="section level3">
+<h3>Example 1: Two sets of rated charities</h3>
+<p>Assume you are studying charitable performance and have two samples of charities - one sample of 10 charities “Datasets/s10.RData” and one sample of 100 charities. Each sample contains data on charity ratings. Let’s read the datasets into R and generate frequency tables for each ssample:</p>
+<pre class="r"><code>load(&quot;Datasets/s10.RData&quot;)   # load charity ratings data: the sample of 10
+freq(s10)</code></pre>
+<pre><code>## Frequencies  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1      1     10.00          10.00     10.00          10.00
+##           2      1     10.00          20.00     10.00          20.00
+##           4      4     40.00          60.00     40.00          60.00
+##           5      4     40.00         100.00     40.00         100.00
+##        &lt;NA&gt;      0                               0.00         100.00
+##       Total     10    100.00         100.00    100.00         100.00</code></pre>
+<pre class="r"><code>load(&quot;Datasets/s100.RData&quot;)   # load charity ratings data: the sample of 100
+freq(s100)</code></pre>
+<pre><code>## Frequencies  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           1      5      5.00           5.00      5.00           5.00
+##           2     13     13.00          18.00     13.00          18.00
+##           3     16     16.00          34.00     16.00          34.00
+##           4     33     33.00          67.00     33.00          67.00
+##           5     33     33.00         100.00     33.00         100.00
+##        &lt;NA&gt;      0                               0.00         100.00
+##       Total    100    100.00         100.00    100.00         100.00</code></pre>
+<p></br></p>
+<hr />
+<p></br></p>
+</div>
+<div id="example-2-general-social-survey-gss" class="section level3">
+<h3>EXAMPLE 2: General Social Survey (GSS)</h3>
+<p>Assume you are studying Americans’ attitudes toward premarital sex. In 1998, the General Social Survey (GSS) asked a random sample of Americans, the following question:</p>
+<blockquote>
+<p><em>There’s been a lot of discussion about the way morals and attitudes about sex are changing in this country. If a man and woman have sex relations before marriage, do you think it is always wrong, almost always wrong, wrong only sometimes, or not wrong at all?</em></p>
+</blockquote>
+<p>We have a sample with 1000 responses to some of the survey questions, including the question about respondents’ attitudes toward sex before marriage.</p>
+<p>Let’s load the dataset <code>gss98_4041.csv</code> from the <em>Dataset</em> folder:</p>
+<pre class="r"><code>load(file = &quot;Datasets/gss98.RData&quot;)</code></pre>
+<p>The dataset contains data on the following 49 variables:</p>
+<pre class="r"><code>names(gss98)</code></pre>
+<pre><code>##  [1] &quot;X.1&quot;      &quot;X&quot;        &quot;SEX&quot;      &quot;RACE&quot;     &quot;RELIG&quot;    &quot;FUND&quot;    
+##  [7] &quot;MARITAL&quot;  &quot;ATTEND&quot;   &quot;PREMARSX&quot; &quot;XMARSEX&quot;  &quot;HOMOSEX&quot;  &quot;TEENSEX&quot; 
+## [13] &quot;ABANY&quot;    &quot;CAPPUN&quot;   &quot;GUNLAW&quot;   &quot;GRASS&quot;    &quot;PRAYER&quot;   &quot;NATCITY&quot; 
+## [19] &quot;NATHEAL&quot;  &quot;NATCRIME&quot; &quot;NATDRUG&quot;  &quot;NATEDUC&quot;  &quot;NATRACE&quot;  &quot;NATFARE&quot; 
+## [25] &quot;NATROAD&quot;  &quot;NATMASS&quot;  &quot;CONCLERG&quot; &quot;CONEDUC&quot;  &quot;CONFED&quot;   &quot;CONPRESS&quot;
+## [31] &quot;CONJUDGE&quot; &quot;CONLEGIS&quot; &quot;FECHLD&quot;   &quot;FEHELP&quot;   &quot;FEPRESCH&quot; &quot;FEFAM&quot;   
+## [37] &quot;RACDIF1&quot;  &quot;LIVEBLKS&quot; &quot;MARBLK&quot;   &quot;DISCAFF&quot;  &quot;PARTY&quot;    &quot;IDEOLOGY&quot;
+## [43] &quot;AGESUM&quot;   &quot;INCOME&quot;   &quot;EDUC2&quot;    &quot;REGION2&quot;  &quot;CITY&quot;     &quot;RURAL&quot;   
+## [49] &quot;PROT&quot;     &quot;NEWFUND&quot;</code></pre>
+<p>To learn more about each variable <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">see the codebook for the survey here.</a></p>
+<p>Let’s take a look at several selected Variables (first ten cases) from the General Social Survey (GSS) 1998:</p>
+<pre class="r"><code>gss98[1:10, c(&quot;SEX&quot;, &quot;RACE&quot;, &quot;RELIG&quot;, &quot;AGESUM&quot;, &quot;EDUC2&quot;, &quot;FUND&quot;, &quot;MARITAL&quot;, &quot;INCOME&quot;, &quot;PARTY&quot;, &quot;PREMARSX&quot;)] %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">SEX</th>
+<th align="left">RACE</th>
+<th align="left">RELIG</th>
+<th align="left">AGESUM</th>
+<th align="left">EDUC2</th>
+<th align="left">FUND</th>
+<th align="left">MARITAL</th>
+<th align="left">INCOME</th>
+<th align="left">PARTY</th>
+<th align="left">PREMARSX</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">30 to 44</td>
+<td align="left">high school graduate</td>
+<td align="left">liberal</td>
+<td align="left">Married</td>
+<td align="left">$60,000 or more</td>
+<td align="left">Independent</td>
+<td align="left">Always wrong</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Catholic</td>
+<td align="left">18 to 29</td>
+<td align="left">high school graduate</td>
+<td align="left">moderate</td>
+<td align="left">Never married</td>
+<td align="left">$35,000 to $59,000</td>
+<td align="left">Republican</td>
+<td align="left">Not wrong at all</td>
+</tr>
+<tr class="odd">
+<td align="left">female</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">30 to 44</td>
+<td align="left">some college</td>
+<td align="left">fundamentalist</td>
+<td align="left">Divorced</td>
+<td align="left">$20,000 to $34,999</td>
+<td align="left">Democrat</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">female</td>
+<td align="left">Other</td>
+<td align="left">Catholic</td>
+<td align="left">30 to 44</td>
+<td align="left">less than h.s. diploma</td>
+<td align="left">moderate</td>
+<td align="left">Widowed</td>
+<td align="left">NA</td>
+<td align="left">Independent</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">30 to 44</td>
+<td align="left">college graduate</td>
+<td align="left">fundamentalist</td>
+<td align="left">Married</td>
+<td align="left">$60,000 or more</td>
+<td align="left">Republican</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">60 or older</td>
+<td align="left">college graduate</td>
+<td align="left">fundamentalist</td>
+<td align="left">Married</td>
+<td align="left">NA</td>
+<td align="left">Independent</td>
+<td align="left">Always wrong</td>
+</tr>
+<tr class="odd">
+<td align="left">female</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">30 to 44</td>
+<td align="left">some college</td>
+<td align="left">moderate</td>
+<td align="left">Never married</td>
+<td align="left">NA</td>
+<td align="left">Independent</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">female</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">60 or older</td>
+<td align="left">some college</td>
+<td align="left">liberal</td>
+<td align="left">Divorced</td>
+<td align="left">$20,000 to $34,999</td>
+<td align="left">Republican</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">45 to 59</td>
+<td align="left">college graduate</td>
+<td align="left">liberal</td>
+<td align="left">Divorced</td>
+<td align="left">NA</td>
+<td align="left">Republican</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="left">White</td>
+<td align="left">Protestant</td>
+<td align="left">60 or older</td>
+<td align="left">high school graduate</td>
+<td align="left">fundamentalist</td>
+<td align="left">Married</td>
+<td align="left">NA</td>
+<td align="left">Independent</td>
+<td align="left">Not wrong at all</td>
+</tr>
+</tbody>
+</table>
+<p>[ <strong>VAR:</strong> <code>PREMARSX</code> ]</p>
+<p>According to <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">the survey’s codebook</a>, the variable of interest describing individual attitudes toward premarital sex is labelled <code>PREMARSX</code>.</p>
+<p>Let’s generate the <strong>Frequency Distribution Table</strong> for <code>PREMARSX</code> using the function <code>summarytools::freq('_Variable Name_')</code>:</p>
+<pre class="r"><code>library(summarytools)   # Make sure you&#39;ve loaded the library &#39;summarytools&#39;
+gss98$PREMARSX &lt;- factor(gss98$PREMARSX, levels = c(&quot;Always wrong&quot;, &quot;Almst alwys wrng&quot;, &quot;Wrong sometimes&quot;, &quot;Not wrong at all&quot;))
+freq(gss98$PREMARSX)    # Generate frequency distribution using command &#39;freq()&#39; from the library &#39;summarytools&#39;</code></pre>
+<pre><code>## Frequencies  
+## 
+##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ---------------------- ------ --------- -------------- --------- --------------
+##           Always wrong    156     24.53          24.53     15.60          15.60
+##       Almst alwys wrng     56      8.81          33.33      5.60          21.20
+##        Wrong sometimes    144     22.64          55.97     14.40          35.60
+##       Not wrong at all    280     44.03         100.00     28.00          63.60
+##                   &lt;NA&gt;    364                              36.40         100.00
+##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p>Let’s generate frequency tables for two more variables:</p>
+<p>[ <strong>VAR:</strong> <code>HOMOSEX</code> ] <em>What about sexual relations between two adults of the same sex–do you think it is always wrong, almost always wrong, wrong only sometimes, or not wrong at all?</em></p>
+<pre class="r"><code>freq(gss98$HOMOSEX)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ---------------------- ------ --------- -------------- --------- --------------
+##       Almst alwys wrng     31      5.02           5.02      3.10           3.10
+##           Always wrong    356     57.70          62.72     35.60          38.70
+##       Not wrong at all    186     30.15          92.87     18.60          57.30
+##        Wrong sometimes     44      7.13         100.00      4.40          61.70
+##                   &lt;NA&gt;    383                              38.30         100.00
+##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p>[ <strong>VAR:</strong> <code>TEENSEX</code> ] <em>What if they are in their early teens, say 14 to 16 years old? In that case, do you think sex relations before marriage are always wrong, almost always wrong, wrong only sometimes, or not wrong at all?</em></p>
+<pre class="r"><code>freq(gss98$TEENSEX)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ---------------------- ------ --------- -------------- --------- --------------
+##       Almst alwys wrng    107     16.44          16.44     10.70          10.70
+##           Always wrong    465     71.43          87.86     46.50          57.20
+##       Not wrong at all     28      4.30          92.17      2.80          60.00
+##        Wrong sometimes     51      7.83         100.00      5.10          65.10
+##                   &lt;NA&gt;    349                              34.90         100.00
+##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+</div>
+<div id="example-3-student-test-scores" class="section level3">
+<h3>EXAMPLE 3: Student Test Scores</h3>
+<p>Let’s read the dataset with student test scores into R and print the scores on the screen:</p>
+<pre class="r"><code>test_scores &lt;- read.csv(&quot;Datasets/TestScores.csv&quot;)
+data.frame(&quot;Class 1&quot; = test_scores[test_scores$Class==&quot;Class1&quot; , &quot;Score&quot;], 
+           &quot;Class 2&quot; = test_scores[test_scores$Class==&quot;Class2&quot; , &quot;Score&quot;], 
+           &quot;Class 3&quot; = test_scores[test_scores$Class==&quot;Class3&quot; , &quot;Score&quot;] ) %&gt;% kable(align = c(&quot;l&quot;,&quot;l&quot;,&quot;l&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class.1</th>
+<th align="left">Class.2</th>
+<th align="left">Class.3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">79</td>
+<td align="left">75</td>
+<td align="left">100</td>
+</tr>
+<tr class="even">
+<td align="left">75</td>
+<td align="left">78</td>
+<td align="left">80</td>
+</tr>
+<tr class="odd">
+<td align="left">82</td>
+<td align="left">82</td>
+<td align="left">93</td>
+</tr>
+<tr class="even">
+<td align="left">91</td>
+<td align="left">88</td>
+<td align="left">85</td>
+</tr>
+<tr class="odd">
+<td align="left">88</td>
+<td align="left">92</td>
+<td align="left">90</td>
+</tr>
+<tr class="even">
+<td align="left">78</td>
+<td align="left">56</td>
+<td align="left">70</td>
+</tr>
+<tr class="odd">
+<td align="left">79</td>
+<td align="left">85</td>
+<td align="left">72</td>
+</tr>
+<tr class="even">
+<td align="left">75</td>
+<td align="left">90</td>
+<td align="left">77</td>
+</tr>
+<tr class="odd">
+<td align="left">78</td>
+<td align="left">78</td>
+<td align="left">79</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="left">81</td>
+<td align="left">81</td>
+</tr>
+<tr class="odd">
+<td align="left">74</td>
+<td align="left">79</td>
+<td align="left">80</td>
+</tr>
+<tr class="even">
+<td align="left">77</td>
+<td align="left">64</td>
+<td align="left">82</td>
+</tr>
+<tr class="odd">
+<td align="left">81</td>
+<td align="left">67</td>
+<td align="left">77</td>
+</tr>
+<tr class="even">
+<td align="left">90</td>
+<td align="left">41</td>
+<td align="left">78</td>
+</tr>
+<tr class="odd">
+<td align="left">74</td>
+<td align="left">40</td>
+<td align="left">92</td>
+</tr>
+<tr class="even">
+<td align="left">71</td>
+<td align="left">61</td>
+<td align="left">98</td>
+</tr>
+<tr class="odd">
+<td align="left">85</td>
+<td align="left">68</td>
+<td align="left">83</td>
+</tr>
+<tr class="even">
+<td align="left">65</td>
+<td align="left">79</td>
+<td align="left">83</td>
+</tr>
+<tr class="odd">
+<td align="left">73</td>
+<td align="left">89</td>
+<td align="left">92</td>
+</tr>
+<tr class="even">
+<td align="left">81</td>
+<td align="left">64</td>
+<td align="left">79</td>
+</tr>
+<tr class="odd">
+<td align="left">77</td>
+<td align="left">97</td>
+<td align="left">80</td>
+</tr>
+<tr class="even">
+<td align="left">74</td>
+<td align="left">95</td>
+<td align="left">71</td>
+</tr>
+<tr class="odd">
+<td align="left">85</td>
+<td align="left">73</td>
+<td align="left">94</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="left">91</td>
+<td align="left">92</td>
+</tr>
+<tr class="odd">
+<td align="left">82</td>
+<td align="left">56</td>
+<td align="left">79</td>
+</tr>
+<tr class="even">
+<td align="left">79</td>
+<td align="left">64</td>
+<td align="left">83</td>
+</tr>
+<tr class="odd">
+<td align="left">18</td>
+<td align="left">74</td>
+<td align="left">81</td>
+</tr>
+<tr class="even">
+<td align="left">32</td>
+<td align="left">67</td>
+<td align="left">98</td>
+</tr>
+<tr class="odd">
+<td align="left">95</td>
+<td align="left">67</td>
+<td align="left">73</td>
+</tr>
+<tr class="even">
+<td align="left">77</td>
+<td align="left">54</td>
+<td align="left">91</td>
+</tr>
+<tr class="odd">
+<td align="left">83</td>
+<td align="left">97</td>
+<td align="left">74</td>
+</tr>
+<tr class="even">
+<td align="left">74</td>
+<td align="left">87</td>
+<td align="left">84</td>
+</tr>
+<tr class="odd">
+<td align="left">76</td>
+<td align="left">80</td>
+<td align="left">91</td>
+</tr>
+<tr class="even">
+<td align="left">60</td>
+<td align="left">89</td>
+<td align="left">88</td>
+</tr>
+<tr class="odd">
+<td align="left">61</td>
+<td align="left">81</td>
+<td align="left">89</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s generate a contingency table:</p>
+<pre class="r"><code>testscores &lt;- read.csv(&quot;Datasets/TestScores.csv&quot;)  
+summarytools::freq(testscores$Score)                 #Oops, NOT VERY USEFUL !!!</code></pre>
+<pre><code>## Frequencies  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           0      1      0.95           0.95      0.95           0.95
+##          15      1      0.95           1.90      0.95           1.90
+##          18      1      0.95           2.86      0.95           2.86
+##          32      1      0.95           3.81      0.95           3.81
+##          40      1      0.95           4.76      0.95           4.76
+##          41      1      0.95           5.71      0.95           5.71
+##          54      1      0.95           6.67      0.95           6.67
+##          56      2      1.90           8.57      1.90           8.57
+##          60      1      0.95           9.52      0.95           9.52
+##          61      2      1.90          11.43      1.90          11.43
+##          64      3      2.86          14.29      2.86          14.29
+##          65      1      0.95          15.24      0.95          15.24
+##          67      3      2.86          18.10      2.86          18.10
+##          68      1      0.95          19.05      0.95          19.05
+##          70      1      0.95          20.00      0.95          20.00
+##          71      2      1.90          21.90      1.90          21.90
+##          72      1      0.95          22.86      0.95          22.86
+##          73      3      2.86          25.71      2.86          25.71
+##          74      6      5.71          31.43      5.71          31.43
+##          75      3      2.86          34.29      2.86          34.29
+##          76      1      0.95          35.24      0.95          35.24
+##          77      5      4.76          40.00      4.76          40.00
+##          78      5      4.76          44.76      4.76          44.76
+##          79      8      7.62          52.38      7.62          52.38
+##          80      4      3.81          56.19      3.81          56.19
+##          81      6      5.71          61.90      5.71          61.90
+##          82      4      3.81          65.71      3.81          65.71
+##          83      4      3.81          69.52      3.81          69.52
+##          84      1      0.95          70.48      0.95          70.48
+##          85      4      3.81          74.29      3.81          74.29
+##          87      1      0.95          75.24      0.95          75.24
+##          88      3      2.86          78.10      2.86          78.10
+##          89      3      2.86          80.95      2.86          80.95
+##          90      3      2.86          83.81      2.86          83.81
+##          91      4      3.81          87.62      3.81          87.62
+##          92      4      3.81          91.43      3.81          91.43
+##          93      1      0.95          92.38      0.95          92.38
+##          94      1      0.95          93.33      0.95          93.33
+##          95      2      1.90          95.24      1.90          95.24
+##          97      2      1.90          97.14      1.90          97.14
+##          98      2      1.90          99.05      1.90          99.05
+##         100      1      0.95         100.00      0.95         100.00
+##        &lt;NA&gt;      0                               0.00         100.00
+##       Total    105    100.00         100.00    100.00         100.00</code></pre>
+<p><strong>Too long and not very informative (because there are too many values that the variable take), isn’t it?</strong></p>
+<p>Instead of displaying and calculating the frequency for each value the numeric (interval level) variable takes, we can cut the range of values into intervals using the command <code>cut()</code>:</p>
+<pre class="r"><code>score_intervals &lt;- cut(x = testscores$Score, breaks = c(0,60,70,80,90,100), include.lowest = TRUE)</code></pre>
+<p>Now we can generate a frequency distribution for the intervals:</p>
+<pre class="r"><code>summarytools::freq(score_intervals)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                  Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## -------------- ------ --------- -------------- --------- --------------
+##         [0,60]     10      9.52           9.52      9.52           9.52
+##        (60,70]     11     10.48          20.00     10.48          20.00
+##        (70,80]     38     36.19          56.19     36.19          56.19
+##        (80,90]     29     27.62          83.81     27.62          83.81
+##       (90,100]     17     16.19         100.00     16.19         100.00
+##           &lt;NA&gt;      0                               0.00         100.00
+##          Total    105    100.00         100.00    100.00         100.00</code></pre>
+<p></br></p>
+<hr />
+<hr />
+<hr />
+<p></br></p>
+</div>
+</div>
+<div id="graphing-frequency-distributions" class="section level1">
+<h1>3.2 Graphing Frequency Distributions</h1>
+<pre class="r"><code>test_scores &lt;- read.csv(&quot;Datasets/TestScores.csv&quot;)  </code></pre>
+<pre class="r"><code>library(ggplot2)
+
+test_scores %&gt;% filter(Class == &quot;Class1&quot;) %&gt;%
+ggplot(aes(x=Score)) + 
+    geom_dotplot(fill=&quot;darkred&quot;, color=&quot;darkred&quot;, alpha = 0.3) + 
+    xlim(0,100) + 
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    labs(title = &quot;Test Scores (Class 1) - Stacked Dot Plot&quot;)</code></pre>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>test_scores %&gt;% 
+    ggplot(aes(x=Score)) + 
+    geom_dotplot(fill=&quot;darkred&quot;, color=&quot;darkred&quot;, alpha = 0.3) + 
+    xlim(0,100) + 
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    labs(title = &quot;Test Scores (Classes 1-3) - Stacked Dot Plot&quot;)</code></pre>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><strong>This is not practical when the number of observations in the dataset is large!</strong></p>
+<p>Instead, use a histogram:</p>
+<pre class="r"><code>ggplot(data = test_scores) + geom_histogram(aes(x = Score), bins = 30, fill = &quot;darkred&quot;) + 
+                              labs(title = &quot;Test Scores (All) - Histogram&quot;)</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = test_scores) + geom_histogram(aes(x = Score, fill = Class)) + 
+                             labs(title = &quot;Test Scores (All) - Histogram&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = test_scores) + geom_histogram(aes(x = Score, fill = Class)) + facet_grid(Class ~ .) + 
+                             labs(title = &quot;Test Scores (Classes 1-3) - Histogram&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<p>For categorical (nominal or ordinal) variables, use bar charts:</p>
+<pre class="r"><code>gss98 %&gt;% ggplot() + geom_bar( aes(x = PREMARSX), fill = &quot;darkred&quot; )</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Same, but but without missing values:</p>
+<pre class="r"><code>gss98 %&gt;% filter(!is.na(PREMARSX)) %&gt;% ggplot() + geom_bar( aes(x = PREMARSX), fill = &quot;darkred&quot; )</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>#library(tidyr)
+#gss98 %&gt;% tidyr::drop_na(PREMARSX) %&gt;% ggplot() + geom_bar( aes(x = PREMARSX), fill = &quot;darkred&quot; )</code></pre>
+<p>Bar plot with relative frequencies and value labels:</p>
+<pre class="r"><code>gss98 %&gt;%  group_by(PREMARSX) %&gt;% summarise(Percent = 100*n()/nrow(gss98)) %&gt;%  # Calculate % for PREMARSX
+    ggplot( mapping = aes(x = PREMARSX, y = Percent, label = Percent)) +        # Map aesthetics 
+    geom_bar( stat=&quot;identity&quot;, fill = &quot;darkred&quot; ) +                             # added stat=&quot;identity&quot;
+    geom_text(vjust = -0.2)                                                     # adjust height of the labels</code></pre>
+<pre><code>## Warning: Factor `PREMARSX` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><br></p>
+<hr />
+<div id="selected-variables-from-a-random-sample-of-500-observations-from-the-2000-u.s.-census-data" class="section level2">
+<h2>Selected Variables from <a href="https://www.openintro.org/stat/data.php?data=census">a random sample of 500 observations from the 2000 U.S. Census Data</a>:</h2>
+<ul>
+<li><code>census_year</code> - Census Year.</li>
+<li><code>state_fips_code</code> - Name of state.</li>
+<li><code>total_family_income</code> - Total family income (in U.S. dollars).</li>
+<li><code>age</code> - Age.</li>
+<li><code>sex</code> - Sex with levels Female and Male.</li>
+<li><code>race_general</code> - Race with levels American Indian or Alaska Native, Black, Chinese, Japanese, Other Asian or Pacific Islander, Two major races, White and * Other.</li>
+<li><code>marital_status</code> - Marital status with levels Divorced, Married/spouse absent, Married/spouse present, Never married/single, Separated and Widowed.</li>
+<li><code>total_personal_income</code> - Total personal income (in U.S. dollars).</li>
+</ul>
+<pre class="r"><code>census &lt;- read.csv(&quot;C:/Users/admin/Dropbox/PhD/00_Coursework/13sem_4041_Spring2020/R/Datasets/census.csv&quot;)
+library(summarytools)</code></pre>
+<p>Frequency distributions for <code>census$marital_status</code>:</p>
+<pre class="r"><code>freq(census$marital_status) %&gt;% kable(digits = 2)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Freq</th>
+<th align="right">% Valid</th>
+<th align="right">% Valid Cum.</th>
+<th align="right">% Total</th>
+<th align="right">% Total Cum.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Divorced</td>
+<td align="right">38</td>
+<td align="right">7.6</td>
+<td align="right">7.6</td>
+<td align="right">7.6</td>
+<td align="right">7.6</td>
+</tr>
+<tr class="even">
+<td>Married/spouse absent</td>
+<td align="right">14</td>
+<td align="right">2.8</td>
+<td align="right">10.4</td>
+<td align="right">2.8</td>
+<td align="right">10.4</td>
+</tr>
+<tr class="odd">
+<td>Married/spouse present</td>
+<td align="right">192</td>
+<td align="right">38.4</td>
+<td align="right">48.8</td>
+<td align="right">38.4</td>
+<td align="right">48.8</td>
+</tr>
+<tr class="even">
+<td>Never married/single</td>
+<td align="right">222</td>
+<td align="right">44.4</td>
+<td align="right">93.2</td>
+<td align="right">44.4</td>
+<td align="right">93.2</td>
+</tr>
+<tr class="odd">
+<td>Separated</td>
+<td align="right">3</td>
+<td align="right">0.6</td>
+<td align="right">93.8</td>
+<td align="right">0.6</td>
+<td align="right">93.8</td>
+</tr>
+<tr class="even">
+<td>Widowed</td>
+<td align="right">31</td>
+<td align="right">6.2</td>
+<td align="right">100.0</td>
+<td align="right">6.2</td>
+<td align="right">100.0</td>
+</tr>
+<tr class="odd">
+<td><NA></td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.0</td>
+<td align="right">100.0</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td align="right">500</td>
+<td align="right">100.0</td>
+<td align="right">100.0</td>
+<td align="right">100.0</td>
+<td align="right">100.0</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>ggplot(data = census) + geom_bar(mapping = aes(x = marital_status)) + theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Frequency distributions for <code>census$total_family_income</code>:</p>
+<pre class="r"><code>income_intervals &lt;- cut(x = census$total_family_income/1000, breaks = c(0,25,50,75,100,999), include.lowest = TRUE)
+summarytools::freq(income_intervals)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                   Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## --------------- ------ --------- -------------- --------- --------------
+##          [0,25]    148     30.52          30.52     29.60          29.60
+##         (25,50]    138     28.45          58.97     27.60          57.20
+##         (50,75]     90     18.56          77.53     18.00          75.20
+##        (75,100]     48      9.90          87.42      9.60          84.80
+##       (100,999]     61     12.58         100.00     12.20          97.00
+##            &lt;NA&gt;     15                               3.00         100.00
+##           Total    500    100.00         100.00    100.00         100.00</code></pre>
+<pre class="r"><code>ggplot(data = census) + geom_histogram(mapping = aes(x = total_family_income/1000)) + xlab(&quot;Total Family Income (Thousands $)&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 15 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><br></p>
+<hr />
+<p><br></p>
+<p>Download the datasets for this class:</p>
+<ul>
+<li><a href="docs/Class3_Datasets.zip">Datasets</a></li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

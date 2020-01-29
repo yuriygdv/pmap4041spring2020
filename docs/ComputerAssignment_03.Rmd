@@ -1,0 +1,242 @@
+---
+title: 'Computer Assignment 3: Frequency Distributions'
+author: "Yuriy Davydenko"
+date: '`r format(Sys.Date(), "%B %d %Y")`'
+output: html_document
+---
+
+    ## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD "author" ABOVE AND REMOVE THIS COMMENT ##
+
+</br>
+
+### 1. Load  Libraries, Set Your Working Directory, & Load Data
+
+Load Libraries:
+```{r, message=FALSE}
+library(dplyr)         # for manipulating data
+library(ggplot2)       # for making graphs
+library(knitr)         # for nicer table formatting
+library(summarytools)  # for frequency distribution tables
+```
+
+Set your working directory, where the folder "Datasets" is located:
+```{r}
+setwd(".")             # for example: setwd("C:/Users/George/Dropbox/GSU/4041_Spring2020/R")
+```
+
+Load the __gss98__ data set from the file __"Datasets/gss98.RData"__ into R using `load(file = "Datasets/gss98.RData")` command. Before you run the command, make sure you have set the working directory correctly (folder "Datasets" should be in your working directory). 
+
+```{r }
+load(file = "Datasets/gss98.RData")
+```
+
+</br>
+
+### 2. Interpreting Frequency Distributions: `RELIG`
+
+Generate a frequency distribution for `RELIG` using `summarytools::freq(gss98$RELIG)` command:
+
+```{r}
+freq(gss98$RELIG)
+```
+
+Generate a bar chart for `RELIG` using ` gss98 %>% ggplot() + geom_bar( aes(x = RELIG), fill = "darkred" ) ` (pick your own color for the chart):
+
+```{r}
+gss98 %>% ggplot() + geom_bar( aes(x = RELIG), fill = "darkred" ) + labs(title = "Bar plot for RELIG")
+```
+
+__QUESTIONS:__
+
+A. How many people in this data set are Protestants? Catholics? Jews?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+B. What percentage of all respondents have no religion? What proportion have no religion? How were both numbers calculated?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+C. What advantage(s) and disadvantage(s) do you see to presenting a bar chart in place of a frequency table?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+</br>
+
+### 3. Interpreting Frequency Distribution: `FEPRESCH`
+
+Generate a frequency distribution for `FEPRESCH` using `freq(DATASET_NAME$VARIABLE_NAME, round.digits = 1)` command (hint: replace `DATASET_NAME$VARIABLE_NAME` with `gss98$FEPRESCH` as in the previous example):
+
+```{r}
+# replace this commment with your code 
+```
+
+
+Generate a frequency graph for `FEPRESCH` (hint: use `geom_bar()` as in the previous example). Pick your own color and don't forget the title:
+
+```{r}
+
+# replace this commment with your code 
+
+```
+
+
+__QUESTIONS:__
+
+A. Use the [the codebook for the survey ](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR) to find the exact question wording for the variable `FEPRESCH`. Copy it into your answer (You can cut and paste.)
+
+    Replace this comment with your answers (make sure the text remains indented)
+    
+B. How many people in this data set strongly agree with this statement? What percentage of all respondents strongly agree with this statement?
+
+    Replace this comment with your answers (make sure the text remains indented)
+    
+C. What percentage of the respondents who gave valid responses strongly agree with this statement? How was this number calculated? Why is this answer different from that in question 3B? Which percentage is most meaningful in this case - the "percent" or the "valid percent"? Why?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+D. How many missing cases are there?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+E. What does the 40.7 in the "Cum Percent" column mean? What is the absolute frequency who agreed or strongly agreed? What percentage disagreed or strongly disagreed? What is the absolute frequency who disagreed or strongly disagreed? (Show your work.)
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+F. Interpret the bar plot for the variable `FEPRESCH`. Why did I ask you to plot a bar chart and not a histogram for this variable?
+
+    Replace this comment with your answers (make sure the text remains indented)
+
+</br>
+
+### 4. Variable Types
+
+__QUESTION:__
+
+**A.** Are relig and fepresch nominal level, ordinal level, or interval level variables? How do you know? Write the names of at least two more of each type of variable in the data set.
+    
+    Replace this comment with your answers (make sure the text remains indented)
+
+</br>
+
+
+### 5. Comparisons
+
+Have R produce frequency distributions for several variables having to do with confidence in U.S. institutions: `CONCLERG`, `CONEDUC`, `CONFED`, `CONJUDGE`, `CONLEGIS`, and `CONPRESS`.
+
+```{r}
+# freq(gss98$CONCLERG) 
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command
+```
+
+
+</br>
+
+__QUESTIONS:__
+
+**A.** Use the [codebook for the survey ](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR) to find the exact question wording for each variable, Type your answer below:
+
+    [VAR: CONCLERG] -- 
+    [VAR: CONEDUC] --
+    [VAR: CONFED] --
+    [VAR: CONJUDGE] -- 
+    [VAR: CONLEGIS] -- 
+    [VAR: CONPRESS] -- 
+
+</br>
+
+**B.** The following commands extract second column from each frequency table above (% valid) to construct a table comparing confidence in the six institutions. Rank order the six institutions from the one that Americans have the most confidence in to the one they have the least confidence in. Does it make any difference whether you rank order the institutions by the "great confidence" or the "hardly any confidence" percentages? 
+
+```{r}
+ data.frame( "CONCLERG" = freq(gss98$CONCLERG)[,2], 
+              "CONEDUC" = freq(gss98$CONEDUC)[,2],
+              "CONFED" = freq(gss98$CONFED)[,2],
+              "CONJUDGE" = freq(gss98$CONJUDGE)[,2],
+              "CONLEGIS" = freq(gss98$CONLEGIS)[,2],
+              "CONPRESS" = freq(gss98$CONPRESS)[,2] ) %>% kable(digits = 1, caption = "Percent (%) Valid Responses")
+```
+
+
+    Replace this comment with your answer (make sure the text remains indented)
+
+</br>
+    
+**C.** Write a short paragraph describing what you learn from the table. How much confidence do Americans seem to have in these institutions? Where do they place the greatest confidence? Use some percentages in your paragraph to make your points more explicit.
+
+    Replace this comment with your answer (make sure the text remains indented)
+
+</br>
+</br>
+
+### 6. Histograms
+
+Now, load a random sample of 500 observations from the 2000 U.S. Census Data from the file __"Datasets/loan50.csv"__ into R using `read.csv("Datasets/census.csv")` coomand. Name the object __census__:
+
+```{r}
+census <- read.csv("Datasets/census.csv")
+```
+
+See the names and types of the variables in the dataset using `names()` and `str()` commands:
+```{r}
+names(census)
+str(census)
+```
+
+__QUESTIONS:__
+
+Describe the following variables, their types (levels of measurement), and appropriate type of frequency distribution graph:
+
+    [VAR: marital_status] -- 
+    [VAR: sex] --
+    [VAR: age] --
+    [VAR: total_personal_income] -- 
+
+
+Graph the frequency distribution for `age`:
+```{r, message=FALSE}
+census %>% ggplot(mapping = aes(x = age)) + geom_histogram( fill = "darkred" )
+```
+
+Describe the distribution:
+
+    Replace this comment with your answer (make sure the text remains indented)
+
+
+Graph the frequency distribution for `total_personal_income` using `x = total_personal_income/1000` in `ggplot` command. Add a title and pick your own color:
+
+```{r, message=FALSE, warning=FALSE}
+#replace this note with your command
+```
+
+Describe the distribution:
+
+    Replace this comment with your answer (make sure the text remains indented)
+
+</br>
+
+*** 
+
+</br>
+
+### 7. Submission
+
+Save your RMarkdown file, Knit an html report, and publish it on __RPubs__ or save as a __pdf__ file. Submit the link to the html or your pdf in the dropbox on iCollege.
+
+
+
+<br>
+
+*** 
+
+<br>
+
+Complete version of this assignment (omly graphs and tables to check your work) is here:
+
+* [Complete Assignment](ca03-complete.html)
+
+
+
+
