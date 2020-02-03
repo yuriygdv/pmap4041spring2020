@@ -12,7 +12,7 @@
 <meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Computer Assignment 3: Frequency Distributions</title>
+<title>Computer Assignment 2: Frequency Distributions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,7 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -323,10 +324,10 @@ $(document).ready(function () {
       </a>
     </li>
     <li>
-      <a href="ca03.html">
+      <a href="ca02.html">
         <span class="fa fa-laptop fa-xs"></span>
          
-        Computer Assignment 3
+        Computer Assignment 2
       </a>
     </li>
     <li>
@@ -409,16 +410,21 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Computer Assignment 3: Frequency Distributions</h1>
+<h1 class="title toc-ignore">Computer Assignment 2: Frequency Distributions</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">January 29 2020</h4>
+<h4 class="date">February 03 2020</h4>
 
 </div>
 
 
 <p></br></p>
-<pre><code>THIS VERSION OF THE ASSIGNMENT IS WITH COMPLETE GRAPHS AND TABLES
-You still have to provide your written answers to the assignment questions </code></pre>
+<pre><code>DOWNLOAD ComputerAssignment_03.Rmd file USING THE LINK BELOW AND OPEN IT IN RStudio</code></pre>
+<ul>
+<li><a href="docs/ComputerAssignment_03.Rmd">Complete Assignment #3: Download link - Rmd file - (Click “Save As”)</a></li>
+<li><a href="docs/ComputerAssignment_03.zip">Complete Assignment #3: Download link - Zip file - (Click “Save As”)</a> (this is the same file but zipped)</li>
+</ul>
+<p></br></p>
+<pre><code>BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD &quot;author&quot; ABOVE AND REMOVE THIS COMMENT</code></pre>
 <p></br></p>
 <div id="load-libraries-set-your-working-directory-load-data" class="section level3">
 <h3>1. Load Libraries, Set Your Working Directory, &amp; Load Data</h3>
@@ -428,7 +434,7 @@ library(ggplot2)       # for making graphs
 library(knitr)         # for nicer table formatting
 library(summarytools)  # for frequency distribution tables</code></pre>
 <p>Set your working directory, where the folder “Datasets” is located:</p>
-<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;&quot;)</code></pre>
+<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
 <p>Load the <strong>gss98</strong> data set from the file <strong>“Datasets/gss98.RData”</strong> into R using <code>load(file = &quot;Datasets/gss98.RData&quot;)</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
 <pre class="r"><code>load(file = &quot;Datasets/gss98.RData&quot;)</code></pre>
 <p></br></p>
@@ -449,8 +455,8 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 ##             &lt;NA&gt;     12                               1.20         100.00
 ##            Total   1000    100.00         100.00    100.00         100.00</code></pre>
 <p>Generate a bar chart for <code>RELIG</code> using <code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = &quot;darkred&quot; )</code> (pick your own color for the chart):</p>
-<pre class="r"><code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = &quot;darkred&quot; )</code></pre>
-<p><img src="ca03-complete_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = &quot;darkred&quot; ) + labs(title = &quot;Bar plot for RELIG&quot;)</code></pre>
+<p><img src="ca02_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>QUESTIONS:</strong></p>
 <p>A. How many people in this data set are Protestants? Catholics? Jews?</p>
 <pre><code>Replace this comment with your answers (make sure the text remains indented)</code></pre>
@@ -462,23 +468,10 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 </div>
 <div id="interpreting-frequency-distribution-fepresch" class="section level3">
 <h3>3. Interpreting Frequency Distribution: <code>FEPRESCH</code></h3>
-<p>Generate a frequency distribution for <code>FEPRESCH</code> using <code>freq(DATASET_NAME$VARIABLE_NAME)</code> command:</p>
+<p>Generate a frequency distribution for <code>FEPRESCH</code> using <code>freq(DATASET_NAME$VARIABLE_NAME, round.digits = 1)</code> command (hint: replace <code>DATASET_NAME$VARIABLE_NAME</code> with <code>gss98$FEPRESCH</code> as in the previous example):</p>
 <pre class="r"><code># replace this commment with your code </code></pre>
-<pre class="r"><code>freq(gss98$FEPRESCH, round.digits = 1)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                         Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## --------------------- ------ --------- -------------- --------- --------------
-##        Strongly agree     45       7.0            7.0       4.5            4.5
-##                 Agree    215      33.6           40.7      21.5           26.0
-##              Disagree    324      50.7           91.4      32.4           58.4
-##       Strong disagree     55       8.6          100.0       5.5           63.9
-##                  &lt;NA&gt;    361                               36.1          100.0
-##                 Total   1000     100.0          100.0     100.0          100.0</code></pre>
-<p>Generate a histogram for <code>FEPRESCH</code>:</p>
+<p>Generate a frequency graph for <code>FEPRESCH</code> (hint: use <code>geom_bar()</code> as in the previous example). Pick your own color and don’t forget the title:</p>
 <pre class="r"><code># replace this commment with your code </code></pre>
-<pre class="r"><code>ggplot(data = gss98) + geom_bar( aes(x = FEPRESCH), fill = &quot;darkred&quot; ) + labs(title = &quot;Bar plot for FEPRESCH&quot;)</code></pre>
-<p><img src="ca03-complete_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p><strong>QUESTIONS:</strong></p>
 <p>A. Use the <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">the codebook for the survey</a> to find the exact question wording for the variable <code>FEPRESCH</code>. Copy it into your answer (You can cut and paste.)</p>
 <pre><code>Replace this comment with your answers (make sure the text remains indented)</code></pre>
@@ -504,67 +497,12 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 <div id="comparisons" class="section level3">
 <h3>5. Comparisons</h3>
 <p>Have R produce frequency distributions for several variables having to do with confidence in U.S. institutions: <code>CONCLERG</code>, <code>CONEDUC</code>, <code>CONFED</code>, <code>CONJUDGE</code>, <code>CONLEGIS</code>, and <code>CONPRESS</code>.</p>
-<pre class="r"><code># replace this commment with your code </code></pre>
-<pre class="r"><code>freq(gss98$CONCLERG) </code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence    196     29.74          29.74     19.60          19.60
-##        some confidence    335     50.83          80.58     33.50          53.10
-##       Hardly confidnce    128     19.42         100.00     12.80          65.90
-##                   &lt;NA&gt;    341                              34.10         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<pre class="r"><code>freq(gss98$CONEDUC)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence    193     28.59          28.59     19.30          19.30
-##        some confidence    381     56.44          85.04     38.10          57.40
-##       Hardly confidnce    101     14.96         100.00     10.10          67.50
-##                   &lt;NA&gt;    325                              32.50         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<pre class="r"><code>freq(gss98$CONFED)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence    103     15.61          15.61     10.30          10.30
-##        some confidence    323     48.94          64.55     32.30          42.60
-##       Hardly confidnce    234     35.45         100.00     23.40          66.00
-##                   &lt;NA&gt;    340                              34.00         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<pre class="r"><code>freq(gss98$CONJUDGE)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence    216     33.38          33.38     21.60          21.60
-##        some confidence    347     53.63          87.02     34.70          56.30
-##       Hardly confidnce     84     12.98         100.00      8.40          64.70
-##                   &lt;NA&gt;    353                              35.30         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<pre class="r"><code>freq(gss98$CONLEGIS)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence     67     10.18          10.18      6.70           6.70
-##        some confidence    386     58.66          68.84     38.60          45.30
-##       Hardly confidnce    205     31.16         100.00     20.50          65.80
-##                   &lt;NA&gt;    342                              34.20         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<pre class="r"><code>freq(gss98$CONPRESS)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       great confidence     59      8.85           8.85      5.90           5.90
-##        some confidence    341     51.12          59.97     34.10          40.00
-##       Hardly confidnce    267     40.03         100.00     26.70          66.70
-##                   &lt;NA&gt;    333                              33.30         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<pre class="r"><code># freq(gss98$CONCLERG) 
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command
+# replace this commment with your command</code></pre>
 <p></br></p>
 <p><strong>QUESTIONS:</strong></p>
 <p><strong>A.</strong> Use the <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">codebook for the survey</a> to find the exact question wording for each variable, Type your answer below:</p>
@@ -668,6 +606,7 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 ##  $ race_general         : Factor w/ 8 levels &quot;American Indian or Alaska Native&quot;,..: 7 8 2 8 8 8 8 8 2 8 ...
 ##  $ marital_status       : Factor w/ 6 levels &quot;Divorced&quot;,&quot;Married/spouse absent&quot;,..: 3 4 4 4 3 3 3 3 3 6 ...
 ##  $ total_personal_income: int  0 13000 20000 NA 36000 27000 11800 48000 40000 14600 ...</code></pre>
+<p><strong>QUESTIONS:</strong></p>
 <p>Describe the following variables, their types (levels of measurement), and appropriate type of frequency distribution graph:</p>
 <pre><code>[VAR: marital_status] -- 
 [VAR: sex] --
@@ -675,12 +614,11 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 [VAR: total_personal_income] -- </code></pre>
 <p>Graph the frequency distribution for <code>age</code>:</p>
 <pre class="r"><code>census %&gt;% ggplot(mapping = aes(x = age)) + geom_histogram( fill = &quot;darkred&quot; )</code></pre>
-<p><img src="ca03-complete_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="ca02_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Describe the distribution:</p>
 <pre><code>Replace this comment with your answer (make sure the text remains indented)</code></pre>
-<p>Graph the frequency distribution for <code>total_personal_income</code> using <code>x = total_personal_income/1000</code> in <code>ggplot</code> command:</p>
-<pre class="r"><code>census %&gt;% ggplot(mapping = aes(x = total_personal_income/1000)) + geom_histogram( fill = &quot;darkred&quot; ) </code></pre>
-<p><img src="ca03-complete_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Graph the frequency distribution for <code>total_personal_income</code> using <code>x = total_personal_income/1000</code> in <code>ggplot</code> command. Add a title and pick your own color:</p>
+<pre class="r"><code>#replace this note with your command</code></pre>
 <p>Describe the distribution:</p>
 <pre><code>Replace this comment with your answer (make sure the text remains indented)</code></pre>
 <p></br></p>
@@ -689,10 +627,16 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 </div>
 <div id="submission" class="section level3">
 <h3>7. Submission</h3>
-<p>Save your RMarkdown file, Knit an html report, and publish it on <strong>RPubs</strong> or save as a <strong>pdf</strong> file. Submit the link to the html or your pdf in the Homework 1 dropbox on iCollege</p>
+<p>Save your RMarkdown file, Knit an html report, and publish it on <strong>RPubs</strong> or save as a <strong>pdf</strong> file. Submit the link to the html or your pdf in the dropbox on iCollege.</p>
+<p><br></p>
+<hr />
+<p><br></p>
+<p>Complete version of this assignment (omly graphs and tables to check your work) is here:</p>
+<ul>
+<li><a href="ca03-complete.html">Complete Assignment</a></li>
+</ul>
 </div>
 
-<p style = "text-align: right;"> Copyright &copy; 2020 </p>
 
 
 
