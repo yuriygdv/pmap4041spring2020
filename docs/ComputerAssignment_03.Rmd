@@ -1,15 +1,34 @@
 ---
-title: 'Computer Assignment 3: Frequency Distributions'
+title: "Computer Assignment 3: Describing Distributions with Numbers"
 author: "Yuriy Davydenko"
-date: '`r format(Sys.Date(), "%B %d %Y")`'
+date:  '`r format(Sys.Date(), "%B %d %Y")`'
 output: html_document
 ---
 
+<br>
+
     ## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD "author" ABOVE AND REMOVE THIS COMMENT ##
 
-</br>
+<br>
 
-### 1. Load  Libraries, Set Your Working Directory, & Load Data
+Download the datasets for this class:
+
+* [Dataset (click "Save As")](docs/OPM94.RData)
+
+You can download this whole script as `ComputerAssignment_03.Rmd` file to save on your computer and open in RStudio instead of copying & pasting from this webpage:
+
+* [Complete Assignment #3: Download link - Rmd file - (Click "Save As")](docs/ComputerAssignment_03.Rmd)
+
+
+For those who prefers to work with RCloud, a project with the same materials can be accessed using the following link:
+
+* [RCloud Project](https://rstudio.cloud/project/914127)
+
+
+<br>
+
+
+## Load  Libraries, Set Your Working Directory, & Load Data
 
 Load Libraries:
 ```{r, message=FALSE}
@@ -24,218 +43,238 @@ Set your working directory, where the folder "Datasets" is located:
 setwd(".")             # for example: setwd("C:/Users/George/Dropbox/GSU/4041_Spring2020/R")
 ```
 
-Load the __gss98__ data set from the file __"Datasets/gss98.RData"__ into R using `load(file = "Datasets/gss98.RData")` command. Before you run the command, make sure you have set the working directory correctly (folder "Datasets" should be in your working directory). 
-
-```{r }
-load(file = "Datasets/gss98.RData")
-```
-
-</br>
-
-### 2. Interpreting Frequency Distributions: `RELIG`
-
-Generate a frequency distribution for `RELIG` using `summarytools::freq(gss98$RELIG)` command:
+## Load Data
+We are going to work with a new data set - a random sample of 1,000 federal personnel records for March 1994. These are not the responses to questionnaires as the previous data set was. Instead, they include the sort of information the government keeps in its personnel files: grade, salary, occupation, supervisory status, education, age, years of federal experience, sex, race, etc.
 
 ```{r}
-freq(gss98$RELIG)
+load("Datasets/OPM94.RData")
 ```
 
-Generate a bar chart for `RELIG` using ` gss98 %>% ggplot() + geom_bar( aes(x = RELIG), fill = "darkred" ) ` (pick your own color for the chart):
-
-```{r}
-gss98 %>% ggplot() + geom_bar( aes(x = RELIG), fill = "darkred" ) + labs(title = "Bar plot for RELIG")
-```
-
-__QUESTIONS:__
-
-A. How many people in this data set are Protestants? Catholics? Jews?
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-B. What percentage of all respondents have no religion? What proportion have no religion? How were both numbers calculated?
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-C. What advantage(s) and disadvantage(s) do you see to presenting a bar chart in place of a frequency table?
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-</br>
-
-### 3. Interpreting Frequency Distribution: `FEPRESCH`
-
-Generate a frequency distribution for `FEPRESCH` using `freq(DATASET_NAME$VARIABLE_NAME, round.digits = 1)` command (hint: replace `DATASET_NAME$VARIABLE_NAME` with `gss98$FEPRESCH` as in the previous example):
-
-```{r}
-# replace this commment with your code 
-```
-
-
-Generate a frequency graph for `FEPRESCH` (hint: use `geom_bar()` as in the previous example). Pick your own color and don't forget the title:
-
+See a full listing of the variables by using `names(dataset_name)` command:
 ```{r}
 
-# replace this commment with your code 
-
 ```
 
 
-__QUESTIONS:__
+## Homework Problems
 
-A. Use the [the codebook for the survey ](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR) to find the exact question wording for the variable `FEPRESCH`. Copy it into your answer (You can cut and paste.)
+### 1. Calculating the mode, median, mean, range, variance, and standard deviation
 
-    Replace this comment with your answers (make sure the text remains indented)
+__1.1__ First, lets work temporarily with American Indian females only (this step will subset the data set): `race == "American Indian", male == "female"`
+
+```{r}
+opm94AIF <- opm94 %>% filter(race == "American Indian", male == "female")   # subset data
+opm94AIF %>% pander::pander(split.table = Inf)                                # print the resulting dataset nicely formatted
+```
+
+Let's print out the individual values of the variables `age, edyrs, grade, promo01, supmgr01` in the subset of the data, so that you could calculate statistics manually. We'll also have the computer calculate the same statistics so that you could check your answers.
+
+Individual values:
+```{r}
+opm94AIF <- opm94AIF %>% select("age", "edyrs", "grade", "promo01", "supmgr01")
+opm94AIF
+```
+
+Descriptive statistics for the same variables (three different commands/packages to choose from):
+
+Using `summary()` from `base` package:
+```{r}
+opm94AIF %>% select("age", "edyrs", "grade", "promo01", "supmgr01") %>% summary()
+```
+
+Using `descr()` from `descr` package:
+```{r}
+descr::descr(opm94AIF)
+```
+
+Using `descr()` from `summarytools` package:
+```{r}
+summarytools::descr(opm94AIF)
+```
+
+<br>
+
+__QUESTION 1.1:__ Which of the three outputs for descriptive statistics do you find the most useful? Explain
+
+    Replace this note with your answer. Make sure it remains indented.
     
-B. How many people in this data set strongly agree with this statement? What percentage of all respondents strongly agree with this statement?
 
-    Replace this comment with your answers (make sure the text remains indented)
-    
-C. What percentage of the respondents who gave valid responses strongly agree with this statement? How was this number calculated? Why is this answer different from that in question 3B? Which percentage is most meaningful in this case - the "percent" or the "valid percent"? Why?
+<br>
 
-    Replace this comment with your answers (make sure the text remains indented)
-
-D. How many missing cases are there?
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-E. What does the 40.7 in the "Cum Percent" column mean? What is the absolute frequency who agreed or strongly agreed? What percentage disagreed or strongly disagreed? What is the absolute frequency who disagreed or strongly disagreed? (Show your work.)
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-F. Interpret the bar plot for the variable `FEPRESCH`. Why did I ask you to plot a bar chart and not a histogram for this variable?
-
-    Replace this comment with your answers (make sure the text remains indented)
-
-</br>
-
-### 4. Variable Types
-
-__QUESTION:__
-
-**A.** Are relig and fepresch nominal level, ordinal level, or interval level variables? How do you know? Write the names of at least two more of each type of variable in the data set.
-    
-    Replace this comment with your answers (make sure the text remains indented)
-
-</br>
-
-
-### 5. Comparisons
-
-Have R produce frequency distributions for several variables having to do with confidence in U.S. institutions: `CONCLERG`, `CONEDUC`, `CONFED`, `CONJUDGE`, `CONLEGIS`, and `CONPRESS`.
+__1.2__ Using the raw data above, let's compute (as appropriate) the mode, median, mean, range, variance, and standard deviation  for variable `age` (`opm94AIF$age`: 42 31 46 53 57 62 33 43 53 32 ) listed for American Indian females:
 
 ```{r}
-# freq(gss98$CONCLERG) 
-# replace this commment with your command
-# replace this commment with your command
-# replace this commment with your command
-# replace this commment with your command
-# replace this commment with your command
+age <- opm94AIF$age  # save the values in a new variable with the name `age` for less typing
 ```
 
+* Mode age
+```{r}
+table(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32))    # figure out the mode from the table or use which.max()
+which.max(table(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32)))
+```
 
-</br>
+* Median age
+```{r}
+sort(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32)) # find the median from the ordered vector or use R function median()
+median(opm94AIF$age)
+```
 
-__QUESTIONS:__
+* Mean age:
+```{r}
+(42+31+46+53+57+62+33+43+53+32)/10        # or
+sum(opm94AIF$age)/length(opm94AIF$age)
+mean(opm94AIF$age)
+```
 
-**A.** Use the [codebook for the survey ](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR) to find the exact question wording for each variable, Type your answer below:
+* Range for age:
+```{r}
+sort(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32))   # or
+range(opm94AIF$age)
 
-    [VAR: CONCLERG] -- 
-    [VAR: CONEDUC] --
-    [VAR: CONFED] --
-    [VAR: CONJUDGE] -- 
-    [VAR: CONLEGIS] -- 
-    [VAR: CONPRESS] -- 
+```
 
-</br>
+* Variance = SSD/(n-1)  
+```{r}
+age
+age - mean(age)
+(age - mean(age))^2
+sum((age - mean(age))^2)/(10-1) 
+var(age)
+```
 
-**B.** The following commands extract second column from each frequency table above (% valid) to construct a table comparing confidence in the six institutions. Rank order the six institutions from the one that Americans have the most confidence in to the one they have the least confidence in. Does it make any difference whether you rank order the institutions by the "great confidence" or the "hardly any confidence" percentages? 
+* SD = sqrt(var)
+```{r}
+sqrt(sum((age - mean(age))^2)/(10-1) )
+sd(age)
+```
+
+__QUESTION 1.2:__ Do the manually calcualted results match the descriptive statistics in the tables above in section 1.1?
+
+    Replace this note with your answer. Make sure it remains indented.
+
+<br>
+
+__QUESTION 1.3:__ Similarly, compute (as appropriate) the mode, median, mean, range, variance, and standard deviation  for variables `edyrs` and `supmgr01` (`opm94AIF$edyrs`: 13 13 12 15 12 10 13 18 15 13, `opm94AIF$supmgr01`: 1 0 0 1 0 0 0 0 0 0 ) listed for American Indian females. Check your results against the output in 1.1.
 
 ```{r}
- data.frame( "CONCLERG" = freq(gss98$CONCLERG)[,2], 
-              "CONEDUC" = freq(gss98$CONEDUC)[,2],
-              "CONFED" = freq(gss98$CONFED)[,2],
-              "CONJUDGE" = freq(gss98$CONJUDGE)[,2],
-              "CONLEGIS" = freq(gss98$CONLEGIS)[,2],
-              "CONPRESS" = freq(gss98$CONPRESS)[,2] ) %>% kable(digits = 1, caption = "Percent (%) Valid Responses")
+
+# replace this note with your computations and comments
+
 ```
 
+<br>
 
-    Replace this comment with your answer (make sure the text remains indented)
+### 2. Calculating mode, median, mean for grouped data
 
-</br>
-    
-**C.** Write a short paragraph describing what you learn from the table. How much confidence do Americans seem to have in these institutions? Where do they place the greatest confidence? Use some percentages in your paragraph to make your points more explicit.
-
-    Replace this comment with your answer (make sure the text remains indented)
-
-</br>
-</br>
-
-### 6. Histograms
-
-Now, load a random sample of 500 observations from the 2000 U.S. Census Data from the file __"Datasets/loan50.csv"__ into R using `read.csv("Datasets/census.csv")` coomand. Name the object __census__:
+Let's generate grouped data (frequency table) that you will use for calculating statistics (mode, median, mean) for variable `edyrs` from the full dataset `opm94`:
 
 ```{r}
-census <- read.csv("Datasets/census.csv")
+summarytools::freq(opm94$edyrs)   # grouped data
+summary(opm94$edyrs)  # summary statistics by R
+
 ```
 
-See the names and types of the variables in the dataset using `names()` and `str()` commands:
+<br>
+Finding mode, median, mean for `edyrs` using the grouped data:
+
+* Mode - the most frequent vaue, can be seen in the frequency table (=12)
+
+* Median - the value in the middle, can be seen in the frequency table from the `% Valid Cum.` column (=14)
+
+* Mean:  SUM(Xi*fi)/n:
 ```{r}
-names(census)
-str(census)
+(10*12 + 12*330 + 13*101 + 14*98 + 15*39 + 16*290 + 18*112 + 20*18)/1000
 ```
 
-__QUESTIONS:__
-
-Describe the following variables, their types (levels of measurement), and appropriate type of frequency distribution graph:
-
-    [VAR: marital_status] -- 
-    [VAR: sex] --
-    [VAR: age] --
-    [VAR: total_personal_income] -- 
+__QUESTION 2.1:__ Similarlly to the example above, find the mode, median, mean for variables `yos` and `supmgr01` using the grouped data:
 
 
-Graph the frequency distribution for `age`:
-```{r, message=FALSE}
-census %>% ggplot(mapping = aes(x = age)) + geom_histogram( fill = "darkred" )
+```{r}
+
+# your work
+
 ```
 
-Describe the distribution:
-
-    Replace this comment with your answer (make sure the text remains indented)
-
-
-Graph the frequency distribution for `total_personal_income` using `x = total_personal_income/1000` in `ggplot` command. Add a title and pick your own color:
-
-```{r, message=FALSE, warning=FALSE}
-#replace this note with your command
-```
-
-Describe the distribution:
-
-    Replace this comment with your answer (make sure the text remains indented)
-
-</br>
-
-*** 
-
-</br>
-
-### 7. Submission
-
-Save your RMarkdown file, Knit an html report, and publish it on __RPubs__ or save as a __pdf__ file. Submit the link to the html or your pdf in the dropbox on iCollege.
 
 
 
 <br>
 
-*** 
+### 3. Calculating mode, median, mean for grouped data (dummy variables)
+
+__QUESTION 3:__
+`Male01` and `exit01` are dummy variables. (They only have two possible values, o and 1.) For each, compare its mean to the percentage of cases with the value 1. How are these two measures related?
+
+Percentage of cases with the value 0 and 1 for `male01`:
+```{r}
+table(opm94$male01) %>% prop.table()*100  
+```
+
+Mean value of `male01`:
+```{r}
+mean(opm94$male01)   
+```
+
+    Your answer
+
 
 <br>
 
-Complete version of this assignment (omly graphs and tables to check your work) is here:
+### 4. Calcualting the mean for grouped data formulas for intervals
 
-* [Complete Assignment](ca03-complete.html)
+__QUESTION 4:__
+Using the Frequencies output for the entire data set (and the grouped data formulas for intervals), calculate the mean grade, using GRADE4 instead of grade.Calculate means using the midpoint of each interval of grade4
+
+```{r}
+freq(opm94$grade4)
+```
+
+Mean:
+```{r}
+# your work
+```
+
+
+<br>
+
+
+### 5. Comparing means for different groups
+
+Let's calculate mmeans of a variety of variables for black and white workers so that you can describe differences between the two groups of workers:
+
+```{r}
+opm94$race %>% table()
+opm94 %>% filter(race == "White") %>% select(sal) %>% summarise(mean_sal_white = mean(sal, na.rm = T))
+opm94 %>% filter(race == "Black") %>% select(sal) %>% summarise(mean_sal_black = mean(sal, na.rm = T))
+opm94 %>% filter(race == "White") %>% select(edyrs) %>% summarise(mean_edyrs_white = mean(edyrs, na.rm = T))
+opm94 %>% filter(race == "Black") %>% select(edyrs) %>% summarise(mean_edyrs_black = mean(edyrs, na.rm = T))
+```
+
+
+Or, alternatively, use the following commands:
+```{r}
+opm94 %>% select(race, sal) %>% group_by(race) %>% summarise(mean_sal = mean(sal, na.rm = T))
+opm94 %>% select(race, edyrs) %>% group_by(race) %>% summarise(mean_edyrs = mean(edyrs, na.rm = T))
+#opm94 %>% select(race, grade) %>% group_by(race) %>% summarise(mean_grade = mean(grade, na.rm = T))
+#opm94 %>% select(race, promo01) %>% group_by(race) %>%  summarise(mean_promo01 = mean(promo01, na.rm = T))
+#opm94 %>% select(race, supmgr01) %>% group_by(race) %>%  summarise(mean_supmgr01 = mean(supmgr01, na.rm = T))
+```
+
+
+
+
+__Question 5:__
+Do whites receive higher rewards (e.g., salaries, grades, supervisory status, promotions) than minorities? Do differences in education and federal experience seem to be partly responsible for these patterns? Write a paragraph discussing differences between the groups (be specific about which groups you compare). 
+
+    Your answer...
+    
+
+***
+
+__Knit the document into an html file and upload to RPubs or save as a pdf file and submit on iCollege.__
+
+
+***
 
 
 
