@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yuriy Davydenko" />
+
+
+<title>Describing Distributions with Numbers (In-class practice)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PMAP 4041</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-info"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    R Workshops
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R Starter</li>
+    <li>
+      <a href="week01.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 1 (in class)
+      </a>
+    </li>
+    <li>
+      <a href="ca01.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 1
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Exploratory Data Analysis</li>
+    <li>
+      <a href="week03.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 3 (Frequency Distributions)
+      </a>
+    </li>
+    <li>
+      <a href="ca02.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 2
+      </a>
+    </li>
+    <li>
+      <a href="week04.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 4 (Describing Distributions with Numbers)
+      </a>
+    </li>
+    <li>
+      <a href="ca03.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 3
+      </a>
+    </li>
+    <li>
+      <a href="week05.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 5
+      </a>
+    </li>
+    <li>
+      <a href="week06.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 6
+      </a>
+    </li>
+    <li>
+      <a href="week07.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 7
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inference</li>
+    <li>
+      <a href="week10.html">Week 10</a>
+    </li>
+    <li>
+      <a href="week11.html">Week 11</a>
+    </li>
+    <li>
+      <a href="week12.html">Week 12</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project.html">
+    <span class="fa fa-tasks"></span>
+     
+    Course Project
+  </a>
+</li>
+<li>
+  <a href="https://rstudio.cloud">
+    <span class="fa fa-cloud"></span>
+     
+    RStudio.cloud
+  </a>
+</li>
+<li>
+  <a href="https://rpubs.com">
+    <span class="fa fa-pencil"></span>
+     
+    RPubs
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://calendly.com/ydavydenko1">
+    <span class="fa fa-question fa-lg"></span>
+     
+    Appointment
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Describing Distributions with Numbers (In-class practice)</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">February 05 2020</h4>
+
+</div>
+
+
+<p><br></p>
+<p>Download the datasets for this class:</p>
+<ul>
+<li><a href="docs/OPM94.RData">Dataset ‘OPM94’ (click “Save As”)</a></li>
+<li><a href="docs/census.csv">Dataset ‘Census’ (click “Save As”)</a></li>
+<li><a href="docs/loan50.csv">Dataset ‘Loan50’ (click “Save As”)</a></li>
+</ul>
+<p><br> <br></p>
+<div id="load-libraries-set-your-working-directory-load-data" class="section level2">
+<h2>Load Libraries, Set Your Working Directory, &amp; Load Data</h2>
+<p>Load Libraries:</p>
+<pre class="r"><code>library(dplyr)         # for manipulating data
+library(ggplot2)       # for making graphs
+library(knitr)         # for nicer table formatting
+library(summarytools)  # for frequency distribution tables &amp; summary statistics
+library(descr)         # for summary statistics</code></pre>
+<p>Set working directory, where the folder “Datasets” is located:</p>
+<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load Data</h2>
+<p>We are going to work with a new data set - a random sample of 1,000 federal personnel records for March 1994. These are not the responses to questionnaires as the previous data set was. Instead, they include the sort of information the government keeps in its personnel files: grade, salary, occupation, supervisory status, education, age, years of federal experience, sex, race, etc.</p>
+<pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;)</code></pre>
+<p>See a full listing of the variables by using <code>names(dataset_name)</code> command:</p>
+<p><br> <br></p>
+</div>
+<div id="calculating-statistics" class="section level2">
+<h2>Calculating Statistics</h2>
+<div id="calculating-the-mode-median-mean-range-variance-and-standard-deviation" class="section level3">
+<h3>1. Calculating the mode, median, mean, range, variance, and standard deviation</h3>
+<p><br></p>
+<p><strong>1.1</strong> First, lets work temporarily with American Indian females only (this step will subset the data set): <code>race == &quot;American Indian&quot;, male == &quot;female&quot;</code></p>
+<pre class="r"><code>opm94AIF &lt;- opm94 %&gt;% filter(race == &quot;American Indian&quot;, male == &quot;female&quot;)   # subset data
+opm94AIF %&gt;% pander::pander(split.table = Inf)                                # print the resulting dataset nicely formatted</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="8%" />
+<col width="3%" />
+<col width="2%" />
+<col width="4%" />
+<col width="2%" />
+<col width="4%" />
+<col width="3%" />
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="4%" />
+<col width="8%" />
+<col width="5%" />
+<col width="8%" />
+<col width="4%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">x</th>
+<th align="center">sal</th>
+<th align="center">grade</th>
+<th align="center">patco</th>
+<th align="center">major</th>
+<th align="center">age</th>
+<th align="center">male</th>
+<th align="center">vet</th>
+<th align="center">handvet</th>
+<th align="center">hand</th>
+<th align="center">yos</th>
+<th align="center">edyrs</th>
+<th align="center">promo</th>
+<th align="center">exit</th>
+<th align="center">supmgr</th>
+<th align="center">race</th>
+<th align="center">minority</th>
+<th align="center">grade4</th>
+<th align="center">promo01</th>
+<th align="center">supmgr01</th>
+<th align="center">male01</th>
+<th align="center">exit01</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">256</td>
+<td align="center">49401</td>
+<td align="center">13</td>
+<td align="center">Administrative</td>
+<td align="center"></td>
+<td align="center">42</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">14</td>
+<td align="center">13</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 13 to 16</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">257</td>
+<td align="center">25672</td>
+<td align="center">5</td>
+<td align="center">Technical</td>
+<td align="center"></td>
+<td align="center">31</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">6</td>
+<td align="center">13</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">258</td>
+<td align="center">23316</td>
+<td align="center">5</td>
+<td align="center">Clerical</td>
+<td align="center"></td>
+<td align="center">46</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">16</td>
+<td align="center">12</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">259</td>
+<td align="center">45697</td>
+<td align="center">12</td>
+<td align="center">Administrative</td>
+<td align="center"></td>
+<td align="center">53</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">23</td>
+<td align="center">15</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 9 to 12</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">260</td>
+<td align="center">45383</td>
+<td align="center">9</td>
+<td align="center">Professional</td>
+<td align="center"></td>
+<td align="center">57</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">36</td>
+<td align="center">12</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 9 to 12</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">261</td>
+<td align="center">24576</td>
+<td align="center">5</td>
+<td align="center">Technical</td>
+<td align="center"></td>
+<td align="center">62</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">38</td>
+<td align="center">10</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">262</td>
+<td align="center">20166</td>
+<td align="center">5</td>
+<td align="center">Clerical</td>
+<td align="center"></td>
+<td align="center">33</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">6</td>
+<td align="center">13</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">263</td>
+<td align="center">42751</td>
+<td align="center">11</td>
+<td align="center">Professional</td>
+<td align="center">PUBAF</td>
+<td align="center">43</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">16</td>
+<td align="center">18</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 9 to 12</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">264</td>
+<td align="center">24585</td>
+<td align="center">6</td>
+<td align="center">Administrative</td>
+<td align="center"></td>
+<td align="center">53</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">18</td>
+<td align="center">15</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">265</td>
+<td align="center">20796</td>
+<td align="center">5</td>
+<td align="center">Technical</td>
+<td align="center"></td>
+<td align="center">32</td>
+<td align="center">female</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">10</td>
+<td align="center">13</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">American Indian</td>
+<td align="center">1</td>
+<td align="center">grades 5 to 8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s print out the individual values of the variables <code>age, edyrs, grade, promo01, supmgr01</code> in the subset of the data, so that you could calculate statistics manually. We’ll also have the computer calculate the same statistics so that you could check your answers.</p>
+<p>Individual values:</p>
+<pre class="r"><code>opm94AIF &lt;- opm94AIF %&gt;% select(&quot;age&quot;, &quot;edyrs&quot;, &quot;grade&quot;, &quot;promo01&quot;, &quot;supmgr01&quot;)
+opm94AIF</code></pre>
+<pre><code>##    age edyrs grade promo01 supmgr01
+## 1   42    13    13       0        1
+## 2   31    13     5       0        0
+## 3   46    12     5       0        0
+## 4   53    15    12       0        1
+## 5   57    12     9       0        0
+## 6   62    10     5       0        0
+## 7   33    13     5       0        0
+## 8   43    18    11       0        0
+## 9   53    15     6       1        0
+## 10  32    13     5       0        0</code></pre>
+<p>Descriptive statistics for the same variables (three different commands/packages to choose from):</p>
+<p>Using <code>summary()</code> from <code>base</code> package:</p>
+<pre class="r"><code>opm94AIF %&gt;% select(&quot;age&quot;, &quot;edyrs&quot;, &quot;grade&quot;, &quot;promo01&quot;, &quot;supmgr01&quot;) %&gt;% summary()</code></pre>
+<pre><code>##       age            edyrs           grade         promo01       supmgr01  
+##  Min.   :31.00   Min.   :10.00   Min.   : 5.0   Min.   :0.0   Min.   :0.0  
+##  1st Qu.:35.25   1st Qu.:12.25   1st Qu.: 5.0   1st Qu.:0.0   1st Qu.:0.0  
+##  Median :44.50   Median :13.00   Median : 5.5   Median :0.0   Median :0.0  
+##  Mean   :45.20   Mean   :13.40   Mean   : 7.6   Mean   :0.1   Mean   :0.2  
+##  3rd Qu.:53.00   3rd Qu.:14.50   3rd Qu.:10.5   3rd Qu.:0.0   3rd Qu.:0.0  
+##  Max.   :62.00   Max.   :18.00   Max.   :13.0   Max.   :1.0   Max.   :1.0</code></pre>
+<p>Using <code>descr()</code> from <code>descr</code> package:</p>
+<pre class="r"><code>descr::descr(opm94AIF)</code></pre>
+<pre><code>## 
+## age
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   31.00   35.25   44.50   45.20   53.00   62.00 
+## 
+## edyrs
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   10.00   12.25   13.00   13.40   14.50   18.00 
+## 
+## grade
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     5.0     5.0     5.5     7.6    10.5    13.0 
+## 
+## promo01
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     0.0     0.0     0.1     0.0     1.0 
+## 
+## supmgr01
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     0.0     0.0     0.2     0.0     1.0</code></pre>
+<p>Using <code>descr()</code> from <code>summarytools</code> package:</p>
+<pre class="r"><code>summarytools::descr(opm94AIF)</code></pre>
+<pre><code>## Descriptive Statistics  
+## 
+##                        age    edyrs    grade   promo01   supmgr01
+## ----------------- -------- -------- -------- --------- ----------
+##              Mean    45.20    13.40     7.60      0.10       0.20
+##           Std.Dev    10.97     2.17     3.31      0.32       0.42
+##               Min    31.00    10.00     5.00      0.00       0.00
+##                Q1    33.00    12.00     5.00      0.00       0.00
+##            Median    44.50    13.00     5.50      0.00       0.00
+##                Q3    53.00    15.00    11.00      0.00       0.00
+##               Max    62.00    18.00    13.00      1.00       1.00
+##               MAD    14.83     1.48     0.74      0.00       0.00
+##               IQR    17.75     2.25     5.50      0.00       0.00
+##                CV     0.24     0.16     0.44      3.16       2.11
+##          Skewness     0.02     0.59     0.53      2.28       1.28
+##       SE.Skewness     0.69     0.69     0.69      0.69       0.69
+##          Kurtosis    -1.62    -0.29    -1.66      3.57      -0.37
+##           N.Valid    10.00    10.00    10.00     10.00      10.00
+##         Pct.Valid   100.00   100.00   100.00    100.00     100.00</code></pre>
+<p><br></p>
+<p><br></p>
+<p><strong>1.2</strong> Using the raw data above, let’s compute (as appropriate) the mode, median, mean, range, variance, and standard deviation for variable <code>age</code> (<code>opm94AIF$age</code>: 42 31 46 53 57 62 33 43 53 32 ) listed for American Indian females:</p>
+<pre class="r"><code>age &lt;- opm94AIF$age  # save the values in a new variable with the name `age` for less typing</code></pre>
+<ul>
+<li>Mode age</li>
+</ul>
+<pre class="r"><code>table(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32))    # figure out the mode from the table or use which.max()</code></pre>
+<pre><code>## 
+## 31 32 33 42 43 46 53 57 62 
+##  1  1  1  1  1  1  2  1  1</code></pre>
+<pre class="r"><code>which.max(table(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32)))</code></pre>
+<pre><code>## 53 
+##  7</code></pre>
+<ul>
+<li>Median age</li>
+</ul>
+<pre class="r"><code>sort(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32)) # find the median from the ordered vector or use R function median()</code></pre>
+<pre><code>##  [1] 31 32 33 42 43 46 53 53 57 62</code></pre>
+<pre class="r"><code>median(opm94AIF$age)</code></pre>
+<pre><code>## [1] 44.5</code></pre>
+<ul>
+<li>Mean age:</li>
+</ul>
+<pre class="r"><code>(42+31+46+53+57+62+33+43+53+32)/10        # or</code></pre>
+<pre><code>## [1] 45.2</code></pre>
+<pre class="r"><code>sum(opm94AIF$age)/length(opm94AIF$age)</code></pre>
+<pre><code>## [1] 45.2</code></pre>
+<pre class="r"><code>mean(opm94AIF$age)</code></pre>
+<pre><code>## [1] 45.2</code></pre>
+<ul>
+<li>Range for age:</li>
+</ul>
+<pre class="r"><code>sort(c(42, 31, 46, 53, 57, 62, 33, 43, 53, 32))   # or</code></pre>
+<pre><code>##  [1] 31 32 33 42 43 46 53 53 57 62</code></pre>
+<pre class="r"><code>range(opm94AIF$age)</code></pre>
+<pre><code>## [1] 31 62</code></pre>
+<ul>
+<li>Variance = SSD/(n-1)</li>
+</ul>
+<pre class="r"><code>age</code></pre>
+<pre><code>##  [1] 42 31 46 53 57 62 33 43 53 32</code></pre>
+<pre class="r"><code>age - mean(age)</code></pre>
+<pre><code>##  [1]  -3.2 -14.2   0.8   7.8  11.8  16.8 -12.2  -2.2   7.8 -13.2</code></pre>
+<pre class="r"><code>(age - mean(age))^2</code></pre>
+<pre><code>##  [1]  10.24 201.64   0.64  60.84 139.24 282.24 148.84   4.84  60.84 174.24</code></pre>
+<pre class="r"><code>sum((age - mean(age))^2)/(10-1) </code></pre>
+<pre><code>## [1] 120.4</code></pre>
+<pre class="r"><code>var(age)</code></pre>
+<pre><code>## [1] 120.4</code></pre>
+<ul>
+<li>SD = sqrt(var)</li>
+</ul>
+<pre class="r"><code>sqrt(sum((age - mean(age))^2)/(10-1) )</code></pre>
+<pre><code>## [1] 10.97269</code></pre>
+<pre class="r"><code>sd(age)</code></pre>
+<pre><code>## [1] 10.97269</code></pre>
+<p><br> <br></p>
+</div>
+<div id="calculating-mode-median-mean-for-grouped-data" class="section level3">
+<h3>2. Calculating mode, median, mean for grouped data</h3>
+<p>Let’s generate grouped data (frequency table) that you will use for calculating statistics (mode, median, mean) for variable <code>edyrs</code> from the full dataset <code>opm94</code>:</p>
+<pre class="r"><code>summarytools::freq(opm94$edyrs)   # grouped data</code></pre>
+<pre><code>## Frequencies  
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##          10     12      1.20           1.20      1.20           1.20
+##          12    330     33.00          34.20     33.00          34.20
+##          13    101     10.10          44.30     10.10          44.30
+##          14     98      9.80          54.10      9.80          54.10
+##          15     39      3.90          58.00      3.90          58.00
+##          16    290     29.00          87.00     29.00          87.00
+##          18    112     11.20          98.20     11.20          98.20
+##          20     18      1.80         100.00      1.80         100.00
+##        &lt;NA&gt;      0                               0.00         100.00
+##       Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<pre class="r"><code>summary(opm94$edyrs)  # summary statistics by R</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   10.00   12.00   14.00   14.37   16.00   20.00</code></pre>
+<p><br></p>
+<p>Finding mode, median, mean for <code>edyrs</code> using the grouped data:</p>
+<ul>
+<li><p>Mode - the most frequent vaue, can be seen in the frequency table (=12)</p></li>
+<li><p>Median - the value in the middle, can be seen in the frequency table from the <code>% Valid Cum.</code> column (=14)</p></li>
+<li><p>Mean: SUM(Xi*fi)/n:</p></li>
+</ul>
+<pre class="r"><code>(10*12 + 12*330 + 13*101 + 14*98 + 15*39 + 16*290 + 18*112 + 20*18)/1000</code></pre>
+<pre><code>## [1] 14.366</code></pre>
+<p><br></p>
+</div>
+<div id="calculating-mode-median-mean-for-grouped-data-dummy-variables" class="section level3">
+<h3>3. Calculating mode, median, mean for grouped data (dummy variables)</h3>
+<p><strong>QUESTION 3:</strong> <code>Male01</code> and <code>exit01</code> are dummy variables. (They only have two possible values, o and 1.) For each, compare its mean to the percentage of cases with the value 1. How are these two measures related?</p>
+<p>Percentage of cases with the value 0 and 1 for <code>male01</code>:</p>
+<pre class="r"><code>table(opm94$male01) %&gt;% prop.table()*100  </code></pre>
+<pre><code>## 
+##    0    1 
+## 48.8 51.2</code></pre>
+<p>Mean value of <code>male01</code>:</p>
+<pre class="r"><code>mean(opm94$male01)   </code></pre>
+<pre><code>## [1] 0.512</code></pre>
+<p><br></p>
+</div>
+<div id="calcualting-the-mean-for-grouped-data-formulas-for-intervals" class="section level3">
+<h3>4. Calcualting the mean for grouped data formulas for intervals</h3>
+<p>Using the Frequencies output for the entire data set (and the grouped data formulas for intervals), let’s calculate the mean grade, using <code>grade4</code> instead of <code>grade</code> using the midpoint of each interval of grade4</p>
+<pre class="r"><code>summarytools::freq(opm94$grade4)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                         Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## --------------------- ------ --------- -------------- --------- --------------
+##         grades 1 to 4     70      7.00           7.00      7.00           7.00
+##       grades 13 to 16    223     22.30          29.30     22.30          29.30
+##         grades 5 to 8    299     29.90          59.20     29.90          59.20
+##        grades 9 to 12    408     40.80         100.00     40.80         100.00
+##                  &lt;NA&gt;      0                               0.00         100.00
+##                 Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p><br></p>
+</div>
+<div id="comparing-means-for-different-groups" class="section level3">
+<h3>5. Comparing means for different groups</h3>
+<p>Let’s calculate mmeans of a variety of variables for black and white workers so that you can describe differences between the two groups of workers:</p>
+<pre class="r"><code>opm94$race %&gt;% table()</code></pre>
+<pre><code>## .
+## American Indian           Asian           Black        Hispanic           White 
+##              17              31             175              49             728</code></pre>
+<pre class="r"><code>opm94 %&gt;% filter(race == &quot;White&quot;) %&gt;% select(sal) %&gt;% summarise(mean_sal_white = mean(sal, na.rm = T))</code></pre>
+<pre><code>##   mean_sal_white
+## 1       43294.39</code></pre>
+<pre class="r"><code>opm94 %&gt;% filter(race == &quot;Black&quot;) %&gt;% select(sal) %&gt;% summarise(mean_sal_black = mean(sal, na.rm = T))</code></pre>
+<pre><code>##   mean_sal_black
+## 1       32712.78</code></pre>
+<pre class="r"><code># Or, alternatively, use: 
+opm94 %&gt;% select(race, sal) %&gt;% group_by(race) %&gt;% summarise(mean_sal = mean(sal, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   race            mean_sal
+##   &lt;fct&gt;              &lt;dbl&gt;
+## 1 American Indian   32846.
+## 2 Asian             38440.
+## 3 Black             32713.
+## 4 Hispanic          36500.
+## 5 White             43294.</code></pre>
+<pre class="r"><code>opm94 %&gt;% select(race, grade) %&gt;% group_by(race) %&gt;% summarise(mean_grade = mean(grade, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   race            mean_grade
+##   &lt;fct&gt;                &lt;dbl&gt;
+## 1 American Indian       8.24
+## 2 Asian                 9.65
+## 3 Black                 7.91
+## 4 Hispanic              8.94
+## 5 White                10.1</code></pre>
+<pre class="r"><code>opm94 %&gt;% select(race, promo01) %&gt;% group_by(race) %&gt;%  summarise(mean_promo01 = mean(promo01, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   race            mean_promo01
+##   &lt;fct&gt;                  &lt;dbl&gt;
+## 1 American Indian        0.25 
+## 2 Asian                  0.172
+## 3 Black                  0.126
+## 4 Hispanic               0.213
+## 5 White                  0.123</code></pre>
+<pre class="r"><code>opm94 %&gt;% select(race, supmgr01) %&gt;% group_by(race) %&gt;%  summarise(mean_supmgr01 = mean(supmgr01, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   race            mean_supmgr01
+##   &lt;fct&gt;                   &lt;dbl&gt;
+## 1 American Indian         0.118
+## 2 Asian                   0.161
+## 3 Black                   0.109
+## 4 Hispanic                0.143
+## 5 White                   0.201</code></pre>
+</div>
+</div>
+
+<p style = "text-align: right;"> Copyright &copy; 2020 </p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
