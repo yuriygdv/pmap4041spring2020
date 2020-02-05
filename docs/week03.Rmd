@@ -1,0 +1,290 @@
+---
+title: "Class 3. FREQUENCY DISTRIBUTIONS: In-Class Practice"
+author: "Yuriy Davydenko"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  html_document:
+    includes:
+      in_header: "favicon.html" 
+---
+
+<br>
+
+Download the datasets for this class:
+
+* [Datasets](docs/Class3_Datasets.zip)
+
+You can download this whole script as `ComputerAssignment_03.Rmd` file to save on your computer and open in RStudio instead of copying & pasting from this webpage:
+
+* [Complete Assignment #3: Download link - Rmd file - (Click "Save As")](docs/ComputerAssignment_03.Rmd)
+
+
+<br>
+
+
+```{r, message=FALSE}
+#install.packages("dplyr")   # install packages if they are not installed yet 
+#install.packages("ggplot2") # (uncomment the command before executing it by removing '#' in front of it)
+#install.packages("knitr")
+#install.packages("summarytools")
+
+library(dplyr)         # for manipulating data
+library(ggplot2)       # for making graphs
+library(knitr)         # for nicer table formatting
+library(summarytools)  # for frequency distribution tables
+
+```
+
+<br>
+
+# 3.1 Frequency Distribution Tables 
+__(See Lecture Notes for Week 3 on iCollege to read about interpreting frequency tables)__
+
+### Example 1: Two sets of rated charities
+
+Assume you are studying charitable performance and have two samples of charities - one sample of 10 charities "Datasets/s10.RData" and one sample of 100 charities. Each sample contains data on charity ratings. Let's read the datasets into R and generate frequency tables for each ssample:
+```{r}
+load("Datasets/s10.RData")   # load charity ratings data: the sample of 10
+freq(s10)
+```
+
+```{r}
+load("Datasets/s100.RData")   # load charity ratings data: the sample of 100
+freq(s100)
+```
+
+</br>
+
+* * *  
+
+</br>
+
+### EXAMPLE 2: General Social Survey (GSS)
+
+Assume you are studying Americans' attitudes toward premarital sex. In 1998, the General Social Survey (GSS) asked a random sample of Americans, the following question: 
+
+> *There's been a lot of discussion about the way morals and attitudes about sex are changing in this country. If a man
+and woman have sex relations before marriage, do you think it is always wrong, almost always wrong, wrong only
+sometimes, or not wrong at all?*
+
+We have a sample with 1000 responses to some of the survey questions, including the question about respondents' attitudes toward sex before marriage.
+
+Let's load the dataset `gss98_4041.csv` from the _Dataset_ folder:
+```{r}
+load(file = "Datasets/gss98.RData")
+```
+
+The dataset contains data on the following 49 variables:
+```{r}
+names(gss98)
+```
+
+To learn more about each variable [see the codebook for the survey here.](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR)
+
+
+Let's take a look at several selected Variables (first ten cases) from the General Social Survey (GSS) 1998:
+```{r}
+
+gss98[1:10, c("SEX", "RACE", "RELIG", "AGESUM", "EDUC2", "FUND", "MARITAL", "INCOME", "PARTY", "PREMARSX")] %>% kable()
+```
+
+[ __VAR:__ `PREMARSX` ]
+
+According to [the survey's codebook ](http://www.icpsr.umich.edu/cgi-bin/file?comp=none&study=34802&ds=1&file_id=1136502&path=ICPSR), the variable of interest describing individual attitudes toward premarital sex is labelled `PREMARSX`.
+
+Let's generate the **Frequency Distribution Table** for `PREMARSX` using the function `summarytools::freq('_Variable Name_')`:
+
+```{r}
+library(summarytools)   # Make sure you've loaded the library 'summarytools'
+gss98$PREMARSX <- factor(gss98$PREMARSX, levels = c("Always wrong", "Almst alwys wrng", "Wrong sometimes", "Not wrong at all"))
+freq(gss98$PREMARSX)    # Generate frequency distribution using command 'freq()' from the library 'summarytools'
+```
+
+Let's generate frequency tables for two more variables:
+
+[ __VAR:__ `HOMOSEX` ] 
+*What about sexual relations between two adults of the same sex--do you think it is always wrong, almost always wrong, wrong only sometimes, or not wrong at all?*
+
+```{r}
+
+freq(gss98$HOMOSEX)
+
+```
+
+[ __VAR:__ `TEENSEX` ]
+*What if they are in their early teens, say 14 to 16 years old? In that case, do you think sex relations before marriage are always wrong, almost always wrong, wrong only sometimes, or not wrong at all?*
+
+```{r}
+
+freq(gss98$TEENSEX)
+
+```
+
+
+### EXAMPLE 3: Student Test Scores
+
+Let's read the dataset with student test scores into R and print the scores on the screen: 
+```{r}
+test_scores <- read.csv("Datasets/TestScores.csv")
+data.frame("Class 1" = test_scores[test_scores$Class=="Class1" , "Score"], 
+           "Class 2" = test_scores[test_scores$Class=="Class2" , "Score"], 
+           "Class 3" = test_scores[test_scores$Class=="Class3" , "Score"] ) %>% kable(align = c("l","l","l"))
+```
+
+Let's generate a contingency table:
+```{r}
+testscores <- read.csv("Datasets/TestScores.csv")  
+summarytools::freq(testscores$Score)                 #Oops, NOT VERY USEFUL !!!
+```
+
+__Too long and not very informative (because there are too many values that the variable take), isn't it?__
+
+Instead of displaying and calculating the frequency for each value the numeric (interval level) variable takes, we can cut the range of values into intervals using the command `cut()`:
+```{r}
+score_intervals <- cut(x = testscores$Score, breaks = c(0,60,70,80,90,100), include.lowest = TRUE)
+```
+
+Now we can generate a frequency distribution for the intervals:
+```{r}
+summarytools::freq(score_intervals)
+```
+
+</br>
+
+* * *  
+* * *  
+* * *  
+
+</br>
+
+# 3.2 Graphing Frequency Distributions
+
+```{r}
+test_scores <- read.csv("Datasets/TestScores.csv")  
+```
+
+```{r}
+library(ggplot2)
+
+test_scores %>% filter(Class == "Class1") %>%
+ggplot(aes(x=Score)) + 
+    geom_dotplot(fill="darkred", color="darkred", alpha = 0.3) + 
+    xlim(0,100) + 
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    labs(title = "Test Scores (Class 1) - Stacked Dot Plot")
+
+```
+
+```{r}
+test_scores %>% 
+    ggplot(aes(x=Score)) + 
+    geom_dotplot(fill="darkred", color="darkred", alpha = 0.3) + 
+    xlim(0,100) + 
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank()) +
+    labs(title = "Test Scores (Classes 1-3) - Stacked Dot Plot")
+```
+
+__This is not practical when the number of observations in the dataset is large!__
+
+Instead, use a histogram:
+```{r}
+ggplot(data = test_scores) + geom_histogram(aes(x = Score), bins = 30, fill = "darkred") + 
+                              labs(title = "Test Scores (All) - Histogram")
+```
+
+```{r}
+ggplot(data = test_scores) + geom_histogram(aes(x = Score, fill = Class)) + 
+                             labs(title = "Test Scores (All) - Histogram")
+ggplot(data = test_scores) + geom_histogram(aes(x = Score, fill = Class)) + facet_grid(Class ~ .) + 
+                             labs(title = "Test Scores (Classes 1-3) - Histogram")
+```
+
+For categorical (nominal or ordinal) variables, use bar charts:
+
+```{r}
+gss98 %>% ggplot() + geom_bar( aes(x = PREMARSX), fill = "darkred" )
+```
+
+Same, but but without missing values:
+
+```{r}
+
+gss98 %>% filter(!is.na(PREMARSX)) %>% ggplot() + geom_bar( aes(x = PREMARSX), fill = "darkred" )
+
+#library(tidyr)
+#gss98 %>% tidyr::drop_na(PREMARSX) %>% ggplot() + geom_bar( aes(x = PREMARSX), fill = "darkred" )
+
+```
+
+Bar plot with relative frequencies and value labels:
+```{r}
+gss98 %>%  group_by(PREMARSX) %>% summarise(Percent = 100*n()/nrow(gss98)) %>%  # Calculate % for PREMARSX
+    ggplot( mapping = aes(x = PREMARSX, y = Percent, label = Percent)) +        # Map aesthetics 
+    geom_bar( stat="identity", fill = "darkred" ) +                             # added stat="identity"
+    geom_text(vjust = -0.2)                                                     # adjust height of the labels
+
+```
+
+
+
+<br>
+
+***
+
+
+## Selected Variables from [a random sample of 500 observations from the 2000 U.S. Census Data](https://www.openintro.org/stat/data.php?data=census):
+
+* `census_year` - Census Year.
+* `state_fips_code` - Name of state.
+* `total_family_income` - Total family income (in U.S. dollars).
+* `age` - Age.
+* `sex` - Sex with levels Female and Male.
+* `race_general` - Race with levels American Indian or Alaska Native, Black, Chinese, Japanese, Other Asian or Pacific Islander, Two major races, White and * Other.
+* `marital_status` - Marital status with levels Divorced, Married/spouse absent, Married/spouse present, Never married/single, Separated and Widowed.
+* `total_personal_income` - Total personal income (in U.S. dollars).
+
+
+```{r}
+census <- read.csv("C:/Users/admin/Dropbox/PhD/00_Coursework/13sem_4041_Spring2020/R/Datasets/census.csv")
+library(summarytools)
+```
+
+
+Frequency distributions for `census$marital_status`:
+```{r}
+freq(census$marital_status) %>% kable(digits = 2)
+ggplot(data = census) + geom_bar(mapping = aes(x = marital_status)) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Frequency distributions for `census$total_family_income`:
+```{r}
+
+income_intervals <- cut(x = census$total_family_income/1000, breaks = c(0,25,50,75,100,999), include.lowest = TRUE)
+summarytools::freq(income_intervals)
+ggplot(data = census) + geom_histogram(mapping = aes(x = total_family_income/1000)) + xlab("Total Family Income (Thousands $)")
+```
+
+
+<br>
+
+*** 
+
+<br>
+
+Download the datasets for this class:
+
+* [Datasets](docs/Class3_Datasets.zip)
+
+
+
+
+
+
+
+
+
+
