@@ -456,7 +456,89 @@ library(descr)         # for summary statistics</code></pre>
 <h2>Load Data</h2>
 <p>We are going to work with a new data set - a random sample of 1,000 federal personnel records for March 1994. These are not the responses to questionnaires as the previous data set was. Instead, they include the sort of information the government keeps in its personnel files: grade, salary, occupation, supervisory status, education, age, years of federal experience, sex, race, etc.</p>
 <pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;)</code></pre>
-<p>See a full listing of the variables by using <code>names(dataset_name)</code> command:</p>
+</div>
+<div id="exploring-dataset" class="section level2">
+<h2>Exploring Dataset</h2>
+<p>See a full listing of the variables by using <code>names(dataset_name)</code> command and the structure of the dataset using <code>str(dataset_name)</code> :</p>
+<pre class="r"><code>names(opm94)</code></pre>
+<pre><code>##  [1] &quot;x&quot;        &quot;sal&quot;      &quot;grade&quot;    &quot;patco&quot;    &quot;major&quot;    &quot;age&quot;     
+##  [7] &quot;male&quot;     &quot;vet&quot;      &quot;handvet&quot;  &quot;hand&quot;     &quot;yos&quot;      &quot;edyrs&quot;   
+## [13] &quot;promo&quot;    &quot;exit&quot;     &quot;supmgr&quot;   &quot;race&quot;     &quot;minority&quot; &quot;grade4&quot;  
+## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;</code></pre>
+<pre class="r"><code>str(opm94)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1000 obs. of  22 variables:
+##  $ x       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ sal     : int  26045 37651 64926 18588 19573 28648 27805 16560 40440 24285 ...
+##  $ grade   : int  7 9 14 4 3 9 7 3 11 6 ...
+##  $ patco   : Factor w/ 5 levels &quot;Administrative&quot;,..: 1 4 4 2 2 4 5 2 1 2 ...
+##  $ major   : Factor w/ 23 levels &quot;     &quot;,&quot;AGRIC&quot;,..: 16 11 10 1 1 11 1 1 1 6 ...
+##  $ age     : int  52 34 37 26 51 44 50 37 59 57 ...
+##  $ male    : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ vet     : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 2 1 ...
+##  $ handvet : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ hand    : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 1 1 1 1 1 ...
+##  $ yos     : int  6 4 3 6 14 1 7 5 13 6 ...
+##  $ edyrs   : int  16 16 16 12 12 16 14 12 12 14 ...
+##  $ promo   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 NA 1 1 1 1 1 ...
+##  $ exit    : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ supmgr  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ race    : Factor w/ 5 levels &quot;American Indian&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ minority: int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ grade4  : Factor w/ 4 levels &quot;grades 1 to 4&quot;,..: 3 4 2 1 1 4 3 1 4 3 ...
+##  $ promo01 : num  1 0 0 0 NA 0 0 0 0 0 ...
+##  $ supmgr01: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ male01  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ exit01  : num  0 0 0 0 1 0 0 0 0 0 ...</code></pre>
+<p>See the top ten rows of the dataset and the number of rows (observations) inthe dataset:</p>
+<pre class="r"><code>head(opm94)</code></pre>
+<pre><code>##   x   sal grade          patco major age   male vet handvet hand yos edyrs
+## 1 1 26045     7 Administrative LIT    52 female  no      no  yes   6    16
+## 2 2 37651     9   Professional HEALT  34 female  no      no   no   4    16
+## 3 3 64926    14   Professional ENGR   37 female  no      no   no   3    16
+## 4 4 18588     4       Clerical        26 female  no      no   no   6    12
+## 5 5 19573     3       Clerical        51 female  no      no   no  14    12
+## 6 6 28648     9   Professional HEALT  44 female  no      no   no   1    16
+##   promo exit supmgr  race minority          grade4 promo01 supmgr01 male01
+## 1   yes   no     no Asian        1   grades 5 to 8       1        0      0
+## 2    no   no     no Asian        1  grades 9 to 12       0        0      0
+## 3    no   no     no Asian        1 grades 13 to 16       0        0      0
+## 4    no   no     no Asian        1   grades 1 to 4       0        0      0
+## 5  &lt;NA&gt;  yes     no Asian        1   grades 1 to 4      NA        0      0
+## 6    no   no     no Asian        1  grades 9 to 12       0        0      0
+##   exit01
+## 1      0
+## 2      0
+## 3      0
+## 4      0
+## 5      1
+## 6      0</code></pre>
+<pre class="r"><code>nrow(opm94)</code></pre>
+<pre><code>## [1] 1000</code></pre>
+<p>Let’s explore <code>salary</code> in this sample:</p>
+<p><strong>Histograms</strong></p>
+<pre class="r"><code># Histogram using base graphics:
+hist(opm94$sal)</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code># Histogram using ggplot:
+ggplot(data = opm94, aes(x = sal)) + geom_histogram()</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><strong>Boxplots</strong></p>
+<pre class="r"><code>opm94 %&gt;% ggplot( aes(y = sal) ) + geom_boxplot()</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Same plots arranged side-by-side:</p>
+<pre class="r"><code>plot1 &lt;- ggplot(data = opm94, aes(x = sal)) + geom_histogram()
+plot2 &lt;- ggplot(data = opm94, aes(y = sal) ) + geom_boxplot() + coord_flip()
+
+gridExtra::grid.arrange(plot1, plot2, ncol = 1)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><strong>Histograms and boxplots</strong> again (across super manager status):</p>
+<pre class="r"><code>opm94 %&gt;% ggplot( aes(x = supmgr, y = sal) ) + geom_boxplot()</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = sal, fill = supmgr)) + geom_histogram() + facet_grid(supmgr ~ .)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="week04_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <p><br> <br></p>
 </div>
 <div id="calculating-statistics" class="section level2">
