@@ -345,17 +345,17 @@ $(document).ready(function () {
       </a>
     </li>
     <li>
-      <a href="week05.html">
-        <span class="fa fa-calendar-o fa-xs"></span>
-         
-        Week 5
-      </a>
-    </li>
-    <li>
       <a href="week06.html">
         <span class="fa fa-calendar-o fa-xs"></span>
          
-        Week 6
+        Week 6 (Scatterplots &amp; Correlations)
+      </a>
+    </li>
+    <li>
+      <a href="ca04.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 4
       </a>
     </li>
     <li>
@@ -419,7 +419,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Describing Distributions with Numbers (In-class practice)</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">February 13 2020</h4>
+<h4 class="date">February 19 2020</h4>
 
 </div>
 
@@ -464,9 +464,9 @@ library(descr)         # for summary statistics</code></pre>
 <pre><code>##  [1] &quot;x&quot;        &quot;sal&quot;      &quot;grade&quot;    &quot;patco&quot;    &quot;major&quot;    &quot;age&quot;     
 ##  [7] &quot;male&quot;     &quot;vet&quot;      &quot;handvet&quot;  &quot;hand&quot;     &quot;yos&quot;      &quot;edyrs&quot;   
 ## [13] &quot;promo&quot;    &quot;exit&quot;     &quot;supmgr&quot;   &quot;race&quot;     &quot;minority&quot; &quot;grade4&quot;  
-## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;</code></pre>
+## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;   &quot;vet01&quot;</code></pre>
 <pre class="r"><code>str(opm94)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    1000 obs. of  22 variables:
+<pre><code>## &#39;data.frame&#39;:    1000 obs. of  23 variables:
 ##  $ x       : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ sal     : int  26045 37651 64926 18588 19573 28648 27805 16560 40440 24285 ...
 ##  $ grade   : int  7 9 14 4 3 9 7 3 11 6 ...
@@ -488,7 +488,8 @@ library(descr)         # for summary statistics</code></pre>
 ##  $ promo01 : num  1 0 0 0 NA 0 0 0 0 0 ...
 ##  $ supmgr01: num  0 0 0 0 0 0 0 0 0 0 ...
 ##  $ male01  : num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ exit01  : num  0 0 0 0 1 0 0 0 0 0 ...</code></pre>
+##  $ exit01  : num  0 0 0 0 1 0 0 0 0 0 ...
+##  $ vet01   : num  0 0 0 0 0 0 0 0 1 0 ...</code></pre>
 <p>See the top ten rows of the dataset and the number of rows (observations) inthe dataset:</p>
 <pre class="r"><code>head(opm94)</code></pre>
 <pre><code>##   x   sal grade          patco major age   male vet handvet hand yos edyrs
@@ -505,13 +506,13 @@ library(descr)         # for summary statistics</code></pre>
 ## 4    no   no     no Asian        1   grades 1 to 4       0        0      0
 ## 5  &lt;NA&gt;  yes     no Asian        1   grades 1 to 4      NA        0      0
 ## 6    no   no     no Asian        1  grades 9 to 12       0        0      0
-##   exit01
-## 1      0
-## 2      0
-## 3      0
-## 4      0
-## 5      1
-## 6      0</code></pre>
+##   exit01 vet01
+## 1      0     0
+## 2      0     0
+## 3      0     0
+## 4      0     0
+## 5      1     0
+## 6      0     0</code></pre>
 <pre class="r"><code>nrow(opm94)</code></pre>
 <pre><code>## [1] 1000</code></pre>
 <p>Let’s explore <code>salary</code> in this sample:</p>
@@ -554,7 +555,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <col width="2%" />
 <col width="3%" />
 <col width="3%" />
-<col width="8%" />
+<col width="7%" />
 <col width="3%" />
 <col width="2%" />
 <col width="4%" />
@@ -571,6 +572,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <col width="8%" />
 <col width="4%" />
 <col width="5%" />
+<col width="4%" />
 <col width="4%" />
 <col width="4%" />
 </colgroup>
@@ -598,6 +600,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <th align="center">supmgr01</th>
 <th align="center">male01</th>
 <th align="center">exit01</th>
+<th align="center">vet01</th>
 </tr>
 </thead>
 <tbody>
@@ -624,6 +627,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">257</td>
@@ -644,6 +648,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">American Indian</td>
 <td align="center">1</td>
 <td align="center">grades 5 to 8</td>
+<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -672,6 +677,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">259</td>
@@ -696,6 +702,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">260</td>
@@ -716,6 +723,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">American Indian</td>
 <td align="center">1</td>
 <td align="center">grades 9 to 12</td>
+<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -744,6 +752,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">262</td>
@@ -764,6 +773,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">American Indian</td>
 <td align="center">1</td>
 <td align="center">grades 5 to 8</td>
+<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
@@ -792,6 +802,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="odd">
 <td align="center">264</td>
@@ -816,6 +827,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr class="even">
 <td align="center">265</td>
@@ -836,6 +848,7 @@ opm94AIF %&gt;% pander::pander(split.table = Inf)                               
 <td align="center">American Indian</td>
 <td align="center">1</td>
 <td align="center">grades 5 to 8</td>
+<td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>

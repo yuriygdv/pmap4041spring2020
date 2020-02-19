@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yuriy Davydenko" />
+
+<meta name="date" content="2020-02-19" />
+
+<title>Scatterplots &amp; Correlations (In-class Practice)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PMAP 4041</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-info"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    R Workshops
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R Starter</li>
+    <li>
+      <a href="week01.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 1 (in class)
+      </a>
+    </li>
+    <li>
+      <a href="ca01.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 1
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Exploratory Data Analysis</li>
+    <li>
+      <a href="week03.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 3 (Frequency Distributions)
+      </a>
+    </li>
+    <li>
+      <a href="ca02.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 2
+      </a>
+    </li>
+    <li>
+      <a href="week04.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 4-5 (Describing Distributions with Numbers)
+      </a>
+    </li>
+    <li>
+      <a href="ca03.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 3
+      </a>
+    </li>
+    <li>
+      <a href="week06.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 6 (Scatterplots &amp; Correlations)
+      </a>
+    </li>
+    <li>
+      <a href="ca04.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 4
+      </a>
+    </li>
+    <li>
+      <a href="week07.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 7
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inference</li>
+    <li>
+      <a href="week10.html">Week 10</a>
+    </li>
+    <li>
+      <a href="week11.html">Week 11</a>
+    </li>
+    <li>
+      <a href="week12.html">Week 12</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project.html">
+    <span class="fa fa-tasks"></span>
+     
+    Course Project
+  </a>
+</li>
+<li>
+  <a href="https://rstudio.cloud">
+    <span class="fa fa-cloud"></span>
+     
+    RStudio.cloud
+  </a>
+</li>
+<li>
+  <a href="https://rpubs.com">
+    <span class="fa fa-pencil"></span>
+     
+    RPubs
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://calendly.com/ydavydenko1">
+    <span class="fa fa-question fa-lg"></span>
+     
+    Appointment
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Scatterplots &amp; Correlations (In-class Practice)</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">February 19, 2020</h4>
+
+</div>
+
+
+<p><br></p>
+<p>Datasets for this class:</p>
+<ol style="list-style-type: decimal">
+<li>Motor Trend Car Road Tests: <code>mtcars</code> from package <code>datasets</code></li>
+</ol>
+<p>The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).</p>
+<ul>
+<li><p>To load, run: <code>data(mtcars)</code></p></li>
+<li><p>To get more info about the dataset, run: <code>?mtcars</code></p></li>
+<li><p>Check all the built-in dataset by running: <code>library(help = &quot;datasets&quot;)</code></p></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>A random sample of 1,000 federal personnel records for March 1994:</li>
+</ol>
+<ul>
+<li><a href="docs/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
+</ul>
+<p><br> <br></p>
+<div id="load-libraries-and-set-working-directory" class="section level2">
+<h2>Load Libraries and Set Working directory</h2>
+<pre class="r"><code>library(dplyr)       # for maipultaing the dataset using commands %&gt;%, select(), filter() etc.
+library(ggplot2)     # graphics 
+setwd(&quot;.&quot;)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="mtcars-dataset" class="section level1">
+<h1>1. <code>mtcars</code> dataset</h1>
+<div id="load-a-dataset-into-r-environment-and-examine-its-structure" class="section level2">
+<h2>Load a Dataset into R Environment and Examine its Structure</h2>
+<pre class="r"><code>data(mtcars)
+names(mtcars)</code></pre>
+<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
+## [11] &quot;carb&quot;</code></pre>
+<pre class="r"><code>str(mtcars)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+</div>
+<div id="scatterpolts-for-variables-in-mtcars-dataset" class="section level2">
+<h2>1.1 Scatterpolts for variables in <code>mtcars</code> dataset</h2>
+<p>Scatterplot for car mpg against weight (wt ~ mpg) using base graphics:</p>
+<pre class="r"><code>plot(x = mtcars$wt, y = mtcars$mpg)   # or you can type: plot(mtcars$mpg ~ mtcars$wt)</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Scatterplot for car mpg against weight (wt ~ mpg) using ggplot:</p>
+<pre class="r"><code>ggplot(data = mtcars, mapping = aes(x = wt, y = mpg )) + geom_point()</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Adding another dimension: same scatterplot broken down by <code>am</code> (transmission type: 0 = auto, 1 = manual)</p>
+<pre class="r"><code>ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, col = factor(am))) + geom_point()</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Scatterplot for car <code>mpg</code> against <code>am</code>:</p>
+<pre class="r"><code>ggplot(data = mtcars) + geom_point(mapping = aes(x = factor(am), y = mpg, col = factor(am) ))</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Boxplot for car <code>mpg</code> against <code>am</code>:</p>
+<pre class="r"><code>ggplot(data = mtcars, mapping = aes(x = factor(am), y = mpg, col = factor(am))) + geom_boxplot()</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="correlation-matrix-for-mtcars-dataset" class="section level2">
+<h2>1.2. Correlation Matrix for <code>mtcars</code> Dataset</h2>
+<p>Basic correlation matrix using <code>cor()</code> for select variables using <code>select()</code>:</p>
+<pre class="r"><code>mtcars %&gt;% select(mpg, cyl, disp, hp, wt, am) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(2)</code></pre>
+<pre><code>##        mpg   cyl  disp    hp    wt    am
+## mpg   1.00 -0.85 -0.85 -0.78 -0.87  0.60
+## cyl  -0.85  1.00  0.90  0.83  0.78 -0.52
+## disp -0.85  0.90  1.00  0.79  0.89 -0.59
+## hp   -0.78  0.83  0.79  1.00  0.66 -0.24
+## wt   -0.87  0.78  0.89  0.66  1.00 -0.69
+## am    0.60 -0.52 -0.59 -0.24 -0.69  1.00</code></pre>
+<p>A more advanced solution using <code>ggplot</code> family of libraries (<code>GGally</code>):</p>
+<ul>
+<li>don’t forget to install the library if it’s not yet installed</li>
+</ul>
+<pre class="r"><code>#install.packages(&quot;GGally&quot;)
+library(GGally)
+mtcars %&gt;% select(mpg, cyl, disp, hp, wt, am) %&gt;% ggpairs()</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="opm94-dataset" class="section level1">
+<h1>2. <code>OPM94</code> dataset</h1>
+<div id="load-dataset-and-check-its-structure" class="section level2">
+<h2>Load Dataset and Check its Structure:</h2>
+<pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;)
+str(opm94)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1000 obs. of  23 variables:
+##  $ x       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ sal     : int  26045 37651 64926 18588 19573 28648 27805 16560 40440 24285 ...
+##  $ grade   : int  7 9 14 4 3 9 7 3 11 6 ...
+##  $ patco   : Factor w/ 5 levels &quot;Administrative&quot;,..: 1 4 4 2 2 4 5 2 1 2 ...
+##  $ major   : Factor w/ 23 levels &quot;     &quot;,&quot;AGRIC&quot;,..: 16 11 10 1 1 11 1 1 1 6 ...
+##  $ age     : int  52 34 37 26 51 44 50 37 59 57 ...
+##  $ male    : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ vet     : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 2 1 ...
+##  $ handvet : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ hand    : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 1 1 1 1 1 ...
+##  $ yos     : int  6 4 3 6 14 1 7 5 13 6 ...
+##  $ edyrs   : int  16 16 16 12 12 16 14 12 12 14 ...
+##  $ promo   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 NA 1 1 1 1 1 ...
+##  $ exit    : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ supmgr  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ race    : Factor w/ 5 levels &quot;American Indian&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ minority: int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ grade4  : Factor w/ 4 levels &quot;grades 1 to 4&quot;,..: 3 4 2 1 1 4 3 1 4 3 ...
+##  $ promo01 : num  1 0 0 0 NA 0 0 0 0 0 ...
+##  $ supmgr01: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ male01  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ exit01  : num  0 0 0 0 1 0 0 0 0 0 ...
+##  $ vet01   : num  0 0 0 0 0 0 0 0 1 0 ...</code></pre>
+</div>
+<div id="correlation-matrix" class="section level2">
+<h2>2.1. Correlation Matrix</h2>
+<p>Correlation matrix for select interval level variables:</p>
+<pre class="r"><code>opm94 %&gt;% select(sal, grade, edyrs, yos ) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(2)</code></pre>
+<pre><code>##        sal grade edyrs  yos
+## sal   1.00  0.91  0.59 0.40
+## grade 0.91  1.00  0.61 0.31
+## edyrs 0.59  0.61  1.00 0.01
+## yos   0.40  0.31  0.01 1.00</code></pre>
+<p>Correlation matrix with binary variables:</p>
+<pre class="r"><code>opm94 %&gt;% select(sal, male01, vet01, promo01, supmgr01, minority) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(2)</code></pre>
+<pre><code>##            sal male01 vet01 promo01 supmgr01 minority
+## sal       1.00   0.36  0.14   -0.15     0.52    -0.23
+## male01    0.36   1.00  0.42   -0.07     0.18    -0.12
+## vet01     0.14   0.42  1.00   -0.07     0.11    -0.02
+## promo01  -0.15  -0.07 -0.07    1.00    -0.08     0.04
+## supmgr01  0.52   0.18  0.11   -0.08     1.00    -0.09
+## minority -0.23  -0.12 -0.02    0.04    -0.09     1.00</code></pre>
+</div>
+<div id="scatterplots" class="section level2">
+<h2>2.2. Scatterplots</h2>
+<p>Salary ~ Grade:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = grade, y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = grade, y = sal, color = male)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>Salary ~ edyrs:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = edyrs, y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = edyrs, y = sal, color = male)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<p>Salary ~ yos:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = yos, y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = yos, y = sal, color = male)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p>Salary ~ male:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = male, y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = male, y = sal)) + geom_boxplot()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<p>Salary ~ supmgr:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = supmgr, y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = supmgr, y = sal)) + geom_boxplot()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<p>Salary ~ minority:</p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = factor(minority), y = sal)) + geom_point()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = opm94, aes(x = factor(minority), y = sal)) + geom_boxplot()</code></pre>
+<pre><code>## Warning: Removed 5 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="week06_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+</div>
+</div>
+
+<p style = "text-align: right;"> Copyright &copy; 2020 </p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
