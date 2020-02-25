@@ -1,0 +1,186 @@
+---
+title: "Regression Models Project: Do Manual or Automatic Transmissions Provide better MPG?"
+author: "Yuriy Davydenko"
+date: '`r format(Sys.Date(), "%B %d %Y")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, echo=FALSE, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+data("mtcars")
+```
+
+
+## EXECUTIVE SUMMARY
+
+According to `mtcars` data and the regression model developed in the present analysis, car fuel efficiency `mpg` is statistically significantly influenced by a vehicle's weigh `wt` and its horse power `hp`. At the same time, an `mpg` difference based on the type of a transmission can be observed in the sample only: among cars of the same weight and horse power, those with manual transmissions are expected to deliver two mpg more than those with automatic transmission. This effect appears to be statistically insignificant and cannot be genereralized to a larger population of cars - these data provide no evidence that either manual or automatic transmissions are better for MPG.  
+
+
+
+## ANALYSIS
+
+The provided dataset consists of `r dim(mtcars)[1]` observations and `r dim(mtcars)[2]` following variables: `r names(mtcars)`.
+
+### Variables
+
+The outcome variable in this analysis fuel efficiecny `mpg` measured in Miles per Gallon. Its class is `r class(mtcars$mpg)`, which makes it suitable for modeling with the linear OLS model. It ranges from `r range(mtcars$mpg)[1]` to `r range(mtcars$mpg)[2]` mpg with tha mean of `r round(mean(mtcars$mpg), 2)` (see the distribution in the Appendix) . 
+
+The independent variable of interest is a transmission type `am`, measured as 0 for Automatic and 1 for Manual transmissions. In the dataset, the class of the variable is `r class(mtcars$am)`, so it needs to be converted to a factor. There are `r round(summary(mtcars$am)[4]*100, 2)` percent of cars with the manual transmission in the sample.
+
+Other variables that can potentially affect fuel efficiency are the following:  
+
+* `cyl`: Number of cylinders (numeric with values 4, 6 and 8). The distribution of the varibale is presented in Fig.2 in the Appendix. Can be modelled eiher as a numeric variable or as a factor. 
+* `disp`: Displacement (cu.in). The distribution of the varibale is presented in Fig.3 in the Appendix.
+* `hp`: Gross horsepower, a numeric variable with the distribution provided in Fig.4
+* `wt`: Weight (1000 lbs), a numeric variable, Fig.5
+* `gear`: Number of forward gears, a numeric varible, Fig.6
+
+```{r, echo=FALSE, message=FALSE}
+mtcars$am <- factor(mtcars$am, labels = c("Automatic", "Manual"))
+```
+
+### Exploratory Analysis
+
+Calcualting the means in `mpg` across the two types of tranmissions shows there is a substantial difference in fuel efficiency in cars with different types of transmissions (also see the boxplots in Fig.0 in the Appendix):
+```{r, echo=FALSE, message=FALSE}
+mtcars %>% select(mpg, am) %>% group_by(am) %>% summarise(Mean_MPG = mean(mpg), SD = sd(mpg)) %>% kable()
+
+```
+
+### Modeling
+The results of fitting a bivariate model with `mpg` as the autcome and `am` as the single predictors are as follows:
+```{r reg1, echo=FALSE, message=FALSE}
+model1 <- lm(mpg ~ am, data = mtcars)
+summary(model1)$coef %>% kable()
+```
+
+They show that the expected `mpg` of cars with an automatic transmission is `r model1$coef[1]`. Cars with a manual transmission are expected to deliver `r model1$coef[2]` mpg more than cars with an automatic transmission. This difference is statistically significant at the 95% confidence level with the following confidence intervals that outline the differences in the larger population of cars: 
+
+```{r conf1, echo=FALSE, message=FALSE}
+confint(model1) %>% kable()
+```
+
+However, there are other car characteristics that might influence `mpg` and might be correlated with `am`. As a result, the coefiicient on `am` might be biased: 
+```{r cormat, echo=FALSE, message=FALSE}
+cor(mtcars[,c(1,2,3,4,6,10)]) %>% kable()
+```
+
+As the table above shows, many potential predictors of `mpg` are hightly correlated with each other and the predictor variable, so using all of them in the model might be not a good idea due to variance inflation. Therefore, the best parsimonious model will be selected using the Adjusted R-squared and ANOVA on nested models. Those variables that add little explanatory power to the model will be dropped.
+
+One of the most essential differences among cars that  influences mpg  is their weight. Weight `wt` is higly correlated with the number of cylinders and displacement. The first adjustment to the model is adding the weight variable:
+
+```{r, echo=FALSE, message=FALSE}
+model2 <- lm(mpg ~ am + wt , data = mtcars)
+summary(model2)$coef %>% kable()
+cat("Adjusted R-squared:", summary(model2)$adj.r.squared)
+cat("anova(model1, model2): Pr(>F)", anova(model1, model2)$`Pr(>F)`[2])
+```
+
+The adjusted model appears to be a significant improvement over the bivariate model. It explains `r round(summary(model2)$adj.r.squared*100, 2)` percent of the variation in the outcome as opposed to `r round(summary(model1)$adj.r.squared*100, 2)` percent of the variation in the first model - a substantial improvement along with a higly significant ANOVA test comparing the two models. 
+
+However, in this model that now controls for a car's weight, the type of transmission doesn't make difference in terms of `mpg`. The coefficient on `am` is small and insignificant. 
+
+Next adjustment is made by adding displacement `disp` to the model:
+```{r, echo=FALSE, message=FALSE}
+model3 <- lm(mpg ~ am + wt + disp, data = mtcars)  
+summary(model3)$coef %>% kable()
+cat("Adjusted R-squared:", summary(model3)$adj.r.squared)
+cat("anova(model2, model3): Pr(>F)", anova(model2, model3)$`Pr(>F)`[2])
+```
+
+The coefficent on `disp` is small and statistically insignificant. The improvement in the Adjusted R-squared is minor: `r round(summary(model3)$adj.r.squared*100, 2)` - `r round(summary(model2)$adj.r.squared*100, 2)` = `r round(summary(model3)$adj.r.squared*100, 2) - round(summary(model2)$adj.r.squared*100, 2)` percentage point and the ANOVA test suggest that adding the variable doesn't significantly improve the model. Therefore, `disp` will be dropped from the model.
+
+Adding `hp` to the model yields the following coefficients:
+```{r, echo=FALSE, message=FALSE}
+model4 <- lm(mpg ~ am + wt + hp , data = mtcars)     
+summary(model4)$coef %>% kable()
+cat("Adjusted R-squared:", summary(model4)$adj.r.squared)
+cat("anova(model2, model4): Pr(>F)", anova(model2, model4)$`Pr(>F)`[2])
+```
+
+The coefficient on `hp` appears to be stattistically significant and adding the variable improves the Adjusted R-squred. 
+
+Fianlly, adjusting the model by adding `cyl` and `gear` does not significantly improve it:
+
+```{r, echo=FALSE, message=FALSE}
+model5 <- lm(mpg ~ am + wt + hp + cyl , data = mtcars)  # NO
+#summary(model5)$coef %>% kable()
+cat("anova(model4, model5): Pr(>F)", anova(model4, model5)$`Pr(>F)`[2])
+
+model6 <- lm(mpg ~ am + wt + hp + gear, data = mtcars)  #NO
+#summary(model6)$coef %>% kable()
+cat("anova(model4, model6): Pr(>F)", anova(model4, model6)$`Pr(>F)`[2])
+```
+
+The diagnostic plot (see Fig.12) shows that the residuals are evenly spred around zero and across the fitted values, which suggestions that model assumptions are met.
+
+## Summary
+
+The resulting model has three predictors: Transmission Type `am`, Weight `wt`, and Horsepower `hp`. According to this model, in this sample, cars that have a manual transmission are expected to deliver `r model4$coef[2]` more mpg than the cars with the same weight and horsepower that have an automatic transmission. This diffeence, however, is not statistically significant, so the conclusion cannot be extended to the larger population of cars: we can be 95% confident that in the population of cars that the sample represents, cars with a manual transmission deliver between `r confint(model4)[2]` less to `r confint(model4)[6]` more mpg than similar in terms of weight and horsepower cars with an automatic transmission. In other words, these data provide no convincing evidence that either manual or automatic transmissions are better for MPG.  
+
+
+
+## APPENDIX
+
+```{r fig0, echo=FALSE, message=FALSE, fig.align='center'}
+mtcars %>% select(mpg, am) %>% ggplot(aes(x=am, y=mpg)) + geom_boxplot() + labs(x = "Transmission Type") + labs(title = "Fig.0: Differences in mpg Across Types of Transmissions")
+```
+
+```{r fig1, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(data = mtcars, aes(x = mpg)) + geom_histogram() + labs( title = "Figure 1: Distribution of mpg")
+```
+
+```{r fig2, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(mtcars, aes(cyl)) + geom_histogram() + labs(x = "Number of Cylinders") + labs(title = "Fig.2: Distribution of the Number of Cylinders")
+```
+
+```{r fig3, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(mtcars, aes(disp)) + geom_histogram() + labs(x = "Displacement (cu.in)") + labs(title = "Fig.3: Distribution of the Displacement")
+```
+
+```{r fig4, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(mtcars, aes(hp)) + geom_histogram() + labs(x = "Gross horsepower") + labs(title = "Fig.4: Distribution of the Gross horsepower")
+```
+
+```{r fig5, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(mtcars, aes(wt)) + geom_histogram() + labs(x = "Weight (1000 lbs)") + labs(title = "Fig.5: Distribution of the Weight")
+```
+
+```{r fig6, echo=FALSE, message=FALSE, fig.align='center'}
+ggplot(mtcars, aes(gear)) + geom_histogram() + labs(x = "Number of forward gears") + labs(title = "Fig.6: Distribution of the Number of Forward Gears")
+```
+
+
+```{r fig7, echo=FALSE, message=FALSE, fig.align='center'}
+
+mtcars %>% select(mpg, cyl) %>% ggplot(aes(x=factor(cyl), y=mpg)) + geom_boxplot() + labs(x = "Number of Cylinders") + labs(title = "Fig.7: Differences in mpg and Number of Cylinders")
+
+```
+
+```{r fig8, echo=FALSE, message=FALSE, fig.align='center'}
+mtcars %>% select(mpg, disp) %>% ggplot(aes(x=disp, y=mpg)) + geom_point() + labs(x = "Displacement (cu.in)") + labs(title = "Fig.8: Displacement and mpg")
+```
+
+```{r fig9, echo=FALSE, message=FALSE, fig.align='center'}
+mtcars %>% select(mpg, hp) %>% ggplot(aes(x=hp, y=mpg)) + geom_point() + labs(x = "Gross Horsepower") + labs(title = "Fig.9: Gross Horsepower and mpg")
+```
+
+```{r fig10, echo=FALSE, message=FALSE, fig.align='center'}
+mtcars %>% select(mpg, wt) %>% ggplot(aes(x=wt, y=mpg)) + geom_point() + labs(x = "Weight (1000 lbs)") + labs(title = "Fig.10: Weight and mpg")
+```
+
+```{r fig11, echo=FALSE, message=FALSE, fig.align='center'}
+mtcars %>% select(mpg, gear) %>% ggplot(aes(x=factor(gear), y=mpg)) + geom_boxplot() + labs(x = "Number of forward gears") + labs(title = "Fig.11: Number of Forward Gears and mpg")
+```
+
+```{r, echo=FALSE, message=FALSE, fig.align='center'}
+plot(model4$residuals ~ model4$fitted.values, main = "Fig.12: Residuals vs. Fitted Values Diagnostic Plot") 
+```
+```
+

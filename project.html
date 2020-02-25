@@ -9,7 +9,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Yuriy Davydenko" />
 
 
 <title>Data Analysis Project</title>
@@ -418,14 +417,129 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Data Analysis Project</h1>
-<h4 class="author">Yuriy Davydenko</h4>
 
 </div>
 
 
-<p>Data Analysis Project example:</p>
-<p><a href="https://s3.amazonaws.com/coursera-uploads/peer-review/09b037759369477ad351fa552b247dbb/intro_data_prob_project.html">Exploring links between sleep duration and individual health and behaviors.</a></p>
+<p><br></p>
+<p>Identify a research question (set of questions) similar to questions we’ve talked about in this class and a dataset that can be used to answer the question.</p>
+<p>Your project will consist of the following parts:</p>
+<div id="executive-summary." class="section level4">
+<h4>1. Executive summary.</h4>
+<p>A short executive summary describing your research question(s), data, and conclusions.</p>
+</div>
+<div id="research-questions." class="section level4">
+<h4>2. Research question(s).</h4>
+<p>Come up with one or more research questions involving at least three variables and at least one relationship between variables. Briefly discuss why this question is of interest to you and/or your audience. One option here is to perform a multiple regression analysis focusing on a numeric response variable, an explanatory variable, and a set of control variables. Another option is to compare categorical outcomes of interest across different groups. Examples of similar work are provided.</p>
+</div>
+<div id="data." class="section level4">
+<h4>3. Data.</h4>
+<p>For this project, you can use one of the datasets provided for this course or find one from an external source. Describe the dataset, including the variables and how the sample was collected. To do that, use the documentation for the dataset. Briefly discuss the implications of the data collection method on the scope of inference (generalizability and causality).</p>
+</div>
+<div id="exploratory-data-analysis." class="section level4">
+<h4>4. Exploratory Data Analysis.</h4>
+<p>Conduct an exploratory data analysis to address the question(s) of interest. The EDA should include graphs and numerical summaries. Provide interpretation of each output.</p>
+</div>
+<div id="inference" class="section level4">
+<h4>5. Inference</h4>
+<p>Conduct inferential analysis using an appropriate technique.</p>
+</div>
+<div id="results." class="section level4">
+<h4>6. Results.</h4>
+<p>Describe your findings and conclusions in the context of your research question.</p>
+<p>The analysis must be completed using R via RStudio, and your work must be in an R Markdown document. To help you get started, I can provide a template Rmd file.</p>
+<p><br></p>
+</div>
+<div id="group-work" class="section level3">
+<h3>GROUP WORK</h3>
+<p>It is not required, but this assignment can be done as a group project. Feel free to team up with your classmates to work on one project in a group of up to three people. Every member of a group should contribute to the group’s work.</p>
+<p><br></p>
+</div>
+<div id="timeline" class="section level3">
+<h3>TIMELINE</h3>
+<p>If you chose to work as a group, submit the names of your group members for approval – by March 9 Discuss &amp; have your research question approved – by March 23 Demonstrate your progress &amp; discuss questions with instructor – on the weekly basis.</p>
+<p><br></p>
+</div>
+<div id="consultations" class="section level3">
+<h3>CONSULTATIONS</h3>
+<p>To receive help and successfully complete this project, consult with the instructor frequently!!!</p>
+<p><br></p>
+</div>
+<div id="grading-criteria" class="section level3">
+<h3>Grading Criteria</h3>
+<p><strong>RQ</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>The research question(s) are well defined / not vague (Yes-1 point, No-0 points) (“Well defined” means it is obvious from the research questions which variables will be involved in the analysis.)</p></li>
+<li><p>It is clear why the research question(s) is(are) of interest to the author and/or the reader (Yes-1 point, No-0 points)</p></li>
+<li><p>The question(s) involve three or more variables (Yes-1 pts., Needs more work-1pt., No-0 pts)</p></li>
+<li><p>The author described the sampling method, potential sources of bias, and explain its implications for generalizability (Yes-1 point, No-0 points)</p></li>
+<li><p>The author discussed whether causality can be inferred from the analysis (Yes-1 point, No-0 points)</p></li>
+</ol>
+<p><strong>EDA</strong></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>The author did some exploratory data analyses (Yes-1 point, No-0 points)</p></li>
+<li><p>The plots are constructed correctly and address the research question (Yes-2 points, Needs more work, No-0 points)</p></li>
+<li><p>The summary statistics are calculated correctly and address the research question (Yes-2 points, Needs more work - 1 point, No-0 points)</p></li>
+<li><p>Each exploratory output accompanied by a narrative which interpret the visuals and summary statistics correctly (Yes-2 pts, Needs more work-1pt., No-0 pts)</p></li>
+<li><p>INFERENCE</p></li>
+<li><p>The author performed an inference correctly (Yes-2 pts, Needs more work-1pt., No-0 pts)</p></li>
+</ol>
+<p><strong>OVERALL</strong></p>
+<ol start="12" style="list-style-type: decimal">
+<li><p>The author answered the research questions or explained why the question(s) is (are) not answerable (Yes-2 points, Needs more work - 1 point, No-0 points)</p></li>
+<li><p>The report included an executive summary (Yes-1 point, No-0 points)</p></li>
+<li><p>The report is done in Rmd (knitr) and submitted as an HTML/pdf document (Yes-1 point, No-0 points)</p></li>
+<li><p>The report is clear, readable, well organized (Yes-1 point, No-0 points)</p></li>
+</ol>
+<p><br></p>
 <hr />
+<p><br></p>
+</div>
+<div id="available-datasets" class="section level3">
+<h3>AVAILABLE DATASETS</h3>
+<ul>
+<li>Federal Employee Reords 1994-95 <a href="docs/data/OPM94.RData">Dataset ‘OPM94’ (click “Save As”)</a></li>
+<li>Random sample of 2000 U.S. Census Data <a href="docs/data/census.csv">Dataset ‘Census’ (click “Save As”)</a>.
+<ul>
+<li>Source: <a href="https://www.openintro.org/data/index.php?data=census" class="uri">https://www.openintro.org/data/index.php?data=census</a></li>
+</ul></li>
+<li>Loan data from Lending Club <a href="docs/data/loan50.csv">Dataset ‘Loan50’ (click “Save As”)</a>.
+<ul>
+<li>Source: <a href="https://www.openintro.org/data/index.php?data=loan50" class="uri">https://www.openintro.org/data/index.php?data=loan50</a></li>
+</ul></li>
+<li>Ames Iowa: Alternative to the Boston Housing Data Set. Data set contains information from the Ames Assessor’s Office used in computing assessed values for individual residential properties sold in Ames, IA from 2006 to 2010.
+<ul>
+<li><a href="Project/datasets/ames.Rdata">Dataset</a></li>
+<li><a href="Project/datasets/ames_documentation.txt">Documentation</a></li>
+</ul></li>
+<li>General Social Survey, 1972-2016
+<ul>
+<li><a href="Project/datasets/gss.Rdata">Dataset</a></li>
+<li><a href="Project/datasets/GSS_1972-2016_Codebook.pdf">Codebook</a></li>
+</ul></li>
+<li>The Behavioral Risk Factor Surveillance System (BRFSS) - 2013
+<ul>
+<li><a href="Project/datasets/brfss2013.RData">Dataset</a></li>
+<li><a href="Project/datasets/brfss_codebook.html">Codebook</a></li>
+</ul></li>
+<li>The Internet and American Life 2000 <a href="Project/datasets/2000MarchSurveyData_SocCap.zip">Dowload Zip</a></li>
+<li>Government Online 2009 <a href="Project/datasets/2009.December-GovernmentOnline.zip">Download zip</a></li>
+<li>December-Social-Side-of-the-Internet 2010 <a href="Project/datasets/December-2010--Social-Side-of-the-Internet.zip">Download zip</a></li>
+<li>2010 November-Facebook-and-Social-Support <a href="Project/datasets/November-2010-–-Facebook-and-Social-Support.zip">Download zip</a></li>
+<li>2012 August - Civic Engagement <a href="Project/datasets/2012August-CivicEngagement.zip">Download zip</a></li>
+<li>2012 February - Search, Social Networks, and Politics <a href="Project/datasets/2012February-SearchSocialNetworksandPolitics.zip">Download zip</a></li>
+<li>2012 September - Health Tracking <a href="Project/datasets/2012September-HealthTracking.zip">Download zip</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="data-analysis-project-examples" class="section level3">
+<h3>Data Analysis Project Examples</h3>
+<p>These examples might help you get an idea what a project report should look like. Your project doesn’t have to be as big and detailed as those provided in the examples and you are not required to use all the techniques provided in the examples.</p>
+<p><a href="Project/mtcars.html">Regression Models Project: Do Manual or Automatic Transmissions Provide better MPG?</a></p>
+<p><a href="https://s3.amazonaws.com/coursera-uploads/peer-review/09b037759369477ad351fa552b247dbb/intro_data_prob_project.html">Exploring links between sleep duration and individual health and behaviors.</a></p>
+<p><a href="Project/gss.html">Statistical inference with the GSS data</a></p>
+<p><a href="Project/movies.html">Predicting movie ratings</a></p>
+</div>
 
 
 
