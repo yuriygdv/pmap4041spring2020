@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Yuriy Davydenko" />
 
+<meta name="date" content="2020-02-26" />
 
-<title>Syllabus</title>
+<title>Computer Assignment 5: Bivariate Regression</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +26,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -423,77 +424,90 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Syllabus</h1>
+<h1 class="title toc-ignore">Computer Assignment 5: Bivariate Regression</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">February 26, 2020</h4>
 
 </div>
 
 
-<p><br></p>
-<div id="prerequisite" class="section level3">
-<h3>PREREQUISITE</h3>
-<p>Math 1070, minimum C grade.</p>
-</div>
-<div id="course-description" class="section level3">
-<h3>COURSE DESCRIPTION</h3>
-<p>This course focuses on quantitative research methods applicable to the study of public policy. Students will be introduced to the use of descriptive statistics as well as to the development and testing of empirical hypotheses using basic inferential statistical methods.</p>
-<p>This is a rigorous course, requiring 4-6 hours of work per week outside of class, on average. You are expected to read the lecture notes and any other materials provided by the instructor each week before coming to class. Remember, the key to learning is persistence.</p>
-</div>
-<div id="learning-objectives" class="section level3">
-<h3>LEARNING OBJECTIVES</h3>
-<p>At the end of the course, students should be able to:</p>
+<pre><code>## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD &quot;author&quot; ABOVE AND REMOVE THIS COMMENT ##</code></pre>
+<p><br> <br></p>
+<p>Datasets for this assignment:</p>
+<p>A random sample of 1,000 federal personnel records for March 1994:</p>
 <ul>
-<li>Understand the value of data analysis and formulate questions that can be answered using data</li>
-<li>Understand the structure and organization of data</li>
-<li>Understand data collection methods and their implications for the scope of inference</li>
-<li>Manipulate data and run basic statistical analyses using R software</li>
-<li>Conduct basic exploratory data analysis</li>
-<li>Calculate descriptive statistics</li>
-<li>Make basic data visualizations</li>
-<li>Use scatterplots and correlation coefficients to show the direction and strength of relationships between interval-level variables</li>
-<li>Construct and Interpret contingency tables</li>
-<li>Interpret regression coefficients in both bivariate and multiple regressions</li>
-<li>Justify claims based on confidence intervals and hypothesis testing</li>
-<li>Document and share data analyses with others</li>
+<li><a href="docs/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
-</div>
-<div id="texts-tools-and-other-resources" class="section level3">
-<h3>TEXTS, TOOLS, AND OTHER RESOURCES</h3>
-<ol style="list-style-type: decimal">
-<li><p>iCollege iCollege will be used for communication and to disseminate course content, lecture notes, PowerPoint slides, datasets, and more. Students are expected to use this resource on a regular basis for course materials and announcements.</p></li>
-<li><p>Course Website For your convenience, materials relevant to this course, including examples of analyses and reports, will be available at the course website <a href="https://yuriygdv.github.io/pmap4041spring2020" class="uri">https://yuriygdv.github.io/pmap4041spring2020</a></p></li>
-<li><p>Required Textbooks</p>
-<ul>
-<li><p>OpenIntro Statistics, 4th Edition , available at <a href="https://leanpub.com/openintro-statistics" class="uri">https://leanpub.com/openintro-statistics</a></p></li>
-<li><p>Roger D. Peng (2016), Exploratory Data Analysis with R, available at <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p></li>
-</ul></li>
-<li><p>Recommended Textbooks Advanced High School Statistics, Second Edition, available at <a href="https://leanpub.com/ahss" class="uri">https://leanpub.com/ahss</a></p>
-<ul>
-<li>Moore, David S., Notz, William, I., &amp; Fligner, Michael, A. (2011). The Basic Practice of Statistics (with Student CD). 6th Edition. W.H. Freeman. (or any newer edition)</li>
-</ul></li>
-<li><p>For those of you who require more detailed treatment of the statistics topics, the following textbooks are recommended as additional resources (earlier editions are also fine):</p>
-<ul>
-<li><p>Meier, Kenneth, Jeffrey Brudney, and John Bohte. Applied statistics for public and nonprofit administration. Cengage Learning, 2011.</p></li>
-<li><p>Healey, Joseph F. (2013). The Essentials of Statistics: A Tool for Social Research. 3rd Edition. Wadsworth Cengage Learning.</p></li>
-<li><p>Weiers, R. M. “Introduction to Business Statistics. 2005.” Thomson Brooks/Cole, Belmont, CA, USA.</p></li>
-</ul></li>
-<li><p>R Software: You are required to use R software for all homework assignments. R is a free software environment for statistical computing and graphics available at www.r-project.org . In this course, we will use RStudio - an open-source integrated development environment for R available at <a href="https://rstudio.com/products/rstudio/" class="uri">https://rstudio.com/products/rstudio/</a> and RStudio Cloud at <a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a> .</p></li>
-<li><p>R Books &amp; Resources:</p>
-<ul>
-<li><p>R for Data Science by Garrett Grolemund and Hadley Wickham, at <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p></li>
-<li><p>An Introduction to R by Longhow Lam (PDF, 2010-10-28, 212 pages), at <a href="https://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf" class="uri">https://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf</a></p></li>
-<li><p>Cookbook for R at <a href="http://www.cookbook-r.com/" class="uri">http://www.cookbook-r.com/</a></p></li>
-<li><p>R Programming Tutorial on YouTube - Learn the Basics of Statistical Computing <a href="https://www.youtube.com/watch?v=_V8eKsto3Ug" class="uri">https://www.youtube.com/watch?v=_V8eKsto3Ug</a></p></li>
-</ul></li>
-<li><p>Computers: For the purposes of this course, having a personal laptop with all the required software (R and RStudio) is recommended but not required. All the course assignments can be completed in RStudio Cloud using the library computers.</p></li>
-</ol>
-<p>INTERACTIVE VIDEO TECHNOLOGY TRAINING LinkedIn Learning (formerly Lynda.com) offers an online training library on a variety of topics, including software tools for data analysis. Service is free to Georgia State University’s students. You can access online video tutorials with your CampusID and password using the following link: <a href="https://technology.gsu.edu/technology-services/it-services/training-and-learning-resources/linkedin-learning/" class="uri">https://technology.gsu.edu/technology-services/it-services/training-and-learning-resources/linkedin-learning/</a></p>
-<p>For the purposes of this course, the following training can be very helpful: Learning R by Barton Poulson (2h 51m Beginner + Intermediate Released: Aug. 29, 2019) <a href="https://www.linkedin.com/learning/learning-r-2/r-for-data-science?u=76216298" class="uri">https://www.linkedin.com/learning/learning-r-2/r-for-data-science?u=76216298</a></p>
-<p>R Statistics Essential Training by Barton Poulson (5h 59m, Beginner + Intermediate, Released: Sep. 26, 2013) <a href="https://www.linkedin.com/learning/r-statistics-essential-training/next-steps?u=76216298" class="uri">https://www.linkedin.com/learning/r-statistics-essential-training/next-steps?u=76216298</a></p>
-<p>Download the Syllabus <a href="docs/syllabus.pdf">here</a></p>
+<p><br> <br></p>
+<div id="data" class="section level3">
+<h3>1. DATA</h3>
+<p>Load opm94.sav.</p>
+<pre class="r"><code># your work</code></pre>
 <p><br></p>
-<hr />
+</div>
+<div id="creating-new-variable" class="section level3">
+<h3>2. CREATING NEW VARIABLE</h3>
+<p>To see how changing the units of measurement affects the regression coefficient and the correlation coefficient, create a new variable (<code>edyrs_months</code>) that measures <code>edyrs</code> in months instead of years.</p>
+<pre class="r"><code># your work</code></pre>
+<p><br></p>
+</div>
+<div id="correlation-matrix" class="section level3">
+<h3>3. CORRELATION MATRIX</h3>
+<p>Create a correlation matrix with <code>sal</code>, <code>grade</code>, <code>edyrs</code>,<code>edyrs_months</code>,<code>yos</code>, <code>age</code>, <code>male01</code>, <code>minority</code>:</p>
+<pre class="r"><code># your work</code></pre>
+<p><strong>QUESTIONS</strong></p>
+<pre><code>3a. Which variable is `grade` most strongly related to? Rank order the variables in terms of the strength of their relationship with grade
+
+3b. Which variable is years of federal service most strongly related to? most weakly related to?
+
+3c. Look at the correlations between `edyrs` and `edyrs`_month` and between these two variables and all other variables. What&#39;s going on?</code></pre>
+<p><br></p>
+</div>
+<div id="regression-with-numeric-explanatory-variables" class="section level3">
+<h3>4. REGRESSION WITH NUMERIC EXPLANATORY VARIABLES</h3>
+<p>Run four regressions. Regress:</p>
+<ol style="list-style-type: decimal">
+<li><code>sal</code> on <code>grade</code></li>
+<li><code>grade</code> on <code>yos</code></li>
+<li><code>grade</code> on <code>edyrs</code></li>
+<li><code>yos</code> on <code>age</code></li>
+</ol>
+<pre class="r"><code># your work</code></pre>
+<p><strong>QUESTIONS</strong></p>
+<pre><code>4a. For each regression, briefly explain the meaning of the y-intercept and the regression coefficient.
+
+4b. Find the expected salary for someone in 16th grade
+
+4c. Find the expected grade for someone with 5 years of service
+
+4d. Find the expected grade for someone with 12 years of education</code></pre>
+<p>Run another regression <code>grade</code> on <code>edyrs_months</code>:</p>
+<pre class="r"><code># your work</code></pre>
+<p><strong>QUESTIONS</strong></p>
+<pre><code>4e. Why is the regressin coeficient different from the coefficient on `edyrs`? How are they the same?</code></pre>
+<p><br></p>
+</div>
+<div id="regression-with-dummy-explanatory-variables" class="section level3">
+<h3>5. REGRESSION WITH DUMMY EXPLANATORY VARIABLES</h3>
+<p>Create a dummy variable <code>nonvet</code>, which should be the mirror image of variable <code>vet</code> (vet = 0, nonvet = 1)</p>
+<pre class="r"><code># opm94 &lt;- opm94 %&gt;% mutate(nonvet01 = if_else(vet01 == 0, 1, 0 ))</code></pre>
+<p>Regress <code>sal</code> on <code>vet01</code>:</p>
+<pre class="r"><code># your work</code></pre>
+<p>Regress <code>sal</code> on <code>nonvet01</code>:</p>
+<pre class="r"><code># your work</code></pre>
+<p>Compute mean salaries for vets and nonvets:</p>
+<pre class="r"><code># your work</code></pre>
+<p><strong>QUESTIONS</strong></p>
+<pre><code>5a. Find the mean grades of veterans and nonveterans from the two rgression outputs
+
+
+5b. Interpret the Y-intercepts. Why do they differ?
+
+
+5c. Interpret the regression coefficients. Why do they differ?</code></pre>
 </div>
 
+<p style = "text-align: right;"> Copyright &copy; 2020 </p>
 
 
 
