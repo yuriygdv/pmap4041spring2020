@@ -427,7 +427,7 @@ $(document).ready(function () {
 <p></br></p>
 <p>Download the dataset for this assignment:</p>
 <ul>
-<li><a href="docs/data/gss98.RData">Dataset gss98</a></li>
+<li><p><a href="docs/data/gss98.RData">Dataset gss98</a></p></li>
 <li><p><a href="docs/data/Class3_Datasets.zip">All the datasets we have used so far in a zip archive</a></p>
 <p>DOWNLOAD ComputerAssignment_02.Rmd file USING THE LINK BELOW AND OPEN IT IN RStudio</p></li>
 <li><p><a href="docs/ComputerAssignment_02.zip">Complete Assignment #2: Download link - Zip file - (Click “Save As”)</a> (the file is ‘zipped’ and needs to be unzipped after downloading)</p></li>
@@ -448,7 +448,7 @@ library(knitr)         # for nicer table formatting
 library(summarytools)  # for frequency distribution tables</code></pre>
 <p>Set your working directory, where the folder “Datasets” is located:</p>
 <pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
-<p>Load the <strong>gss98</strong> data set from the file <strong>“Datasets/gss98.RData”</strong> into R using <code>load(file = &quot;Datasets/gss98.RData&quot;)</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
+<p>Load the <strong>gss98</strong> data set from the file <strong>“Datasets/gss98.RData”</strong> into R using <code>load(file = "Datasets/gss98.RData")</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
 <pre class="r"><code>load(file = &quot;Datasets/gss98.RData&quot;)</code></pre>
 <p></br></p>
 </div>
@@ -467,7 +467,7 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 ##       Protestant    535     54.15         100.00     53.50          98.80
 ##             &lt;NA&gt;     12                               1.20         100.00
 ##            Total   1000    100.00         100.00    100.00         100.00</code></pre>
-<p>Generate a bar chart for <code>RELIG</code> using <code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = &quot;darkred&quot; )</code> (pick your own color for the chart):</p>
+<p>Generate a bar chart for <code>RELIG</code> using <code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = "darkred" )</code> (pick your own color for the chart):</p>
 <pre class="r"><code>gss98 %&gt;% ggplot() + geom_bar( aes(x = RELIG), fill = &quot;darkred&quot; ) + labs(title = &quot;Bar plot for RELIG&quot;)</code></pre>
 <p><img src="ca02_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>QUESTIONS:</strong></p>
@@ -602,7 +602,7 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 </div>
 <div id="histograms" class="section level3">
 <h3>6. Histograms</h3>
-<p>Now, load a random sample of 500 observations from the 2000 U.S. Census Data from the file <strong>“Datasets/loan50.csv”</strong> into R using <code>read.csv(&quot;Datasets/census.csv&quot;)</code> coomand. Name the object <strong>census</strong>:</p>
+<p>Now, load a random sample of 500 observations from the 2000 U.S. Census Data from the file <strong>“Datasets/loan50.csv”</strong> into R using <code>read.csv("Datasets/census.csv")</code> coomand. Name the object <strong>census</strong>:</p>
 <pre class="r"><code>census &lt;- read.csv(&quot;Datasets/census.csv&quot;)</code></pre>
 <p>See the names and types of the variables in the dataset using <code>names()</code> and <code>str()</code> commands:</p>
 <pre class="r"><code>names(census)</code></pre>

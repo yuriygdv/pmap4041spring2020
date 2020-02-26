@@ -460,7 +460,7 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 <h2>Homework Problems</h2>
 <div id="calculating-the-mode-median-mean-range-variance-and-standard-deviation" class="section level3">
 <h3>1. Calculating the mode, median, mean, range, variance, and standard deviation</h3>
-<p><strong>1.1</strong> First, lets work temporarily with American Indian females only (this step will subset the data set): <code>race == &quot;American Indian&quot;, male == &quot;female&quot;</code></p>
+<p><strong>1.1</strong> First, lets work temporarily with American Indian females only (this step will subset the data set): <code>race == "American Indian", male == "female"</code></p>
 <pre class="r"><code>opm94AIF &lt;- opm94 %&gt;% filter(race == &quot;American Indian&quot;, male == &quot;female&quot;)   # subset data
 opm94AIF %&gt;% pander::pander(split.table = Inf)                                # print the resulting dataset nicely formatted</code></pre>
 <table style="width:100%;">
