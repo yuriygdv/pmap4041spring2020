@@ -1,0 +1,136 @@
+---
+title: "Computer Assignment 4: Scatterplots & Correlation"
+author: "Yuriy Davydenko"
+date: "December 31, 2019"
+output: html_document
+---
+
+    ## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD "author" ABOVE AND REMOVE THIS COMMENT ##
+
+<br>
+
+Datasets for this assignment:
+
+A random sample of 1,000 federal personnel records for March 1994:
+
+* [Download Dataset 'OPM94' (click "Save As")](docs/OPM94.RData)
+
+
+<br>
+<br>
+
+### 1. Load  Libraries, Set Your Working Directory, & Load Data
+
+Load Libraries:
+```{r, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(GGally)
+library(knitr)
+library(pander)
+```
+
+Set your working directory, where the folder "Datasets" is located:
+```{r}
+setwd(".")             # for example: setwd("C:/Users/George/Dropbox/GSU/4041_Spring2020/R")
+```
+
+Load the __OPM94__ data set from the file __"Datasets/OPM94.RData"__ into R using `load(file = "Datasets/OPM94.RData")` command. Before you run the command, make sure you have set the working directory correctly (folder "Datasets" should be in your working directory). 
+
+```{r }
+load(file = "Datasets/OPM94.RData")
+```
+
+Check the variable names:
+```{r}
+names(opm94)
+```
+
+### 2. Let's work with African-American males only to keep the graphs easy to work with:
+```{r}
+summary(opm94$race)  # see the levels of variable race
+summary(opm94$male)  # see the levels of variable male
+
+opm94AAM <- opm94 %>% dplyr::filter(race == "Black", male == "male")   # create a subset of data wher race == "Black", male == "male"
+```
+
+
+<br>
+
+
+### 3. Scatterplots
+
+Create scatterplots with salary (sal) as the dependent variable and four independent variables: `grade, yos, edyrs` and `age`
+
+```{r}
+ggplot(data=opm94AAM) + geom_point(mapping = aes(x=grade, y = sal))
+```
+
+```{r}
+# your work
+```
+
+```{r}
+# your work
+```
+
+```{r}
+# your work
+```
+
+
+<br>
+
+### 4. Correlation Matrix
+
+Now create a correlation matrix with the same five variables, plus two more: `supmgr01, promo01`
+
+```{r}
+# cor(opm94AAM[, c("sal", "grade", "yos", "edyrs", "age", "supmgr01", "promo01")], use = "pairwise.complete.obs" ) %>% round(digits = 2)
+
+opm94AAM %>% select(sal, grade, yos, edyrs, age, supmgr01, promo01) %>% cor(use = "pairwise.complete.obs") %>% round(digits = 2)
+
+```
+
+
+<br>
+
+## HOMEWORK QUESTIONS
+
+__1.__ Write a couple of sentences about each graph. Talk about the strength and direction of each relationship. Does there seem to be any evidence of curvilinearity?
+
+    Your work...
+    
+    
+
+__2.__ Rank-order the strength of the correlations between sal and each of the other variables. Do these seem in line with what you would have guessed based on the scatterplots? Explain briefly.
+
+    Your work...
+    
+    
+
+__3.__ Talk about the direction of each of the correlations between sal and the other variables. Who tends to earn higher salaries, those with more or less education, higher or lower grades, etc.?
+
+    Your work...
+    
+__4.__ How do supervisors (supmgr=1) differ from other people (supmgr=0), based on the correlation coefficients? Do supervisors tend to have higher or lower salaries, higher or lower grades, etc.? Which variables is supervisory status most strongly related to?
+
+    Your work...
+    
+    
+__5.__ How do people who were promoted between 1994 and 1995 (promo=1) differ from those who were not?
+
+    Your work...
+    
+    
+    
+    
+</br>
+
+*** 
+
+</br>
+
+### 5. Submission
+
+Save your RMarkdown file, Knit an html report, and publish to __RPubs__ or save as a __pdf__ file. Submit the link to the html or your pdf in the dropbox on iCollege.
