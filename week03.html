@@ -11,7 +11,7 @@
 
 <meta name="author" content="Yuriy Davydenko" />
 
-<meta name="date" content="2020-03-10" />
+<meta name="date" content="2020-03-11" />
 
 <title>Week 3. FREQUENCY DISTRIBUTIONS: In-Class Practice</title>
 
@@ -363,7 +363,7 @@ $(document).ready(function () {
       <a href="week07.html">
         <span class="fa fa-calendar-o fa-xs"></span>
          
-        Week 7
+        Week 7 (Bivariate Regression)
       </a>
     </li>
     <li>
@@ -373,16 +373,30 @@ $(document).ready(function () {
         Computer Assignment 5
       </a>
     </li>
+    <li>
+      <a href="week10.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 10 (Contingency Tables)
+      </a>
+    </li>
+    <li>
+      <a href="ca06.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 6
+      </a>
+    </li>
     <li class="divider"></li>
     <li class="dropdown-header">Inference</li>
     <li>
-      <a href="week10.html">Week 10</a>
+      <a href="week10.html">Week 12</a>
     </li>
     <li>
-      <a href="week11.html">Week 11</a>
+      <a href="week11.html">Week 13</a>
     </li>
     <li>
-      <a href="week12.html">Week 12</a>
+      <a href="week12.html">Week 14</a>
     </li>
   </ul>
 </li>
@@ -427,7 +441,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Week 3. FREQUENCY DISTRIBUTIONS: In-Class Practice</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">March 10, 2020</h4>
+<h4 class="date">March 11, 2020</h4>
 
 </div>
 
@@ -464,29 +478,25 @@ library(summarytools)  # for frequency distribution tables</code></pre>
 <p>Assume you are studying charitable performance and have two samples of charities - one sample of 10 charities “Datasets/s10.RData” and one sample of 100 charities. Each sample contains data on charity ratings. Let’s read the datasets into R and generate frequency tables for each ssample:</p>
 <pre class="r"><code>load(&quot;Datasets/s10.RData&quot;)   # load charity ratings data: the sample of 10
 freq(s10)</code></pre>
-<pre><code>## Frequencies  
-## 
-##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ----------- ------ --------- -------------- --------- --------------
-##           1      1     10.00          10.00     10.00          10.00
-##           2      1     10.00          20.00     10.00          20.00
-##           4      4     40.00          60.00     40.00          60.00
-##           5      4     40.00         100.00     40.00         100.00
-##        &lt;NA&gt;      0                               0.00         100.00
-##       Total     10    100.00         100.00    100.00         100.00</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre><code>## s10 
+##       Frequency Percent
+## 1             1      10
+## 2             1      10
+## 4             4      40
+## 5             4      40
+## Total        10     100</code></pre>
 <pre class="r"><code>load(&quot;Datasets/s100.RData&quot;)   # load charity ratings data: the sample of 100
 freq(s100)</code></pre>
-<pre><code>## Frequencies  
-## 
-##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ----------- ------ --------- -------------- --------- --------------
-##           1      5      5.00           5.00      5.00           5.00
-##           2     13     13.00          18.00     13.00          18.00
-##           3     16     16.00          34.00     16.00          34.00
-##           4     33     33.00          67.00     33.00          67.00
-##           5     33     33.00         100.00     33.00         100.00
-##        &lt;NA&gt;      0                               0.00         100.00
-##       Total    100    100.00         100.00    100.00         100.00</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre><code>## s100 
+##       Frequency Percent
+## 1             5       5
+## 2            13      13
+## 3            16      16
+## 4            33      33
+## 5            33      33
+## Total       100     100</code></pre>
 <p></br></p>
 <hr />
 <p></br></p>
@@ -658,41 +668,38 @@ freq(s100)</code></pre>
 <pre class="r"><code>library(summarytools)   # Make sure you&#39;ve loaded the library &#39;summarytools&#39;
 gss98$PREMARSX &lt;- factor(gss98$PREMARSX, levels = c(&quot;Always wrong&quot;, &quot;Almst alwys wrng&quot;, &quot;Wrong sometimes&quot;, &quot;Not wrong at all&quot;))
 freq(gss98$PREMARSX)    # Generate frequency distribution using command &#39;freq()&#39; from the library &#39;summarytools&#39;</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##           Always wrong    156     24.53          24.53     15.60          15.60
-##       Almst alwys wrng     56      8.81          33.33      5.60          21.20
-##        Wrong sometimes    144     22.64          55.97     14.40          35.60
-##       Not wrong at all    280     44.03         100.00     28.00          63.60
-##                   &lt;NA&gt;    364                              36.40         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre><code>## gss98$PREMARSX 
+##                  Frequency Percent Valid Percent
+## Always wrong           156    15.6        24.528
+## Almst alwys wrng        56     5.6         8.805
+## Wrong sometimes        144    14.4        22.642
+## Not wrong at all       280    28.0        44.025
+## NA&#39;s                   364    36.4              
+## Total                 1000   100.0       100.000</code></pre>
 <p>Let’s generate frequency tables for two more variables:</p>
 <p>[ <strong>VAR:</strong> <code>HOMOSEX</code> ] <em>What about sexual relations between two adults of the same sex–do you think it is always wrong, almost always wrong, wrong only sometimes, or not wrong at all?</em></p>
 <pre class="r"><code>freq(gss98$HOMOSEX)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       Almst alwys wrng     31      5.02           5.02      3.10           3.10
-##           Always wrong    356     57.70          62.72     35.60          38.70
-##       Not wrong at all    186     30.15          92.87     18.60          57.30
-##        Wrong sometimes     44      7.13         100.00      4.40          61.70
-##                   &lt;NA&gt;    383                              38.30         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre><code>## gss98$HOMOSEX 
+##                  Frequency Percent Valid Percent
+## Always wrong           356    35.6        57.699
+## Almst alwys wrng        31     3.1         5.024
+## Wrong sometimes         44     4.4         7.131
+## Not wrong at all       186    18.6        30.146
+## NA&#39;s                   383    38.3              
+## Total                 1000   100.0       100.000</code></pre>
 <p>[ <strong>VAR:</strong> <code>TEENSEX</code> ] <em>What if they are in their early teens, say 14 to 16 years old? In that case, do you think sex relations before marriage are always wrong, almost always wrong, wrong only sometimes, or not wrong at all?</em></p>
 <pre class="r"><code>freq(gss98$TEENSEX)</code></pre>
-<pre><code>## Frequencies  
-## 
-##                          Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
-## ---------------------- ------ --------- -------------- --------- --------------
-##       Almst alwys wrng    107     16.44          16.44     10.70          10.70
-##           Always wrong    465     71.43          87.86     46.50          57.20
-##       Not wrong at all     28      4.30          92.17      2.80          60.00
-##        Wrong sometimes     51      7.83         100.00      5.10          65.10
-##                   &lt;NA&gt;    349                              34.90         100.00
-##                  Total   1000    100.00         100.00    100.00         100.00</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre><code>## gss98$TEENSEX 
+##                  Frequency Percent Valid Percent
+## Always wrong           465    46.5        71.429
+## Almst alwys wrng       107    10.7        16.436
+## Wrong sometimes         51     5.1         7.834
+## Not wrong at all        28     2.8         4.301
+## NA&#39;s                   349    34.9              
+## Total                 1000   100.0       100.000</code></pre>
 </div>
 <div id="example-3-student-test-scores" class="section level3">
 <h3>EXAMPLE 3: Student Test Scores</h3>
@@ -1033,15 +1040,13 @@ ggplot(aes(x=Score)) +
 library(summarytools)</code></pre>
 <p>Frequency distributions for <code>census$marital_status</code>:</p>
 <pre class="r"><code>freq(census$marital_status) %&gt;% kable(digits = 2)</code></pre>
+<p><img src="week03_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">Freq</th>
-<th align="right">% Valid</th>
-<th align="right">% Valid Cum.</th>
-<th align="right">% Total</th>
-<th align="right">% Total Cum.</th>
+<th align="right">Frequency</th>
+<th align="right">Percent</th>
 </tr>
 </thead>
 <tbody>
@@ -1049,70 +1054,41 @@ library(summarytools)</code></pre>
 <td>Divorced</td>
 <td align="right">38</td>
 <td align="right">7.6</td>
-<td align="right">7.6</td>
-<td align="right">7.6</td>
-<td align="right">7.6</td>
 </tr>
 <tr class="even">
 <td>Married/spouse absent</td>
 <td align="right">14</td>
 <td align="right">2.8</td>
-<td align="right">10.4</td>
-<td align="right">2.8</td>
-<td align="right">10.4</td>
 </tr>
 <tr class="odd">
 <td>Married/spouse present</td>
 <td align="right">192</td>
 <td align="right">38.4</td>
-<td align="right">48.8</td>
-<td align="right">38.4</td>
-<td align="right">48.8</td>
 </tr>
 <tr class="even">
 <td>Never married/single</td>
 <td align="right">222</td>
 <td align="right">44.4</td>
-<td align="right">93.2</td>
-<td align="right">44.4</td>
-<td align="right">93.2</td>
 </tr>
 <tr class="odd">
 <td>Separated</td>
 <td align="right">3</td>
 <td align="right">0.6</td>
-<td align="right">93.8</td>
-<td align="right">0.6</td>
-<td align="right">93.8</td>
 </tr>
 <tr class="even">
 <td>Widowed</td>
 <td align="right">31</td>
 <td align="right">6.2</td>
-<td align="right">100.0</td>
-<td align="right">6.2</td>
-<td align="right">100.0</td>
 </tr>
 <tr class="odd">
-<td><NA></td>
-<td align="right">0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.0</td>
-<td align="right">100.0</td>
-</tr>
-<tr class="even">
 <td>Total</td>
 <td align="right">500</td>
-<td align="right">100.0</td>
-<td align="right">100.0</td>
-<td align="right">100.0</td>
 <td align="right">100.0</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>ggplot(data = census) + geom_bar(mapping = aes(x = marital_status)) + theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
-<p><img src="week03_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="week03_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <p>Frequency distributions for <code>census$total_family_income</code>:</p>
 <pre class="r"><code>income_intervals &lt;- cut(x = census$total_family_income/1000, breaks = c(0,25,50,75,100,999), include.lowest = TRUE)
 summarytools::freq(income_intervals)</code></pre>

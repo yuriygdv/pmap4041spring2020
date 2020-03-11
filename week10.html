@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yuriy Davydenko" />
+
+
+<title>Contingency Tables (In-class Practice)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/gsu_ico.png">
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PMAP 4041</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-info"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    R Workshops
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R Starter</li>
+    <li>
+      <a href="week01.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 1 (in class)
+      </a>
+    </li>
+    <li>
+      <a href="ca01.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 1
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Exploratory Data Analysis</li>
+    <li>
+      <a href="week03.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 3 (Frequency Distributions)
+      </a>
+    </li>
+    <li>
+      <a href="ca02.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 2
+      </a>
+    </li>
+    <li>
+      <a href="week04.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 4-5 (Describing Distributions with Numbers)
+      </a>
+    </li>
+    <li>
+      <a href="ca03.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 3
+      </a>
+    </li>
+    <li>
+      <a href="week06.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 6 (Scatterplots &amp; Correlations)
+      </a>
+    </li>
+    <li>
+      <a href="ca04.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 4
+      </a>
+    </li>
+    <li>
+      <a href="week07.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 7 (Bivariate Regression)
+      </a>
+    </li>
+    <li>
+      <a href="ca05.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 5
+      </a>
+    </li>
+    <li>
+      <a href="week10.html">
+        <span class="fa fa-calendar-o fa-xs"></span>
+         
+        Week 10 (Contingency Tables)
+      </a>
+    </li>
+    <li>
+      <a href="ca06.html">
+        <span class="fa fa-laptop fa-xs"></span>
+         
+        Computer Assignment 6
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inference</li>
+    <li>
+      <a href="week10.html">Week 12</a>
+    </li>
+    <li>
+      <a href="week11.html">Week 13</a>
+    </li>
+    <li>
+      <a href="week12.html">Week 14</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project.html">
+    <span class="fa fa-tasks"></span>
+     
+    Course Project
+  </a>
+</li>
+<li>
+  <a href="https://rstudio.cloud">
+    <span class="fa fa-cloud"></span>
+     
+    RStudio.cloud
+  </a>
+</li>
+<li>
+  <a href="https://rpubs.com">
+    <span class="fa fa-pencil"></span>
+     
+    RPubs
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://calendly.com/ydavydenko1">
+    <span class="fa fa-question fa-lg"></span>
+     
+    Appointment
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Contingency Tables (In-class Practice)</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">March 11 2020</h4>
+
+</div>
+
+
+<p><br></p>
+<p>Download the datasets for this class:</p>
+<ul>
+<li><a href="Datasets/gss98.RData">Dataset ‘gss98’ (click “Save As”)</a></li>
+</ul>
+<p>The <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">codebook for the survey</a> to find the question wording for a variable</p>
+<p>For those who prefer to work with RCloud, a project with the same materials can be accessed using the following link:</p>
+<ul>
+<li><a href="https://rstudio.cloud/project/1023807">RCloud Project for Week 10/Computer Assignment 6</a></li>
+</ul>
+<p><br> <br></p>
+<div id="load-libraries-set-your-working-directory-load-data" class="section level2">
+<h2>Load Libraries, Set Your Working Directory, &amp; Load Data</h2>
+<pre class="r"><code>#install.packages(&quot;descr&quot;)     # install if necessary
+library(descr)
+#install.packages(&quot;dplyr&quot;)
+library(dplyr)
+#install.packages(&quot;ggplot2&quot;)
+library(ggplot2)</code></pre>
+<pre class="r"><code>load(&quot;Datasets/gss98.RData&quot;)
+names(gss98)</code></pre>
+<pre><code>##  [1] &quot;X.1&quot;      &quot;X&quot;        &quot;SEX&quot;      &quot;RACE&quot;     &quot;RELIG&quot;    &quot;FUND&quot;    
+##  [7] &quot;MARITAL&quot;  &quot;ATTEND&quot;   &quot;PREMARSX&quot; &quot;XMARSEX&quot;  &quot;HOMOSEX&quot;  &quot;TEENSEX&quot; 
+## [13] &quot;ABANY&quot;    &quot;CAPPUN&quot;   &quot;GUNLAW&quot;   &quot;GRASS&quot;    &quot;PRAYER&quot;   &quot;NATCITY&quot; 
+## [19] &quot;NATHEAL&quot;  &quot;NATCRIME&quot; &quot;NATDRUG&quot;  &quot;NATEDUC&quot;  &quot;NATRACE&quot;  &quot;NATFARE&quot; 
+## [25] &quot;NATROAD&quot;  &quot;NATMASS&quot;  &quot;CONCLERG&quot; &quot;CONEDUC&quot;  &quot;CONFED&quot;   &quot;CONPRESS&quot;
+## [31] &quot;CONJUDGE&quot; &quot;CONLEGIS&quot; &quot;FECHLD&quot;   &quot;FEHELP&quot;   &quot;FEPRESCH&quot; &quot;FEFAM&quot;   
+## [37] &quot;RACDIF1&quot;  &quot;LIVEBLKS&quot; &quot;MARBLK&quot;   &quot;DISCAFF&quot;  &quot;PARTY&quot;    &quot;IDEOLOGY&quot;
+## [43] &quot;AGESUM&quot;   &quot;INCOME&quot;   &quot;EDUC2&quot;    &quot;REGION2&quot;  &quot;CITY&quot;     &quot;RURAL&quot;   
+## [49] &quot;PROT&quot;     &quot;NEWFUND&quot;</code></pre>
+</div>
+<div id="crosstabs" class="section level2">
+<h2>CROSSTABS</h2>
+<p>A CROSSTAB with <code>ABANY</code> (ABORTION IF WOMAN WANTS FOR ANY REASON) as the dependent variable and <code>SEX</code> as the independent variable (absolute frequencies only):</p>
+<pre class="r"><code>CrossTable(gss98$ABANY, gss98$SEX, prop.r = F, prop.c = F, prop.t = F, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |-------------------------|
+## 
+## ====================================
+##                gss98$SEX
+## gss98$ABANY    female   male   Total
+## ------------------------------------
+## No                234    145     379
+## ------------------------------------
+## Yes               148     97     245
+## ------------------------------------
+## Total             382    242     624
+## ====================================</code></pre>
+<p>A CROSSTAB with <code>GRASS</code> (SHOULD MARIJUANA BE MADE LEGAL) as the dependent variable and <code>IDEOLOGY</code> as the independent variable (absolute frequencies and all three percentages are included):</p>
+<pre class="r"><code>CrossTable(gss98$GRASS, gss98$IDEOLOGY, prop.r = T, prop.c = T, prop.t = T, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |             Row Percent | 
+## |          Column Percent | 
+## |           Total Percent | 
+## |-------------------------|
+## 
+## ========================================================
+##                gss98$IDEOLOGY
+## gss98$GRASS    liberal   moderate   conservative   Total
+## --------------------------------------------------------
+## Should             67         54             46     167 
+##                  40.1%      32.3%          27.5%   27.6%
+##                  42.9%      23.8%          20.6%        
+##                  11.1%       8.9%           7.6%        
+## --------------------------------------------------------
+## Should not         89        173            177     439 
+##                  20.3%      39.4%          40.3%   72.4%
+##                  57.1%      76.2%          79.4%        
+##                  14.7%      28.5%          29.2%        
+## --------------------------------------------------------
+## Total             156        227            223     606 
+##                  25.7%      37.5%          36.8%        
+## ========================================================</code></pre>
+<p>A CROSSTAB with <code>CAPPUN</code> (FAVOR OR OPPOSE DEATH PENALTY FOR MURDER) as the dependent variable and <code>RELIG</code> as the independent variable (absolute frequencies and all three percentages are included):</p>
+<pre class="r"><code>CrossTable(gss98$CAPPUN, gss98$RELIG, prop.r = T, prop.c = T, prop.t = T, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |             Row Percent | 
+## |          Column Percent | 
+## |           Total Percent | 
+## |-------------------------|
+## 
+## ======================================================================
+##                 gss98$RELIG
+## gss98$CAPPUN    Catholic   Jewish    None   Other   Protestant   Total
+## ----------------------------------------------------------------------
+## Favor               170       13      88      21          355     647 
+##                    26.3%     2.0%   13.6%    3.2%        54.9%   71.3%
+##                    73.9%    76.5%   67.2%   58.3%        72.0%        
+##                    18.7%     1.4%    9.7%    2.3%        39.1%        
+## ----------------------------------------------------------------------
+## Oppose               60        4      43      15          138     260 
+##                    23.1%     1.5%   16.5%    5.8%        53.1%   28.7%
+##                    26.1%    23.5%   32.8%   41.7%        28.0%        
+##                     6.6%     0.4%    4.7%    1.7%        15.2%        
+## ----------------------------------------------------------------------
+## Total               230       17     131      36          493     907 
+##                    25.4%     1.9%   14.4%    4.0%        54.4%        
+## ======================================================================</code></pre>
+<p>A CROSSTAB with <code>CONEDUC</code> (CONFIDENCE IN EDUCATION) as the dependent variable and <code>RACE</code> as the independent variable (absolute frequencies and all three percentages are included):</p>
+<pre class="r"><code>CrossTable(gss98$CONEDUC, gss98$RACE, prop.r = T, prop.c = T, prop.t = T, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |             Row Percent | 
+## |          Column Percent | 
+## |           Total Percent | 
+## |-------------------------|
+## 
+## =================================================
+##                     gss98$RACE
+## gss98$CONEDUC       Black   Other   White   Total
+## -------------------------------------------------
+## great confidence      41      16     136     193 
+##                     21.2%    8.3%   70.5%   28.6%
+##                     41.8%   39.0%   25.4%        
+##                      6.1%    2.4%   20.1%        
+## -------------------------------------------------
+## some confidence       49      22     310     381 
+##                     12.9%    5.8%   81.4%   56.4%
+##                     50.0%   53.7%   57.8%        
+##                      7.3%    3.3%   45.9%        
+## -------------------------------------------------
+## Hardly confidnce       8       3      90     101 
+##                      7.9%    3.0%   89.1%   15.0%
+##                      8.2%    7.3%   16.8%        
+##                      1.2%    0.4%   13.3%        
+## -------------------------------------------------
+## Total                 98      41     536     675 
+##                     14.5%    6.1%   79.4%        
+## =================================================</code></pre>
+<p>A CROSSTAB with <code>NATEDUC</code> (“Are we spending too much, too little, or about the right amount on IMPROVING NATIONS EDUCATION SYSTEM”) as the dependent variable and <code>RACE</code> as the independent variable (absolute frequencies and all three percentages are included):</p>
+<pre class="r"><code>CrossTable(gss98$NATEDUC, gss98$RACE, prop.r = T, prop.c = T, prop.t = T, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |             Row Percent | 
+## |          Column Percent | 
+## |           Total Percent | 
+## |-------------------------|
+## 
+## ==============================================
+##                  gss98$RACE
+## gss98$NATEDUC    Black   Other   White   Total
+## ----------------------------------------------
+## Too little         55      21     270     346 
+##                  15.9%    6.1%   78.0%   71.3%
+##                  73.3%   70.0%   71.1%        
+##                  11.3%    4.3%   55.7%        
+## ----------------------------------------------
+## About right        19       8      87     114 
+##                  16.7%    7.0%   76.3%   23.5%
+##                  25.3%   26.7%   22.9%        
+##                   3.9%    1.6%   17.9%        
+## ----------------------------------------------
+## Too much            1       1      23      25 
+##                   4.0%    4.0%   92.0%    5.2%
+##                   1.3%    3.3%    6.1%        
+##                   0.2%    0.2%    4.7%        
+## ----------------------------------------------
+## Total              75      30     380     485 
+##                  15.5%    6.2%   78.4%        
+## ==============================================</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
