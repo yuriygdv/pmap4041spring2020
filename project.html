@@ -389,13 +389,13 @@ $(document).ready(function () {
     <li class="divider"></li>
     <li class="dropdown-header">Inference</li>
     <li>
-      <a href="week10.html">Week 12</a>
+      <a href="week12.html">Week 12</a>
     </li>
     <li>
-      <a href="week11.html">Week 13</a>
+      <a href="week13.html">Week 13</a>
     </li>
     <li>
-      <a href="week12.html">Week 14</a>
+      <a href="week4.html">Week 14</a>
     </li>
   </ul>
 </li>
@@ -481,7 +481,7 @@ $(document).ready(function () {
 <h3>TIMELINE</h3>
 <ul>
 <li><p>If you chose to work as a group, submit the names of your group members for approval – by March 9</p></li>
-<li><p>Discuss &amp; have your research question approved – by March 23</p></li>
+<li><p>Discuss &amp; have your research question approved – by March 30</p></li>
 <li><p>Demonstrate your progress &amp; discuss questions with instructor – on the weekly basis.</p></li>
 </ul>
 <p><br></p>
@@ -524,7 +524,6 @@ $(document).ready(function () {
 <div id="available-datasets" class="section level3">
 <h3>AVAILABLE DATASETS</h3>
 <ul>
-<li>Federal Employee Reords 1994-95 <a href="docs/data/OPM94.RData">Dataset ‘OPM94’ (click “Save As”)</a></li>
 <li>Random sample of 2000 U.S. Census Data <a href="docs/data/census.csv">Dataset ‘Census’ (click “Save As”)</a>.
 <ul>
 <li>Source: <a href="https://www.openintro.org/data/index.php?data=census" class="uri">https://www.openintro.org/data/index.php?data=census</a></li>
@@ -556,6 +555,43 @@ $(document).ready(function () {
 <li>2012 February - Search, Social Networks, and Politics <a href="Project/datasets/2012February-SearchSocialNetworksandPolitics.zip">Download zip</a></li>
 <li>2012 September - Health Tracking <a href="Project/datasets/2012September-HealthTracking.zip">Download zip</a></li>
 </ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="default-project-scenario" class="section level3">
+<h3>DEFAULT PROJECT SCENARIO</h3>
+<p>Instead of coming up with a unique topic of your own, you can choose to proceed with the default project scenario described below.</p>
+<p><strong>Social Justice &amp; Pay Equity</strong></p>
+<p>The following is an extract from a <a href="https://obamawhitehouse.archives.gov/sites/default/files/docs/equal_pay_issue_brief_final.pdf">2015 White House brief</a> on gender pay gap:</p>
+<p><em>Over the past century, American women have made tremendous strides in increasing their labor market experience and their skills. Today, women account for 47 percent of the labor force and they hold 49.3 percent of jobs. Women’s share of the labor force has been rising for more than 50 years and is continuing to increase. Today more households than ever have a woman as the primary or equal breadwinner in the household. … On Equal Pay Day, however, we focus on a stubborn and troubling fact: Despite women’s gains a large gender pay gap still exists.</em></p>
+<p>Barack Obama in a <a href="https://www.youtube.com/watch?v=f7ACN_dxtbU">State of the Union address</a>:</p>
+<p><em>“Today, women make up about half our workforce. But they still make 77 cents for every dollar a man earns. That is wrong. And in 2014, it’s an embarrassment. Women deserve equal pay for equal work.”</em></p>
+<p>Does that mean that women are receiving lower pay for equal work irrespective of the level of qualification? You work for a federal agency and want to find out if this is possibly the case in your agency. Use the <a href="Datasets/OPM2008.RData">provided random sample of federal personnel records from 2008</a> to answer this or similar pay equity-related questions. For example, you can address differences in pay based on gender, race, ethnicity, and/or other employee characteristics. You can analyze the data to find out whether there are differences in pay across the groups of interest, what could explain those differences, and what can bridge the discovered pay gaps. Choose an agency of your interest out of those represented in the dataset, or analyze the federal government as a whole. You can also focus on comparing the differences of interest between 2008 and 1994 using the federal employee records 1994-95 <a href="docs/data/OPM94.RData">Dataset ‘OPM94’)</a>.</p>
+<p><strong>Variables</strong>:</p>
+<ul>
+<li><code>salary</code> - Salary</li>
+<li><code>occupation</code> - Occupation</li>
+<li><code>state</code> - State</li>
+<li><code>grade</code> - Grade level (1-16)</li>
+<li><code>male</code> - Male (Male, Female)</li>
+<li><code>age</code> - Age</li>
+<li><code>edyrs</code> - Education (years)</li>
+<li><code>yos</code> - Federal experience (years)</li>
+<li><code>promo</code> - Promoted in next year (No, Yes)</li>
+<li><code>race</code> - Race/ethnicity (Black, White, Latino, Asian American Indian)</li>
+<li><code>vet</code> - Receives veteran’s preference</li>
+<li><code>exit</code> - Left federal service in next year (No, Yes)</li>
+<li><code>major</code> - Major field of study in college (15 majors)</li>
+<li><code>agency</code> - Agency (29 federal agencies)</li>
+<li><code>supervisor</code> - Has supervisory authority (No, Yes)</li>
+<li><code>patco</code> - PATCO category (Technical, Administrative, Professional, Clerical, Other)</li>
+<li><code>gradecat</code> - Grade level (GS1-GS6, GS7-GS12, GS13-SES)</li>
+<li><code>educ4</code> - Educational attainment (High school or less, Some college, Bachelor’s degree, Graduate degree)</li>
+</ul>
+<p>Another default alternative for the project is to compare changes in Americans’ attitudes on a range of issues between 1998 and 2016 using the data from the familiar to you General Social Survey. I will provide the 2016 dataset upon your request.</p>
+<p><br></p>
+<hr />
 <p><br></p>
 </div>
 <div id="data-analysis-project-examples" class="section level3">
