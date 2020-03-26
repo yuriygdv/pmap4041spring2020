@@ -11,9 +11,8 @@
 
 <meta name="author" content="Yuriy Davydenko" />
 
-<meta name="date" content="2019-12-31" />
 
-<title>Computer Assignment 4: Scatterplots &amp; Correlation</title>
+<title>Problem Set 8: Multiple Regression</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +25,7 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -452,109 +452,99 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Computer Assignment 4: Scatterplots &amp; Correlation</h1>
+<h1 class="title toc-ignore">Problem Set 8: Multiple Regression</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">December 31, 2019</h4>
+<h4 class="date">March 26 2020</h4>
 
 </div>
 
 
+<p><br></p>
 <pre><code>## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD &quot;author&quot; ABOVE AND REMOVE THIS COMMENT ##</code></pre>
-<p><br></p>
-<p>For those who prefer to work with RCloud, a project with the class materials can be accessed using the following link:</p>
-<ul>
-<li><a href="https://rstudio.cloud/project/962203">RCloud Project for Week 6/Computer Assignment 4</a></li>
-</ul>
-<p><br></p>
-<p>You can download this whole script as <code>ComputerAssignment_04.Rmd</code> file to save on your computer and open in RStudio instead of copying &amp; pasting from this webpage:</p>
-<ul>
-<li><a href="docs/ComputerAssignment_04.zip">Complete Assignment #4: Download link - Rmd file - (Click “Save As”)</a> (the file is ‘zipped’ and you need to unzip it)</li>
-</ul>
 <p><br></p>
 <p>Datasets for this assignment:</p>
 <p>A random sample of 1,000 federal personnel records for March 1994:</p>
 <ul>
-<li><a href="docs/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
+<li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
 <p><br> <br></p>
-<div id="load-libraries-set-your-working-directory-load-data" class="section level3">
-<h3>1. Load Libraries, Set Your Working Directory, &amp; Load Data</h3>
-<p>Load Libraries:</p>
+<div id="load-libraries" class="section level3">
+<h3>LOAD LIBRARIES</h3>
 <pre class="r"><code>library(dplyr)
-library(ggplot2)
-library(GGally)
-library(knitr)
-library(pander)</code></pre>
-<p>Set your working directory, where the folder “Datasets” is located:</p>
-<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
-<p>Load the <strong>OPM94</strong> data set from the file <strong>“Datasets/OPM94.RData”</strong> into R using <code>load(file = "Datasets/OPM94.RData")</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
-<pre class="r"><code>load(file = &quot;Datasets/OPM94.RData&quot;)</code></pre>
-<p>Check the variable names:</p>
-<pre class="r"><code>names(opm94)</code></pre>
-<pre><code>##  [1] &quot;x&quot;        &quot;sal&quot;      &quot;grade&quot;    &quot;patco&quot;    &quot;major&quot;    &quot;age&quot;     
-##  [7] &quot;male&quot;     &quot;vet&quot;      &quot;handvet&quot;  &quot;hand&quot;     &quot;yos&quot;      &quot;edyrs&quot;   
-## [13] &quot;promo&quot;    &quot;exit&quot;     &quot;supmgr&quot;   &quot;race&quot;     &quot;minority&quot; &quot;grade4&quot;  
-## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;   &quot;vet01&quot;</code></pre>
+library(ggplot2)</code></pre>
+<p><br> <br></p>
 </div>
-<div id="lets-work-with-african-american-males-only-to-keep-the-graphs-easy-to-work-with" class="section level3">
-<h3>2. Let’s work with African-American males only to keep the graphs easy to work with:</h3>
-<pre class="r"><code>summary(opm94$race)  # see the levels of variable race</code></pre>
-<pre><code>## American Indian           Asian           Black        Hispanic           White 
-##              17              31             175              49             728</code></pre>
-<pre class="r"><code>summary(opm94$male)  # see the levels of variable male</code></pre>
-<pre><code>## female   male 
-##    488    512</code></pre>
-<pre class="r"><code>opm94AAM &lt;- opm94 %&gt;% dplyr::filter(race == &quot;Black&quot;, male == &quot;male&quot;)   # create a subset of data wher race == &quot;Black&quot;, male == &quot;male&quot;</code></pre>
-<p><br></p>
-</div>
-<div id="scatterplots" class="section level3">
-<h3>3. Scatterplots</h3>
-<p>Create scatterplots with salary (sal) as the dependent variable and four independent variables: <code>grade, yos, edyrs</code> and <code>age</code></p>
-<pre class="r"><code>ggplot(data=opm94AAM) + geom_point(mapping = aes(x=grade, y = sal))</code></pre>
-<p><img src="ca04_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code># your work</code></pre>
-<pre class="r"><code># your work</code></pre>
+<div id="data" class="section level3">
+<h3>DATA</h3>
+<p>Load OPM94.RData</p>
 <pre class="r"><code># your work</code></pre>
 <p><br></p>
 </div>
-<div id="correlation-matrix" class="section level3">
-<h3>4. Correlation Matrix</h3>
-<p>Now create a correlation matrix with the same five variables, plus two more: <code>supmgr01, promo01</code></p>
-<pre class="r"><code># cor(opm94AAM[, c(&quot;sal&quot;, &quot;grade&quot;, &quot;yos&quot;, &quot;edyrs&quot;, &quot;age&quot;, &quot;supmgr01&quot;, &quot;promo01&quot;)], use = &quot;pairwise.complete.obs&quot; ) %&gt;% round(digits = 2)
+<div id="multiple-regression" class="section level3">
+<h3>MULTIPLE REGRESSION</h3>
+<p><br></p>
+</div>
+<div id="categorical-factor-level-explanatory-variable-multiple-binary-variables" class="section level3">
+<h3>Categorical (factor) level explanatory variable / multiple binary variables</h3>
+<p><br></p>
+<p>Check the value of the <code>patco</code> variable using <code>levels(opm94$patco)</code> command:</p>
+<pre class="r"><code># </code></pre>
+<p><strong>QUESTION 1:</strong></p>
+<pre><code>What type is this variable? What values does it have?</code></pre>
+<p><br></p>
+<p>Regress <code>sal</code> on <code>patco</code>:</p>
+<pre class="r"><code>#</code></pre>
+<p><strong>QUESTION 2:</strong></p>
+<pre><code>a) What is the reference group?
 
-opm94AAM %&gt;% select(sal, grade, yos, edyrs, age, supmgr01, promo01) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(digits = 2)</code></pre>
-<pre><code>##           sal grade   yos edyrs   age supmgr01 promo01
-## sal      1.00  0.92  0.31  0.52  0.31     0.43    0.10
-## grade    0.92  1.00  0.22  0.47  0.19     0.39    0.07
-## yos      0.31  0.22  1.00  0.10  0.61     0.30   -0.06
-## edyrs    0.52  0.47  0.10  1.00  0.22     0.14    0.07
-## age      0.31  0.19  0.61  0.22  1.00     0.27   -0.18
-## supmgr01 0.43  0.39  0.30  0.14  0.27     1.00   -0.02
-## promo01  0.10  0.07 -0.06  0.07 -0.18    -0.02    1.00</code></pre>
+
+
+b) Interpret the intercept:
+
+
+
+c) Interpret the coefficient on `patcoClerical`:
+
+
+
+d) Interpret the coefficient of `patcoProfessional`:</code></pre>
 <p><br></p>
 </div>
-<div id="homework-questions" class="section level2">
-<h2>HOMEWORK QUESTIONS</h2>
-<p><strong>1.</strong> Write a couple of sentences about each graph. Talk about the strength and direction of each relationship. Does there seem to be any evidence of curvilinearity?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>2.</strong> Rank-order the strength of the correlations between sal and each of the other variables. Do these seem in line with what you would have guessed based on the scatterplots? Explain briefly.</p>
-<pre><code>Your work...</code></pre>
-<p><strong>3.</strong> Talk about the direction of each of the correlations between sal and the other variables. Who tends to earn higher salaries, those with more or less education, higher or lower grades, etc.?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>4.</strong> How do supervisors (supmgr=1) differ from other people (supmgr=0), based on the correlation coefficients? Do supervisors tend to have higher or lower salaries, higher or lower grades, etc.? Which variables is supervisory status most strongly related to?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>5.</strong> How do people who were promoted between 1994 and 1995 (promo=1) differ from those who were not?</p>
-<pre><code>Your work...</code></pre>
-<p></br></p>
+<div id="all-variable-types" class="section level3">
+<h3>All Variable Types</h3>
+<p><br></p>
+<p>Regress <code>sal</code> on <code>minority</code> and <code>grade</code>:</p>
+<pre class="r"><code>#</code></pre>
+<p><strong>QUESTION 3:</strong></p>
+<pre><code>a) What is the reference group?
+
+
+
+b) Interpret the intercept:
+
+
+
+c) Interpret the coefficient on `minority`:
+
+
+d) Interpret the coefficient on `grade`:</code></pre>
+<p>Regress <code>sal</code> on <code>minority</code>:</p>
+<pre class="r"><code>#</code></pre>
+<p><strong>QUESTION 4:</strong></p>
+<pre><code>a) Interpret the intercept:
+
+
+
+b) Interpret the coefficient on `minority`:
+
+
+
+c) Why is the coefficient on `minority` different in this regression compared to the previous one (with `grade` included)?</code></pre>
+<p><br> <br></p>
 <hr />
-<p></br></p>
-<div id="submission" class="section level3">
-<h3>5. Submission</h3>
-<p>Save your RMarkdown file, Knit an html report, and publish to <strong>RPubs</strong> or save as a <strong>pdf</strong> file. Submit the link to the html or your pdf in the dropbox on iCollege.</p>
-</div>
+<pre><code>!!! Knit your report &amp; publish it on RPubs !!!</code></pre>
 </div>
 
-<p style = "text-align: right;"> Yuriy Davydenko &copy; 2020 </p>
 
 
 

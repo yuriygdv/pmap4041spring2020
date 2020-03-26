@@ -11,9 +11,8 @@
 
 <meta name="author" content="Yuriy Davydenko" />
 
-<meta name="date" content="2019-12-31" />
 
-<title>Computer Assignment 4: Scatterplots &amp; Correlation</title>
+<title>Multiple Regression (In-class Practice)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +25,7 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -452,109 +452,114 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Computer Assignment 4: Scatterplots &amp; Correlation</h1>
+<h1 class="title toc-ignore">Multiple Regression (In-class Practice)</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">December 31, 2019</h4>
+<h4 class="date">March 26 2020</h4>
 
 </div>
 
 
-<pre><code>## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD &quot;author&quot; ABOVE AND REMOVE THIS COMMENT ##</code></pre>
-<p><br></p>
-<p>For those who prefer to work with RCloud, a project with the class materials can be accessed using the following link:</p>
-<ul>
-<li><a href="https://rstudio.cloud/project/962203">RCloud Project for Week 6/Computer Assignment 4</a></li>
-</ul>
-<p><br></p>
-<p>You can download this whole script as <code>ComputerAssignment_04.Rmd</code> file to save on your computer and open in RStudio instead of copying &amp; pasting from this webpage:</p>
-<ul>
-<li><a href="docs/ComputerAssignment_04.zip">Complete Assignment #4: Download link - Rmd file - (Click “Save As”)</a> (the file is ‘zipped’ and you need to unzip it)</li>
-</ul>
-<p><br></p>
-<p>Datasets for this assignment:</p>
+<p><br> <br></p>
+<p>This week on RCloud: <a href="https://rstudio.cloud/project/1074544" class="uri">https://rstudio.cloud/project/1074544</a></p>
+<p><br> <br></p>
+<p>Datasets for this class:</p>
 <p>A random sample of 1,000 federal personnel records for March 1994:</p>
 <ul>
-<li><a href="docs/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
+<li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
 <p><br> <br></p>
-<div id="load-libraries-set-your-working-directory-load-data" class="section level3">
-<h3>1. Load Libraries, Set Your Working Directory, &amp; Load Data</h3>
-<p>Load Libraries:</p>
+<div id="load-libraries" class="section level3">
+<h3>Load Libraries</h3>
 <pre class="r"><code>library(dplyr)
-library(ggplot2)
-library(GGally)
-library(knitr)
-library(pander)</code></pre>
-<p>Set your working directory, where the folder “Datasets” is located:</p>
-<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
-<p>Load the <strong>OPM94</strong> data set from the file <strong>“Datasets/OPM94.RData”</strong> into R using <code>load(file = "Datasets/OPM94.RData")</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
-<pre class="r"><code>load(file = &quot;Datasets/OPM94.RData&quot;)</code></pre>
-<p>Check the variable names:</p>
-<pre class="r"><code>names(opm94)</code></pre>
-<pre><code>##  [1] &quot;x&quot;        &quot;sal&quot;      &quot;grade&quot;    &quot;patco&quot;    &quot;major&quot;    &quot;age&quot;     
-##  [7] &quot;male&quot;     &quot;vet&quot;      &quot;handvet&quot;  &quot;hand&quot;     &quot;yos&quot;      &quot;edyrs&quot;   
-## [13] &quot;promo&quot;    &quot;exit&quot;     &quot;supmgr&quot;   &quot;race&quot;     &quot;minority&quot; &quot;grade4&quot;  
-## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;   &quot;vet01&quot;</code></pre>
-</div>
-<div id="lets-work-with-african-american-males-only-to-keep-the-graphs-easy-to-work-with" class="section level3">
-<h3>2. Let’s work with African-American males only to keep the graphs easy to work with:</h3>
-<pre class="r"><code>summary(opm94$race)  # see the levels of variable race</code></pre>
-<pre><code>## American Indian           Asian           Black        Hispanic           White 
-##              17              31             175              49             728</code></pre>
-<pre class="r"><code>summary(opm94$male)  # see the levels of variable male</code></pre>
-<pre><code>## female   male 
-##    488    512</code></pre>
-<pre class="r"><code>opm94AAM &lt;- opm94 %&gt;% dplyr::filter(race == &quot;Black&quot;, male == &quot;male&quot;)   # create a subset of data wher race == &quot;Black&quot;, male == &quot;male&quot;</code></pre>
+library(ggplot2)</code></pre>
 <p><br></p>
 </div>
-<div id="scatterplots" class="section level3">
-<h3>3. Scatterplots</h3>
-<p>Create scatterplots with salary (sal) as the dependent variable and four independent variables: <code>grade, yos, edyrs</code> and <code>age</code></p>
-<pre class="r"><code>ggplot(data=opm94AAM) + geom_point(mapping = aes(x=grade, y = sal))</code></pre>
-<p><img src="ca04_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code># your work</code></pre>
-<pre class="r"><code># your work</code></pre>
-<pre class="r"><code># your work</code></pre>
+<div id="predictingcomparing-car-mpg-american-vs-foreign-cars" class="section level3">
+<h3>PREDICTING/COMPARING CAR MPG (AMERICAN VS FOREIGN CARS)</h3>
+<pre class="r"><code>Cars93 &lt;- MASS::Cars93  # Load the dataset from package MASS
+names(Cars93)           # Variable names</code></pre>
+<pre><code>##  [1] &quot;Manufacturer&quot;       &quot;Model&quot;              &quot;Type&quot;              
+##  [4] &quot;Min.Price&quot;          &quot;Price&quot;              &quot;Max.Price&quot;         
+##  [7] &quot;MPG.city&quot;           &quot;MPG.highway&quot;        &quot;AirBags&quot;           
+## [10] &quot;DriveTrain&quot;         &quot;Cylinders&quot;          &quot;EngineSize&quot;        
+## [13] &quot;Horsepower&quot;         &quot;RPM&quot;                &quot;Rev.per.mile&quot;      
+## [16] &quot;Man.trans.avail&quot;    &quot;Fuel.tank.capacity&quot; &quot;Passengers&quot;        
+## [19] &quot;Length&quot;             &quot;Wheelbase&quot;          &quot;Width&quot;             
+## [22] &quot;Turn.circle&quot;        &quot;Rear.seat.room&quot;     &quot;Luggage.room&quot;      
+## [25] &quot;Weight&quot;             &quot;Origin&quot;             &quot;Make&quot;</code></pre>
+<p><br></p>
+<p><strong><em>Are American cars more or less fuel efficient than foreign cars?</em></strong></p>
+<p><br></p>
+<p>American vs. Foreign Cars: Comparing Distributions of MPG.city using boxplots:</p>
+<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = MPG.city)) + geom_boxplot()</code></pre>
+<p><img src="week11_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Let’s calculate mean MPG.city for the two groups of cars:</p>
+<pre class="r"><code>Cars93 %&gt;% select(MPG.city, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.MPG.city = mean(MPG.city, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Origin  Mean.MPG.city
+##   &lt;fct&gt;           &lt;dbl&gt;
+## 1 USA              21.0
+## 2 non-USA          23.9</code></pre>
+<p>Bivariate regression: MPG.city ~ Origin</p>
+<pre class="r"><code>lm(MPG.city ~ Origin, data = Cars93) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = MPG.city ~ Origin, data = Cars93)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.8667 -3.8667 -0.9583  2.0417 22.1333 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    20.9583     0.7875  26.612   &lt;2e-16 ***
+## Originnon-USA   2.9083     1.1322   2.569   0.0118 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.456 on 91 degrees of freedom
+## Multiple R-squared:  0.06761,    Adjusted R-squared:  0.05737 
+## F-statistic: 6.599 on 1 and 91 DF,  p-value: 0.01183</code></pre>
+<p><br></p>
+<p><strong><em>Do American cars in the sample tend to have larger engines</em></strong>?</p>
+<p><br></p>
+<p>Boxplot for <code>EngineSize</code>:</p>
+<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = EngineSize)) + geom_boxplot()</code></pre>
+<p><img src="week11_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Mean <code>EngineSize</code>:</p>
+<pre class="r"><code>Cars93 %&gt;% dplyr::select(EngineSize, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.EngineSize = mean(EngineSize))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Origin  Mean.EngineSize
+##   &lt;fct&gt;             &lt;dbl&gt;
+## 1 USA                3.07
+## 2 non-USA            2.24</code></pre>
 <p><br></p>
 </div>
-<div id="correlation-matrix" class="section level3">
-<h3>4. Correlation Matrix</h3>
-<p>Now create a correlation matrix with the same five variables, plus two more: <code>supmgr01, promo01</code></p>
-<pre class="r"><code># cor(opm94AAM[, c(&quot;sal&quot;, &quot;grade&quot;, &quot;yos&quot;, &quot;edyrs&quot;, &quot;age&quot;, &quot;supmgr01&quot;, &quot;promo01&quot;)], use = &quot;pairwise.complete.obs&quot; ) %&gt;% round(digits = 2)
+<div id="multiple-regression" class="section level3">
+<h3>Multiple Regression</h3>
+<p>Modeling MPG.city based on car <code>Origin</code> and <code>EngineSize</code>:</p>
+<pre class="r"><code>lm(MPG.city ~ Origin + EngineSize, data = Cars93) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = MPG.city ~ Origin + EngineSize, data = Cars93)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.5478  -2.6409  -0.5944   1.9210  17.2802 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    32.9393     1.4629  22.517  &lt; 2e-16 ***
+## Originnon-USA  -0.3126     0.9050  -0.345    0.731    
+## EngineSize     -3.9068     0.4383  -8.913 5.22e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.999 on 90 degrees of freedom
+## Multiple R-squared:  0.5048, Adjusted R-squared:  0.4938 
+## F-statistic: 45.87 on 2 and 90 DF,  p-value: 1.848e-14</code></pre>
+</div>
 
-opm94AAM %&gt;% select(sal, grade, yos, edyrs, age, supmgr01, promo01) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(digits = 2)</code></pre>
-<pre><code>##           sal grade   yos edyrs   age supmgr01 promo01
-## sal      1.00  0.92  0.31  0.52  0.31     0.43    0.10
-## grade    0.92  1.00  0.22  0.47  0.19     0.39    0.07
-## yos      0.31  0.22  1.00  0.10  0.61     0.30   -0.06
-## edyrs    0.52  0.47  0.10  1.00  0.22     0.14    0.07
-## age      0.31  0.19  0.61  0.22  1.00     0.27   -0.18
-## supmgr01 0.43  0.39  0.30  0.14  0.27     1.00   -0.02
-## promo01  0.10  0.07 -0.06  0.07 -0.18    -0.02    1.00</code></pre>
-<p><br></p>
-</div>
-<div id="homework-questions" class="section level2">
-<h2>HOMEWORK QUESTIONS</h2>
-<p><strong>1.</strong> Write a couple of sentences about each graph. Talk about the strength and direction of each relationship. Does there seem to be any evidence of curvilinearity?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>2.</strong> Rank-order the strength of the correlations between sal and each of the other variables. Do these seem in line with what you would have guessed based on the scatterplots? Explain briefly.</p>
-<pre><code>Your work...</code></pre>
-<p><strong>3.</strong> Talk about the direction of each of the correlations between sal and the other variables. Who tends to earn higher salaries, those with more or less education, higher or lower grades, etc.?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>4.</strong> How do supervisors (supmgr=1) differ from other people (supmgr=0), based on the correlation coefficients? Do supervisors tend to have higher or lower salaries, higher or lower grades, etc.? Which variables is supervisory status most strongly related to?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>5.</strong> How do people who were promoted between 1994 and 1995 (promo=1) differ from those who were not?</p>
-<pre><code>Your work...</code></pre>
-<p></br></p>
-<hr />
-<p></br></p>
-<div id="submission" class="section level3">
-<h3>5. Submission</h3>
-<p>Save your RMarkdown file, Knit an html report, and publish to <strong>RPubs</strong> or save as a <strong>pdf</strong> file. Submit the link to the html or your pdf in the dropbox on iCollege.</p>
-</div>
-</div>
-
-<p style = "text-align: right;"> Yuriy Davydenko &copy; 2020 </p>
 
 
 
