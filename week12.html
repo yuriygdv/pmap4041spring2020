@@ -12,7 +12,7 @@
 <meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Multiple Regression (In-class Practice)</title>
+<title>Normal Distributions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -452,112 +452,39 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Multiple Regression (In-class Practice)</h1>
+<h1 class="title toc-ignore">Normal Distributions</h1>
 <h4 class="author">Yuriy Davydenko</h4>
 <h4 class="date">April 07 2020</h4>
 
 </div>
 
 
-<p><br> <br></p>
-<p>This week on RCloud: <a href="https://rstudio.cloud/project/1074544" class="uri">https://rstudio.cloud/project/1074544</a></p>
-<p><br> <br></p>
-<p>Datasets for this class:</p>
-<p>A random sample of 1,000 federal personnel records for March 1994:</p>
-<ul>
-<li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
-</ul>
-<p><br> <br></p>
-<div id="load-libraries" class="section level3">
-<h3>Load Libraries</h3>
-<pre class="r"><code>library(dplyr)
-library(ggplot2)</code></pre>
+<style type="text/css">
+.main-container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<p><br></p>
+<div id="from-a-histogram-to-a-density-curve" class="section level3">
+<h3>From a Histogram to a Density Curve</h3>
+<p><br></p>
+<p><a href="https://yuriygdv.shinyapps.io/app-From_Histogram_to_Density_Curve/">Open applet in a new window</a></p>
+<p><br></p>
+<iframe src="https://yuriygdv.shinyapps.io/app-From_Histogram_to_Density_Curve/" width="100%" height="500px">
+</iframe>
+<p><br></p>
+<hr />
 <p><br></p>
 </div>
-<div id="predictingcomparing-car-mpg-american-vs-foreign-cars" class="section level3">
-<h3>PREDICTING/COMPARING CAR MPG (AMERICAN VS FOREIGN CARS)</h3>
-<pre class="r"><code>Cars93 &lt;- MASS::Cars93  # Load the dataset from package MASS
-names(Cars93)           # Variable names</code></pre>
-<pre><code>##  [1] &quot;Manufacturer&quot;       &quot;Model&quot;              &quot;Type&quot;              
-##  [4] &quot;Min.Price&quot;          &quot;Price&quot;              &quot;Max.Price&quot;         
-##  [7] &quot;MPG.city&quot;           &quot;MPG.highway&quot;        &quot;AirBags&quot;           
-## [10] &quot;DriveTrain&quot;         &quot;Cylinders&quot;          &quot;EngineSize&quot;        
-## [13] &quot;Horsepower&quot;         &quot;RPM&quot;                &quot;Rev.per.mile&quot;      
-## [16] &quot;Man.trans.avail&quot;    &quot;Fuel.tank.capacity&quot; &quot;Passengers&quot;        
-## [19] &quot;Length&quot;             &quot;Wheelbase&quot;          &quot;Width&quot;             
-## [22] &quot;Turn.circle&quot;        &quot;Rear.seat.room&quot;     &quot;Luggage.room&quot;      
-## [25] &quot;Weight&quot;             &quot;Origin&quot;             &quot;Make&quot;</code></pre>
+<div id="solving-problems-using-normal-distributions" class="section level3">
+<h3>Solving Problems Using Normal Distributions</h3>
 <p><br></p>
-<p><strong><em>Are American cars more or less fuel efficient than foreign cars?</em></strong></p>
+<p><a href="https://yuriygdv.shinyapps.io/app-NormalDistr_Range_0-100/">Open applet in a new window</a></p>
 <p><br></p>
-<p>American vs. Foreign Cars: Comparing Distributions of MPG.city using boxplots:</p>
-<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = MPG.city)) + geom_boxplot()</code></pre>
-<p><img src="week11_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Let’s calculate mean MPG.city for the two groups of cars:</p>
-<pre class="r"><code>Cars93 %&gt;% select(MPG.city, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.MPG.city = mean(MPG.city, na.rm = T))</code></pre>
-<pre><code>## # A tibble: 2 x 2
-##   Origin  Mean.MPG.city
-##   &lt;fct&gt;           &lt;dbl&gt;
-## 1 USA              21.0
-## 2 non-USA          23.9</code></pre>
-<p>Bivariate regression: MPG.city ~ Origin</p>
-<pre class="r"><code>lm(MPG.city ~ Origin, data = Cars93) %&gt;% summary()</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = MPG.city ~ Origin, data = Cars93)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -6.8667 -3.8667 -0.9583  2.0417 22.1333 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    20.9583     0.7875  26.612   &lt;2e-16 ***
-## Originnon-USA   2.9083     1.1322   2.569   0.0118 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 5.456 on 91 degrees of freedom
-## Multiple R-squared:  0.06761,    Adjusted R-squared:  0.05737 
-## F-statistic: 6.599 on 1 and 91 DF,  p-value: 0.01183</code></pre>
-<p><br></p>
-<p><strong><em>Do American cars in the sample tend to have larger engines</em></strong>?</p>
-<p><br></p>
-<p>Boxplot for <code>EngineSize</code>:</p>
-<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = EngineSize)) + geom_boxplot()</code></pre>
-<p><img src="week11_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Mean <code>EngineSize</code>:</p>
-<pre class="r"><code>Cars93 %&gt;% dplyr::select(EngineSize, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.EngineSize = mean(EngineSize))</code></pre>
-<pre><code>## # A tibble: 2 x 2
-##   Origin  Mean.EngineSize
-##   &lt;fct&gt;             &lt;dbl&gt;
-## 1 USA                3.07
-## 2 non-USA            2.24</code></pre>
-<p><br></p>
-</div>
-<div id="multiple-regression" class="section level3">
-<h3>Multiple Regression</h3>
-<p>Modeling MPG.city based on car <code>Origin</code> and <code>EngineSize</code>:</p>
-<pre class="r"><code>lm(MPG.city ~ Origin + EngineSize, data = Cars93) %&gt;% summary()</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = MPG.city ~ Origin + EngineSize, data = Cars93)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -10.5478  -2.6409  -0.5944   1.9210  17.2802 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    32.9393     1.4629  22.517  &lt; 2e-16 ***
-## Originnon-USA  -0.3126     0.9050  -0.345    0.731    
-## EngineSize     -3.9068     0.4383  -8.913 5.22e-14 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 3.999 on 90 degrees of freedom
-## Multiple R-squared:  0.5048, Adjusted R-squared:  0.4938 
-## F-statistic: 45.87 on 2 and 90 DF,  p-value: 1.848e-14</code></pre>
+<iframe src="https://yuriygdv.shinyapps.io/app-NormalDistr_Range_0-100/" width="100%" height="800px">
+</iframe>
 </div>
 
 
