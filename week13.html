@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Syllabus</title>
+<title>Inference for Numerical Data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -454,75 +455,133 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Syllabus</h1>
+<h1 class="title toc-ignore">Inference for Numerical Data</h1>
+<h4 class="author">Yuriy Davydenko</h4>
+<h4 class="date">April 15 2020</h4>
 
 </div>
 
 
-<p><br></p>
-<div id="prerequisite" class="section level3">
-<h3>PREREQUISITE</h3>
-<p>Math 1070, minimum C grade.</p>
-</div>
-<div id="course-description" class="section level3">
-<h3>COURSE DESCRIPTION</h3>
-<p>This course focuses on quantitative research methods applicable to the study of public policy. Students will be introduced to the use of descriptive statistics as well as to the development and testing of empirical hypotheses using basic inferential statistical methods.</p>
-<p>This is a rigorous course, requiring 4-6 hours of work per week outside of class, on average. You are expected to read the lecture notes and any other materials provided by the instructor each week before coming to class. Remember, the key to learning is persistence.</p>
-</div>
-<div id="learning-objectives" class="section level3">
-<h3>LEARNING OBJECTIVES</h3>
-<p>At the end of the course, students should be able to:</p>
+<style type="text/css">
+.main-container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<p><br> <br></p>
+<p>This week on RCloud: <a href="https://rstudio.cloud/project/1156832" class="uri">https://rstudio.cloud/project/1156832</a></p>
+<p><br> <br></p>
+<p>Datasets for this class:</p>
+<p>A random sample of 1,000 federal personnel records for March 1994:</p>
 <ul>
-<li>Understand the value of data analysis and formulate questions that can be answered using data</li>
-<li>Understand the structure and organization of data</li>
-<li>Understand data collection methods and their implications for the scope of inference</li>
-<li>Manipulate data and run basic statistical analyses using R software</li>
-<li>Conduct basic exploratory data analysis</li>
-<li>Calculate descriptive statistics</li>
-<li>Make basic data visualizations</li>
-<li>Use scatterplots and correlation coefficients to show the direction and strength of relationships between interval-level variables</li>
-<li>Construct and Interpret contingency tables</li>
-<li>Interpret regression coefficients in both bivariate and multiple regressions</li>
-<li>Justify claims based on confidence intervals and hypothesis testing</li>
-<li>Document and share data analyses with others</li>
+<li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
+<p><br> <br></p>
+<div id="load-dataset" class="section level3">
+<h3>Load Dataset</h3>
+<pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;)</code></pre>
 </div>
-<div id="texts-tools-and-other-resources" class="section level3">
-<h3>TEXTS, TOOLS, AND OTHER RESOURCES</h3>
-<ol style="list-style-type: decimal">
-<li><p>iCollege iCollege will be used for communication and to disseminate course content, lecture notes, PowerPoint slides, datasets, and more. Students are expected to use this resource on a regular basis for course materials and announcements.</p></li>
-<li><p>Course Website For your convenience, materials relevant to this course, including examples of analyses and reports, will be available at the course website <a href="https://yuriygdv.github.io/pmap4041spring2020" class="uri">https://yuriygdv.github.io/pmap4041spring2020</a></p></li>
-<li><p>Required Textbooks</p>
-<ul>
-<li><p>OpenIntro Statistics, 4th Edition , available at <a href="https://leanpub.com/openintro-statistics" class="uri">https://leanpub.com/openintro-statistics</a></p></li>
-<li><p>Roger D. Peng (2016), Exploratory Data Analysis with R, available at <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p></li>
-</ul></li>
-<li><p>Recommended Textbooks Advanced High School Statistics, Second Edition, available at <a href="https://leanpub.com/ahss" class="uri">https://leanpub.com/ahss</a></p>
-<ul>
-<li>Moore, David S., Notz, William, I., &amp; Fligner, Michael, A. (2011). The Basic Practice of Statistics (with Student CD). 6th Edition. W.H. Freeman. (or any newer edition)</li>
-</ul></li>
-<li><p>For those of you who require more detailed treatment of the statistics topics, the following textbooks are recommended as additional resources (earlier editions are also fine):</p>
-<ul>
-<li><p>Meier, Kenneth, Jeffrey Brudney, and John Bohte. Applied statistics for public and nonprofit administration. Cengage Learning, 2011.</p></li>
-<li><p>Healey, Joseph F. (2013). The Essentials of Statistics: A Tool for Social Research. 3rd Edition. Wadsworth Cengage Learning.</p></li>
-<li><p>Weiers, R. M. “Introduction to Business Statistics. 2005.” Thomson Brooks/Cole, Belmont, CA, USA.</p></li>
-</ul></li>
-<li><p>R Software: You are required to use R software for all homework assignments. R is a free software environment for statistical computing and graphics available at www.r-project.org . In this course, we will use RStudio - an open-source integrated development environment for R available at <a href="https://rstudio.com/products/rstudio/" class="uri">https://rstudio.com/products/rstudio/</a> and RStudio Cloud at <a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a> .</p></li>
-<li><p>R Books &amp; Resources:</p>
-<ul>
-<li><p>R for Data Science by Garrett Grolemund and Hadley Wickham, at <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p></li>
-<li><p>An Introduction to R by Longhow Lam (PDF, 2010-10-28, 212 pages), at <a href="https://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf" class="uri">https://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf</a></p></li>
-<li><p>Cookbook for R at <a href="http://www.cookbook-r.com/" class="uri">http://www.cookbook-r.com/</a></p></li>
-<li><p>R Programming Tutorial on YouTube - Learn the Basics of Statistical Computing <a href="https://www.youtube.com/watch?v=_V8eKsto3Ug" class="uri">https://www.youtube.com/watch?v=_V8eKsto3Ug</a></p></li>
-</ul></li>
-<li><p>Computers: For the purposes of this course, having a personal laptop with all the required software (R and RStudio) is recommended but not required. All the course assignments can be completed in RStudio Cloud using the library computers.</p></li>
-</ol>
-<p>INTERACTIVE VIDEO TECHNOLOGY TRAINING LinkedIn Learning (formerly Lynda.com) offers an online training library on a variety of topics, including software tools for data analysis. Service is free to Georgia State University’s students. You can access online video tutorials with your CampusID and password using the following link: <a href="https://technology.gsu.edu/technology-services/it-services/training-and-learning-resources/linkedin-learning/" class="uri">https://technology.gsu.edu/technology-services/it-services/training-and-learning-resources/linkedin-learning/</a></p>
-<p>For the purposes of this course, the following training can be very helpful: Learning R by Barton Poulson (2h 51m Beginner + Intermediate Released: Aug. 29, 2019) <a href="https://www.linkedin.com/learning/learning-r-2/r-for-data-science?u=76216298" class="uri">https://www.linkedin.com/learning/learning-r-2/r-for-data-science?u=76216298</a></p>
-<p>R Statistics Essential Training by Barton Poulson (5h 59m, Beginner + Intermediate, Released: Sep. 26, 2013) <a href="https://www.linkedin.com/learning/r-statistics-essential-training/next-steps?u=76216298" class="uri">https://www.linkedin.com/learning/r-statistics-essential-training/next-steps?u=76216298</a></p>
-<p>Download the Syllabus <a href="docs/syllabus.pdf">here</a></p>
+<div id="confidence-interval-for-a-population-mean-calculated-manually-mean-edyrs" class="section level3">
+<h3>Confidence Interval for a Population Mean Calculated Manually (mean edyrs)</h3>
+<p>Sample mean:</p>
+<pre class="r"><code>x_bar &lt;- mean(opm94$edyrs, na.rm = TRUE)
+x_bar</code></pre>
+<pre><code>## [1] 14.366</code></pre>
+<p>Sample standard deviation:</p>
+<pre class="r"><code>sd_x &lt;- sd(opm94$edyrs, na.rm = TRUE)
+sd_x</code></pre>
+<pre><code>## [1] 2.263441</code></pre>
+<p>Standard error (standard deviation of the sample mean/of the sampling distribution for the sample mean):</p>
+<pre class="r"><code>se &lt;- sd_x/sqrt(1000)
+se</code></pre>
+<pre><code>## [1] 0.0715763</code></pre>
+<p>The critical value of the t-statistic for 95% confidence level:</p>
+<pre class="r"><code>t &lt;- qt(0.975, 999, lower.tail = TRUE)     
+t</code></pre>
+<pre><code>## [1] 1.962341</code></pre>
+<p>95% confidence interval for the mean years of education <code>edyrs</code> in the population of federal employees:</p>
+<pre class="r"><code>x_bar - t*se      # lower bound</code></pre>
+<pre><code>## [1] 14.22554</code></pre>
+<pre class="r"><code>x_bar + t*se      # upper bound</code></pre>
+<pre><code>## [1] 14.50646</code></pre>
+<p><strong>Conclusion:</strong> We are 95% confident that in the population of federal employees in 1994, the mean value of years of education was between 14.2255429 and 14.5064571</p>
+</div>
+<div id="confidence-interval-using-t.test" class="section level3">
+<h3>Confidence Interval Using t.test</h3>
+<p>We can run a t-test and obtain the same confidence interval using <code>t.test()</code> function:</p>
+<pre class="r"><code>t.test(opm94$edyrs, conf.level = 0.95)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  opm94$edyrs
+## t = 200.71, df = 999, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  14.22554 14.50646
+## sample estimates:
+## mean of x 
+##    14.366</code></pre>
 <p><br></p>
-<hr />
+<p>Is the mean number of years of education in the population of federal employees different from 14?</p>
+<pre class="r"><code>t.test(opm94$edyrs, mu = 14, conf.level = 0.95  )</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  opm94$edyrs
+## t = 5.1134, df = 999, p-value = 3.791e-07
+## alternative hypothesis: true mean is not equal to 14
+## 95 percent confidence interval:
+##  14.22554 14.50646
+## sample estimates:
+## mean of x 
+##    14.366</code></pre>
+<p><strong>Conclusion:</strong> Yes, because t is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean <code>edyrs</code> in the population equals 14. Hence, we can be 95% confident that it’s different from 14 in the population of federal employees.</p>
+<p><br></p>
+<p>Is the mean number of years of education in the population of federal employees greater than 14?</p>
+<pre class="r"><code>t.test(opm94$edyrs, mu = 14, alternative = &quot;greater&quot;, conf.level = 0.95  )</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  opm94$edyrs
+## t = 5.1134, df = 999, p-value = 1.896e-07
+## alternative hypothesis: true mean is greater than 14
+## 95 percent confidence interval:
+##  14.24816      Inf
+## sample estimates:
+## mean of x 
+##    14.366</code></pre>
+<p><strong>Conclusion:</strong> Yes, because the t-statistic is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean <code>edyrs</code> in the population is less or equal to 14. Hence, we can be 95% confident that the mean <code>edyrs</code> in the population of federal employees is greater than 14.</p>
+<p><br></p>
+<p>Is the mean number of years of education in the population of federal employees different from 14.5?</p>
+<pre class="r"><code>t.test(opm94$edyrs, mu = 14.5, conf.level = 0.95  )</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  opm94$edyrs
+## t = -1.8721, df = 999, p-value = 0.06148
+## alternative hypothesis: true mean is not equal to 14.5
+## 95 percent confidence interval:
+##  14.22554 14.50646
+## sample estimates:
+## mean of x 
+##    14.366</code></pre>
+<p><strong>Conclusion:</strong> No, because the t-statistic is lower than the critical value of 1.96 (and p-value is greater than 0.05), we cannot reject the null hypothesis that the true mean <code>edyrs</code> in the population is different from 14.5. Hence, we tentatively accept the null hypothesis.</p>
+<p><br></p>
+<p>Does the mean salary of veterans differ from the mean salary of those who don’t receive veteran preferences in the population of federal employees?</p>
+<pre class="r"><code>t.test(sal ~ vet, data = opm94)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  sal by vet
+## t = -4.0401, df = 353.15, p-value = 6.559e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -8429.905 -2909.792
+## sample estimates:
+##  mean in group no mean in group yes 
+##          39439.66          45109.51</code></pre>
+<p><strong>Conclusion:</strong> Yes, the difference in the mean salary is statistically significantly different from zero.</p>
 </div>
 
 
