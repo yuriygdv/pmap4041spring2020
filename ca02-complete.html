@@ -457,7 +457,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Computer Assignment 2: Frequency Distributions</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">April 15 2020</h4>
+<h4 class="date">April 20 2020</h4>
 
 </div>
 
@@ -469,10 +469,13 @@ You still have to provide your written answers to the assignment questions </cod
 <div id="load-libraries-set-your-working-directory-load-data" class="section level3">
 <h3>1. Load Libraries, Set Your Working Directory, &amp; Load Data</h3>
 <p>Load Libraries:</p>
-<pre class="r"><code>library(dplyr)         # for manipulating data
-library(ggplot2)       # for making graphs
-library(knitr)         # for nicer table formatting
+<pre class="r"><code>library(dplyr)         # for manipulating data</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.3</code></pre>
+<pre class="r"><code>library(ggplot2)       # for making graphs</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.3</code></pre>
+<pre class="r"><code>library(knitr)         # for nicer table formatting
 library(summarytools)  # for frequency distribution tables</code></pre>
+<pre><code>## Warning: package &#39;summarytools&#39; was built under R version 3.6.3</code></pre>
 <p>Set your working directory, where the folder “Datasets” is located:</p>
 <pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;&quot;)</code></pre>
 <p>Load the <strong>gss98</strong> data set from the file <strong>“Datasets/gss98.RData”</strong> into R using <code>load(file = "Datasets/gss98.RData")</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
