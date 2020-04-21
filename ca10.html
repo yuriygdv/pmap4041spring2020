@@ -12,7 +12,7 @@
 <meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Multiple Regression (In-class Practice)</title>
+<title>Problem Set 10: Inference</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,7 +25,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<link rel="shortcut icon" href="img/gsu_ico.png">
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -462,114 +461,148 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Multiple Regression (In-class Practice)</h1>
+<h1 class="title toc-ignore">Problem Set 10: Inference</h1>
 <h4 class="author">Yuriy Davydenko</h4>
 <h4 class="date">April 20 2020</h4>
 
 </div>
 
 
-<p><br> <br></p>
-<p>This week on RCloud: <a href="https://rstudio.cloud/project/1074544" class="uri">https://rstudio.cloud/project/1074544</a></p>
-<p><br> <br></p>
-<p>Datasets for this class:</p>
+<p><br></p>
+<p>Datasets for this assignment:</p>
 <p>A random sample of 1,000 federal personnel records for March 1994:</p>
 <ul>
 <li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
+<p>General Social Survey 1998:</p>
+<ul>
+<li><a href="Datasets/gss98.RData">Dataset ‘gss98’ (click “Save As”)</a></li>
+</ul>
+<p><br></p>
+<p>For those who prefer to work with RCloud, a project with the same materials can be accessed using the following link:</p>
+<ul>
+<li><a href="https://rstudio.cloud/project/1177295">RCloud Project for Week 14/Problem Set 10</a></li>
+</ul>
 <p><br> <br></p>
-<div id="load-libraries" class="section level3">
-<h3>Load Libraries</h3>
-<pre class="r"><code>library(dplyr)
-library(ggplot2)</code></pre>
+<div id="load-libraries" class="section level4">
+<h4>Load Libraries</h4>
+<pre class="r"><code>library(dplyr)</code></pre>
+<p><br> <br></p>
+</div>
+<div id="inference-for-numeric-data" class="section level1">
+<h1>INFERENCE FOR NUMERIC DATA</h1>
+<p>Load <code>OPM94.RData</code></p>
+<pre class="r"><code># your work</code></pre>
+<p><br></p>
+<div id="confidence-interval-for-a-population-mean-calculated-manually" class="section level2">
+<h2>1. Confidence Interval for a Population Mean Calculated Manually</h2>
+<p>Examples for this section are provided on the following page: <a href="https://yuriygdv.github.io/pmap4041spring2020/week13.html" class="uri">https://yuriygdv.github.io/pmap4041spring2020/week13.html</a></p>
+<div id="what-is-the-mean-salary-in-the-sample-of-federal-employees" class="section level4">
+<h4>What is the mean salary in the sample of federal employees?</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="what-is-the-standard-deviation-of-salary-in-the-sample" class="section level4">
+<h4>What is the standard deviation of salary in the sample?</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="what-is-the-variability-of-the-sample-mean-salary" class="section level4">
+<h4>What is the variability of the sample mean salary</h4>
+<p>Variability of the sample mean salary is the same as: Standard deviation of the sample mean / Standard deviation of the of the sampling distribution for the sample mean / Standard error. All of these are interchangeable terms.</p>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="find-the-critical-value-t-of-the-t-statistic-for-95-confidence-level" class="section level4">
+<h4>Find the critical value t* of the t-statistic for 95% confidence level:</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="calculate-the-95-confidence-interval-for-the-mean-salary-in-the-population-of-federal-employees" class="section level4">
+<h4>Calculate the 95% confidence interval for the mean salary in the population of federal employees:</h4>
+<pre class="r"><code># your work
+              # lower bound
+              # upper bound</code></pre>
+</div>
+<div id="what-is-your-conclusion" class="section level4">
+<h4>What is your conclusion?</h4>
+<pre><code>... Your written answer ...</code></pre>
 <p><br></p>
 </div>
-<div id="predictingcomparing-car-mpg-american-vs-foreign-cars" class="section level3">
-<h3>PREDICTING/COMPARING CAR MPG (AMERICAN VS FOREIGN CARS)</h3>
-<pre class="r"><code>Cars93 &lt;- MASS::Cars93  # Load the dataset from package MASS
-names(Cars93)           # Variable names</code></pre>
-<pre><code>##  [1] &quot;Manufacturer&quot;       &quot;Model&quot;              &quot;Type&quot;              
-##  [4] &quot;Min.Price&quot;          &quot;Price&quot;              &quot;Max.Price&quot;         
-##  [7] &quot;MPG.city&quot;           &quot;MPG.highway&quot;        &quot;AirBags&quot;           
-## [10] &quot;DriveTrain&quot;         &quot;Cylinders&quot;          &quot;EngineSize&quot;        
-## [13] &quot;Horsepower&quot;         &quot;RPM&quot;                &quot;Rev.per.mile&quot;      
-## [16] &quot;Man.trans.avail&quot;    &quot;Fuel.tank.capacity&quot; &quot;Passengers&quot;        
-## [19] &quot;Length&quot;             &quot;Wheelbase&quot;          &quot;Width&quot;             
-## [22] &quot;Turn.circle&quot;        &quot;Rear.seat.room&quot;     &quot;Luggage.room&quot;      
-## [25] &quot;Weight&quot;             &quot;Origin&quot;             &quot;Make&quot;</code></pre>
-<p><br></p>
-<p><strong><em>Are American cars more or less fuel efficient than foreign cars?</em></strong></p>
-<p><br></p>
-<p>American vs. Foreign Cars: Comparing Distributions of MPG.city using boxplots:</p>
-<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = MPG.city)) + geom_boxplot()</code></pre>
-<p><img src="week11_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Let’s calculate mean MPG.city for the two groups of cars:</p>
-<pre class="r"><code>Cars93 %&gt;% select(MPG.city, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.MPG.city = mean(MPG.city, na.rm = T))</code></pre>
-<pre><code>## # A tibble: 2 x 2
-##   Origin  Mean.MPG.city
-##   &lt;fct&gt;           &lt;dbl&gt;
-## 1 USA              21.0
-## 2 non-USA          23.9</code></pre>
-<p>Bivariate regression: MPG.city ~ Origin</p>
-<pre class="r"><code>lm(MPG.city ~ Origin, data = Cars93) %&gt;% summary()</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = MPG.city ~ Origin, data = Cars93)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -6.8667 -3.8667 -0.9583  2.0417 22.1333 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    20.9583     0.7875  26.612   &lt;2e-16 ***
-## Originnon-USA   2.9083     1.1322   2.569   0.0118 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 5.456 on 91 degrees of freedom
-## Multiple R-squared:  0.06761,    Adjusted R-squared:  0.05737 
-## F-statistic: 6.599 on 1 and 91 DF,  p-value: 0.01183</code></pre>
-<p><br></p>
-<p><strong><em>Do American cars in the sample tend to have larger engines</em></strong>?</p>
-<p><br></p>
-<p>Boxplot for <code>EngineSize</code>:</p>
-<pre class="r"><code>Cars93 %&gt;% ggplot(mapping = aes(x = Origin, y = EngineSize)) + geom_boxplot()</code></pre>
-<p><img src="week11_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Mean <code>EngineSize</code>:</p>
-<pre class="r"><code>Cars93 %&gt;% dplyr::select(EngineSize, Origin) %&gt;% group_by(Origin) %&gt;% summarize(Mean.EngineSize = mean(EngineSize))</code></pre>
-<pre><code>## # A tibble: 2 x 2
-##   Origin  Mean.EngineSize
-##   &lt;fct&gt;             &lt;dbl&gt;
-## 1 USA                3.07
-## 2 non-USA            2.24</code></pre>
+</div>
+<div id="confidence-interval-for-a-population-mean-calculated-in-r" class="section level2">
+<h2>2. Confidence Interval for a Population Mean Calculated in R</h2>
+<div id="run-a-t-test-and-obtain-the-same-confidence-interval-using-t.test-function" class="section level4">
+<h4>Run a t-test and obtain the same confidence interval using t.test() function:</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="does-the-result-match-with-the-one-you-obtained-manually" class="section level4">
+<h4>Does the result match with the one you obtained manually?</h4>
+<pre><code>... your written answer ...</code></pre>
 <p><br></p>
 </div>
-<div id="multiple-regression" class="section level3">
-<h3>Multiple Regression</h3>
-<p>Modeling MPG.city based on car <code>Origin</code> and <code>EngineSize</code>:</p>
-<pre class="r"><code>lm(MPG.city ~ Origin + EngineSize, data = Cars93) %&gt;% summary()</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = MPG.city ~ Origin + EngineSize, data = Cars93)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -10.5478  -2.6409  -0.5944   1.9210  17.2802 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    32.9393     1.4629  22.517  &lt; 2e-16 ***
-## Originnon-USA  -0.3126     0.9050  -0.345    0.731    
-## EngineSize     -3.9068     0.4383  -8.913 5.22e-14 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 3.999 on 90 degrees of freedom
-## Multiple R-squared:  0.5048, Adjusted R-squared:  0.4938 
-## F-statistic: 45.87 on 2 and 90 DF,  p-value: 1.848e-14</code></pre>
+</div>
+<div id="difference-in-means" class="section level2">
+<h2>3. Difference in means</h2>
+<div id="does-the-mean-salary-of-men-differ-from-the-mean-salary-of-women-in-the-population-of-federal-employees-if-so-by-how-much-run-a-t-test-and-explain-the-results." class="section level4">
+<h4>Does the mean salary of men differ from the mean salary of women in the population of federal employees? If so, by how much? Run a t-test and explain the results.</h4>
+<pre class="r"><code># your work</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="inference-for-regression" class="section level2">
+<h2>4. Inference for Regression</h2>
+<div id="regress-salary-on-minority-and-print-out-the-regression-output-summary" class="section level4">
+<h4>Regress salary on minority and print out the regression output (summary):</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="interpret-the-regression-coefficient-on-minority.-what-does-this-regression-tell-us-about-the-relationship-between-salary-and-minority-status-in-the-population-of-federal-employees-in-1994" class="section level4">
+<h4>Interpret the regression coefficient on minority. What does this regression tell us about the relationship between salary and minority status in the population of federal employees in 1994?</h4>
+<pre><code>... your written answer ...</code></pre>
+</div>
+<div id="print-confidence-intervals-for-the-regression-above" class="section level4">
+<h4>Print confidence intervals for the regression above:</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="interpret-the-confidence-interval-for-minority" class="section level4">
+<h4>Interpret the confidence interval for minority:</h4>
+<pre><code>... Your written answer ...</code></pre>
+</div>
+<div id="regress-salary-sal-on-yos-edyrs-male-patco-vet-age-.-print-out-regression-summary-and-confidence-intervals." class="section level4">
+<h4>Regress salary <code>sal</code> on <code>yos</code> + <code>edyrs</code> + <code>male</code> + <code>patco</code> + <code>vet</code> + <code>age</code> . Print out regression summary and confidence intervals.</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="what-can-you-conclude-about-the-relationship-between-salary-and-minority-status-in-the-population-how-is-the-result-different-from-the-previous-one-and-why" class="section level4">
+<h4>What can you conclude about the relationship between salary and minority status in the population? How is the result different from the previous one and why?</h4>
+<pre><code>...Your written answer ...</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="inference-for-categorical-data" class="section level1">
+<h1>INFERENCE FOR CATEGORICAL DATA</h1>
+<div id="load-gss98-dataset-and-library-descr" class="section level4">
+<h4>Load <code>gss98</code> dataset and library <code>descr</code></h4>
+<pre class="r"><code># your work</code></pre>
+<p>Variable <code>NATEDUC</code> measures American’s attitudes towards public spending on education using the following survey question: <em>Are we spending too much, too little, or about the right amount on improving the nation’s education system?</em></p>
+</div>
+<div id="construct-a-contingency-table-for-nateduc-as-the-response-variable-and-ideology-as-the-explanatory-variable-use-one-of-the-two-methods-presented-in-the-course-materials" class="section level4">
+<h4>Construct a contingency table for <code>NATEDUC</code> as the response variable and <code>IDEOLOGY</code> as the explanatory variable (use one of the two methods presented in the course materials):</h4>
+<pre class="r"><code># your work</code></pre>
+</div>
+<div id="describe-the-relationship-between-nateduc-and-ideology-in-the-sample" class="section level4">
+<h4>Describe the relationship between <code>NATEDUC</code> and <code>IDEOLOGY</code> in the sample?</h4>
+<pre><code>... Your written answer ...</code></pre>
+</div>
+<div id="do-the-attitudes-towards-public-spending-on-education-change-across-different-ideologies-in-the-u.s.-population" class="section level4">
+<h4>Do the attitudes towards public spending on education change across different ideologies in the U.S. population?</h4>
+<pre><code>... Your written answer ...</code></pre>
+<p><br></p>
+<hr />
+<p><br></p>
+<p>Knit and publish your work on RPubs.</p>
+</div>
 </div>
 
+<p style = "text-align: right;"> Yuriy Davydenko &copy; 2020 </p>
 
 
 
