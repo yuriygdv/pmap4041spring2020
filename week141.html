@@ -11,9 +11,8 @@
 
 <meta name="author" content="Yuriy Davydenko" />
 
-<meta name="date" content="2019-12-31" />
 
-<title>Computer Assignment 4: Scatterplots &amp; Correlation</title>
+<title>Inference for Linear Regression (Examples)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -462,24 +461,13 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Computer Assignment 4: Scatterplots &amp; Correlation</h1>
+<h1 class="title toc-ignore">Inference for Linear Regression (Examples)</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">December 31, 2019</h4>
+<h4 class="date">April 21 2020</h4>
 
 </div>
 
 
-<pre><code>## BEFORE STARTING, TYPE YOUR NAME INTO THE FIELD &quot;author&quot; ABOVE AND REMOVE THIS COMMENT ##</code></pre>
-<p><br></p>
-<p>For those who prefer to work with RCloud, a project with the class materials can be accessed using the following link:</p>
-<ul>
-<li><a href="https://rstudio.cloud/project/962203">RCloud Project for Week 6/Computer Assignment 4</a></li>
-</ul>
-<p><br></p>
-<p>You can download this whole script as <code>ComputerAssignment_04.Rmd</code> file to save on your computer and open in RStudio instead of copying &amp; pasting from this webpage:</p>
-<ul>
-<li><a href="docs/ComputerAssignment_04.zip">Complete Assignment #4: Download link - Rmd file - (Click “Save As”)</a> (the file is ‘zipped’ and you need to unzip it)</li>
-</ul>
 <p><br></p>
 <p>Datasets for this assignment:</p>
 <p>A random sample of 1,000 federal personnel records for March 1994:</p>
@@ -487,81 +475,163 @@ $(document).ready(function () {
 <li><a href="docs/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
 <p><br> <br></p>
-<div id="load-libraries-set-your-working-directory-load-data" class="section level3">
-<h3>1. Load Libraries, Set Your Working Directory, &amp; Load Data</h3>
-<p>Load Libraries:</p>
+<div id="example-1-car-fuel-efficiency" class="section level2">
+<h2>Example 1: Car Fuel Efficiency</h2>
+<div id="load-libraries-and-data" class="section level3">
+<h3>Load Libraries and Data</h3>
 <pre class="r"><code>library(dplyr)
-library(ggplot2)
-library(GGally)</code></pre>
-<pre><code>## Warning: package &#39;GGally&#39; was built under R version 3.6.3</code></pre>
-<pre class="r"><code>library(knitr)
-library(pander)</code></pre>
-<p>Set your working directory, where the folder “Datasets” is located:</p>
-<pre class="r"><code>setwd(&quot;.&quot;)             # for example: setwd(&quot;C:/Users/George/Dropbox/GSU/4041_Spring2020/R&quot;)</code></pre>
-<p>Load the <strong>OPM94</strong> data set from the file <strong>“Datasets/OPM94.RData”</strong> into R using <code>load(file = "Datasets/OPM94.RData")</code> command. Before you run the command, make sure you have set the working directory correctly (folder “Datasets” should be in your working directory).</p>
-<pre class="r"><code>load(file = &quot;Datasets/OPM94.RData&quot;)</code></pre>
-<p>Check the variable names:</p>
-<pre class="r"><code>names(opm94)</code></pre>
+library(MASS); data(Cars93)   # MASS::Cars93
+Cars93 &lt;- Cars93 %&gt;% filter(Cylinders != &quot;rotary&quot;)   # remove all cars with rotary engines from the dataset</code></pre>
+<p><br></p>
+</div>
+<div id="are-american-or-foreign-cars-more-fuel-efficient" class="section level3">
+<h3>Are American or foreign cars more fuel efficient?</h3>
+<p>Let’s regress <code>MPG.city</code> on <code>Origin</code> to answer this question:</p>
+<pre class="r"><code>lm(MPG.city ~ Origin, data = Cars93) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = MPG.city ~ Origin, data = Cars93)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.0227 -3.9583 -0.9905  2.0417 21.9773 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    20.9583     0.7848    26.7  &lt; 2e-16 ***
+## Originnon-USA   3.0644     1.1349     2.7  0.00828 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.437 on 90 degrees of freedom
+## Multiple R-squared:  0.07494,    Adjusted R-squared:  0.06467 
+## F-statistic: 7.291 on 1 and 90 DF,  p-value: 0.008277</code></pre>
+<p>The regression output shows that in this sample, the average <code>MPG.city</code> of American cars is 20.96, and the average <code>MPG.city</code> of foreign cars is higher by 2.91.</p>
+<p><strong>Conclusion</strong>: The regression coefficient on <code>Originnon-USA</code> is statistically significant on five-percent level (p = 0.0118 &lt; 0.05), so in the papoulation of alll cars represented by this random sample, foreign cars appear to be more fuel efficient (higher MPG) than American cars.</p>
+</div>
+</div>
+<div id="what-is-the-estimated-difference-in-fuel-efficicncy-between-american-and-foreign-cars" class="section level1">
+<h1>What is the estimated difference in fuel efficicncy between American and foreign cars?</h1>
+<p>Let’s print out confidence intervals for the regression coeffcients from the same regression model:</p>
+<pre class="r"><code>lm(MPG.city ~ Origin, data = Cars93) %&gt;% confint()</code></pre>
+<pre><code>##                   2.5 %    97.5 %
+## (Intercept)   19.399145 22.517522
+## Originnon-USA  0.809811  5.318977</code></pre>
+<p><strong>Conclusion</strong>: The confidence interval on <code>Originnon-USA</code> (0.6594368, 5.15723) tells us that we can be 95 percent confident that in the population of all cars that this sample represents, foreign cars get on average 0.66 to 5.16 miles per galon more than American cars.</p>
+</div>
+<div id="are-foreign-cars-more-fuel-efficient-than-comparable-american-cars" class="section level1">
+<h1>Are foreign cars more fuel efficient than comparable American cars?</h1>
+<p>To answer this question, let’s regress <code>MPG.city</code> on <code>Origin</code> and other car characteristics that might influence car MPG, so that we could control for them:</p>
+<pre class="r"><code>lm(MPG.city ~ Origin + Weight + EngineSize + Cylinders + Horsepower, data = Cars93) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = MPG.city ~ Origin + Weight + EngineSize + Cylinders + 
+##     Horsepower, data = Cars93)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.5673 -1.2119  0.1145  1.1237 14.3819 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   50.939306   2.293678  22.209  &lt; 2e-16 ***
+## Originnon-USA  0.727679   0.666239   1.092 0.277897    
+## Weight        -0.005982   0.001115  -5.364 7.22e-07 ***
+## EngineSize    -0.359592   0.803737  -0.447 0.655752    
+## Cylinders4    -8.619592   1.748906  -4.929 4.18e-06 ***
+## Cylinders5    -9.605933   2.809328  -3.419 0.000976 ***
+## Cylinders6    -8.830470   2.276246  -3.879 0.000209 ***
+## Cylinders8    -7.440803   2.983543  -2.494 0.014618 *  
+## Horsepower    -0.008169   0.010172  -0.803 0.424227    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.624 on 83 degrees of freedom
+## Multiple R-squared:  0.8013, Adjusted R-squared:  0.7822 
+## F-statistic: 41.85 on 8 and 83 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><strong>Conclusion</strong>: As the regression output shows, in this sample, when comparing cars of the same weight, engine size, number of cylinders, and horsepower, the difference in the expected <code>MPG.city</code> between American and foreign cars has shrunk to 0.7 MPG. In other words, in this sample, foreign cars are expected to get 0.7 miles per galon more than comparable American cars.</p>
+<p>However, the difference (coefficient on <code>Originnon-USA</code>) is no longer statistically significant (p=0.277897 &gt; 0.05), so there is no evidence suggesting that fuel efficiency is related to origin in the population of cars.</p>
+<p><br> <br></p>
+<div id="example-2-workplace-equity-in-federal-service." class="section level2">
+<h2>Example 2: Workplace Equity in Federal Service.</h2>
+<p>Using a random sample of 1,000 federal personnel records for March 1994, let’s explore if the grade levels assigned to minority employees’ differs from the grade levels assigned to nonminority employees.</p>
+<div id="load-dataset" class="section level3">
+<h3>Load Dataset</h3>
+<pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;); names(opm94)</code></pre>
 <pre><code>##  [1] &quot;x&quot;        &quot;sal&quot;      &quot;grade&quot;    &quot;patco&quot;    &quot;major&quot;    &quot;age&quot;     
 ##  [7] &quot;male&quot;     &quot;vet&quot;      &quot;handvet&quot;  &quot;hand&quot;     &quot;yos&quot;      &quot;edyrs&quot;   
 ## [13] &quot;promo&quot;    &quot;exit&quot;     &quot;supmgr&quot;   &quot;race&quot;     &quot;minority&quot; &quot;grade4&quot;  
 ## [19] &quot;promo01&quot;  &quot;supmgr01&quot; &quot;male01&quot;   &quot;exit01&quot;   &quot;vet01&quot;</code></pre>
+<p>First, let’s regress <code>grade</code> on <code>minority</code> to explore if there is a relationship between an employee’s minority status and the grade level assigned to their position.</p>
+<pre class="r"><code>lm(grade ~ minority, data = opm94) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = grade ~ minority, data = opm94)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.0824 -3.0824  0.9176  2.9176  7.6838 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.0824     0.1215   82.97  &lt; 2e-16 ***
+## minority     -1.7662     0.2330   -7.58 7.88e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.279 on 998 degrees of freedom
+## Multiple R-squared:  0.05444,    Adjusted R-squared:  0.05349 
+## F-statistic: 57.46 on 1 and 998 DF,  p-value: 7.881e-14</code></pre>
+<pre class="r"><code>lm(grade ~ minority, data = opm94) %&gt;% confint()</code></pre>
+<pre><code>##                 2.5 %    97.5 %
+## (Intercept)  9.843943 10.320892
+## minority    -2.223494 -1.308988</code></pre>
+<p>As the regression output shows, in this sample, the mean grade level of minority employees is lower from the mean grade level of those who do not identify as minorities by 1.7. The coefficient on <code>minority</code> is statistically significant ( p = 7.88*10^(-14) ), so the mean grade of minority employees is lower than the mean grade of nonminority employees in the entire population of federal employees that this sample represents. According to the confidence interval, we are 95% confident that the mean grade of minority employees is 2.22 to -1.31 less than the mean grade of nonminority employees in the population.</p>
+<p>Now, let’s determine if minority status makes any difference for grade among employees that are comparable on other characteristics, including qualifications:</p>
+<pre class="r"><code>lm(grade ~ minority + yos + edyrs + male + patco + vet + age, dat = opm94) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = grade ~ minority + yos + edyrs + male + patco + 
+##     vet + age, data = opm94)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.9791 -0.9732  0.0513  0.9574  6.1572 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        6.403227   0.512530  12.493  &lt; 2e-16 ***
+## minority          -0.464511   0.119519  -3.887 0.000108 ***
+## yos                0.062016   0.007718   8.035 2.65e-15 ***
+## edyrs              0.275472   0.031629   8.709  &lt; 2e-16 ***
+## malemale           0.675422   0.124522   5.424 7.32e-08 ***
+## patcoClerical     -5.666986   0.183039 -30.960  &lt; 2e-16 ***
+## patcoOther        -4.449826   0.317622 -14.010  &lt; 2e-16 ***
+## patcoProfessional -0.072975   0.152330  -0.479 0.632002    
+## patcoTechnical    -3.635071   0.150396 -24.170  &lt; 2e-16 ***
+## vetyes            -0.158621   0.141580  -1.120 0.262832    
+## age                0.000228   0.006723   0.034 0.972955    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.63 on 989 degrees of freedom
+## Multiple R-squared:  0.7684, Adjusted R-squared:  0.766 
+## F-statistic: 328.1 on 10 and 989 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>lm(grade ~ minority + yos + edyrs + male + patco + vet + age, dat = opm94) %&gt;% confint()</code></pre>
+<pre><code>##                         2.5 %      97.5 %
+## (Intercept)        5.39745648  7.40899712
+## minority          -0.69905027 -0.22997165
+## yos                0.04687012  0.07716127
+## edyrs              0.21340425  0.33754049
+## malemale           0.43106377  0.91978068
+## patcoClerical     -6.02617626 -5.30779628
+## patcoOther        -5.07311646 -3.82653471
+## patcoProfessional -0.37190170  0.22595142
+## patcoTechnical    -3.93020205 -3.33993919
+## vetyes            -0.43645347  0.11921128
+## age               -0.01296493  0.01342089</code></pre>
+<p>We can see that the difference in expected grades between the two groups has shrunk, but it still remains, and it is statistically significant. In other words, in the population, the expected grade of minority employees was still lower than that of nonminority employees with the same experience, education, occupational category, age, veteran status, and gender. More specifically, the expected grade of minorities is lower by 2.22 to -1.31 than the expected grade of comparable nonminorities.</p>
 </div>
-<div id="lets-work-with-african-american-males-only-to-keep-the-graphs-easy-to-work-with" class="section level3">
-<h3>2. Let’s work with African-American males only to keep the graphs easy to work with:</h3>
-<pre class="r"><code>summary(opm94$race)  # see the levels of variable race</code></pre>
-<pre><code>## American Indian           Asian           Black        Hispanic           White 
-##              17              31             175              49             728</code></pre>
-<pre class="r"><code>summary(opm94$male)  # see the levels of variable male</code></pre>
-<pre><code>## female   male 
-##    488    512</code></pre>
-<pre class="r"><code>opm94AAM &lt;- opm94 %&gt;% dplyr::filter(race == &quot;Black&quot;, male == &quot;male&quot;)   # create a subset of data wher race == &quot;Black&quot;, male == &quot;male&quot;</code></pre>
-<p><br></p>
-</div>
-<div id="scatterplots" class="section level3">
-<h3>3. Scatterplots</h3>
-<p>Create scatterplots with salary (sal) as the dependent variable and four independent variables: <code>grade, yos, edyrs</code> and <code>age</code></p>
-<pre class="r"><code>ggplot(data=opm94AAM) + geom_point(mapping = aes(x=grade, y = sal))</code></pre>
-<p><img src="ca04_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code># your work</code></pre>
-<pre class="r"><code># your work</code></pre>
-<pre class="r"><code># your work</code></pre>
-<p><br></p>
-</div>
-<div id="correlation-matrix" class="section level3">
-<h3>4. Correlation Matrix</h3>
-<p>Now create a correlation matrix with the same five variables, plus two more: <code>supmgr01, promo01</code></p>
-<pre class="r"><code># cor(opm94AAM[, c(&quot;sal&quot;, &quot;grade&quot;, &quot;yos&quot;, &quot;edyrs&quot;, &quot;age&quot;, &quot;supmgr01&quot;, &quot;promo01&quot;)], use = &quot;pairwise.complete.obs&quot; ) %&gt;% round(digits = 2)
-
-opm94AAM %&gt;% select(sal, grade, yos, edyrs, age, supmgr01, promo01) %&gt;% cor(use = &quot;pairwise.complete.obs&quot;) %&gt;% round(digits = 2)</code></pre>
-<pre><code>##           sal grade   yos edyrs   age supmgr01 promo01
-## sal      1.00  0.92  0.31  0.52  0.31     0.43    0.10
-## grade    0.92  1.00  0.22  0.47  0.19     0.39    0.07
-## yos      0.31  0.22  1.00  0.10  0.61     0.30   -0.06
-## edyrs    0.52  0.47  0.10  1.00  0.22     0.14    0.07
-## age      0.31  0.19  0.61  0.22  1.00     0.27   -0.18
-## supmgr01 0.43  0.39  0.30  0.14  0.27     1.00   -0.02
-## promo01  0.10  0.07 -0.06  0.07 -0.18    -0.02    1.00</code></pre>
-<p><br></p>
-</div>
-<div id="homework-questions" class="section level2">
-<h2>HOMEWORK QUESTIONS</h2>
-<p><strong>1.</strong> Write a couple of sentences about each graph. Talk about the strength and direction of each relationship. Does there seem to be any evidence of curvilinearity?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>2.</strong> Rank-order the strength of the correlations between sal and each of the other variables. Do these seem in line with what you would have guessed based on the scatterplots? Explain briefly.</p>
-<pre><code>Your work...</code></pre>
-<p><strong>3.</strong> Talk about the direction of each of the correlations between sal and the other variables. Who tends to earn higher salaries, those with more or less education, higher or lower grades, etc.?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>4.</strong> How do supervisors (supmgr=1) differ from other people (supmgr=0), based on the correlation coefficients? Do supervisors tend to have higher or lower salaries, higher or lower grades, etc.? Which variables is supervisory status most strongly related to?</p>
-<pre><code>Your work...</code></pre>
-<p><strong>5.</strong> How do people who were promoted between 1994 and 1995 (promo=1) differ from those who were not?</p>
-<pre><code>Your work...</code></pre>
-<p></br></p>
-<hr />
-<p></br></p>
-<div id="submission" class="section level3">
-<h3>5. Submission</h3>
-<p>Save your RMarkdown file, Knit an html report, and publish to <strong>RPubs</strong> or save as a <strong>pdf</strong> file. Submit the link to the html or your pdf in the dropbox on iCollege.</p>
 </div>
 </div>
 
