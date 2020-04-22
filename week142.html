@@ -12,7 +12,7 @@
 <meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Problem Set 10: Inference</title>
+<title>Inference for Categorical Data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -461,7 +461,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Problem Set 10: Inference</h1>
+<h1 class="title toc-ignore">Inference for Categorical Data</h1>
 <h4 class="author">Yuriy Davydenko</h4>
 <h4 class="date">April 22 2020</h4>
 
@@ -469,11 +469,7 @@ $(document).ready(function () {
 
 
 <p><br></p>
-<p>Datasets for this assignment:</p>
-<p>A random sample of 1,000 federal personnel records for March 1994:</p>
-<ul>
-<li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
-</ul>
+<p>Dataset for this example:</p>
 <p>General Social Survey 1998:</p>
 <ul>
 <li><a href="Datasets/gss98.RData">Dataset ‘gss98’ (click “Save As”)</a></li>
@@ -484,121 +480,121 @@ $(document).ready(function () {
 <li><a href="https://rstudio.cloud/project/1177295">RCloud Project for Week 14/Problem Set 10</a></li>
 </ul>
 <p><br> <br></p>
-<div id="load-libraries" class="section level4">
-<h4>Load Libraries</h4>
-<pre class="r"><code>library(dplyr)</code></pre>
-<p><br> <br></p>
-</div>
-<div id="inference-for-numeric-data" class="section level1">
-<h1>INFERENCE FOR NUMERIC DATA</h1>
-<p>Load <code>OPM94.RData</code></p>
-<pre class="r"><code># your work</code></pre>
-<p><br></p>
-<div id="confidence-interval-for-a-population-mean-calculated-manually" class="section level2">
-<h2>1. Confidence Interval for a Population Mean Calculated Manually</h2>
-<p>Examples for this section are provided on the following page: <a href="https://yuriygdv.github.io/pmap4041spring2020/week13.html" class="uri">https://yuriygdv.github.io/pmap4041spring2020/week13.html</a></p>
-<div id="what-is-the-mean-salary-in-the-sample-of-federal-employees" class="section level4">
-<h4>What is the mean salary in the sample of federal employees?</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="what-is-the-standard-deviation-of-salary-in-the-sample" class="section level4">
-<h4>What is the standard deviation of salary in the sample?</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="what-is-the-variability-of-the-sample-mean-salary" class="section level4">
-<h4>What is the variability of the sample mean salary</h4>
-<p>Variability of the sample mean salary is the same as: Standard deviation of the sample mean / Standard deviation of the of the sampling distribution for the sample mean / Standard error. All of these are interchangeable terms.</p>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="find-the-critical-value-t-of-the-t-statistic-for-95-confidence-level" class="section level4">
-<h4>Find the critical value t* of the t-statistic for 95% confidence level:</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="calculate-the-95-confidence-interval-for-the-mean-salary-in-the-population-of-federal-employees" class="section level4">
-<h4>Calculate the 95% confidence interval for the mean salary in the population of federal employees:</h4>
-<pre class="r"><code># your work
-              # lower bound
-              # upper bound</code></pre>
-</div>
-<div id="what-is-your-conclusion" class="section level4">
-<h4>What is your conclusion?</h4>
-<pre><code>... Your written answer ...</code></pre>
-<p><br></p>
-</div>
-</div>
-<div id="confidence-interval-for-a-population-mean-calculated-in-r" class="section level2">
-<h2>2. Confidence Interval for a Population Mean Calculated in R</h2>
-<div id="run-a-t-test-and-obtain-the-same-confidence-interval-using-t.test-function" class="section level4">
-<h4>Run a t-test and obtain the same confidence interval using t.test() function:</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="does-the-result-match-with-the-one-you-obtained-manually" class="section level4">
-<h4>Does the result match with the one you obtained manually?</h4>
-<pre><code>... your written answer ...</code></pre>
-<p><br></p>
-</div>
-</div>
-<div id="difference-in-means" class="section level2">
-<h2>3. Difference in means</h2>
-<div id="does-the-mean-salary-of-men-differ-from-the-mean-salary-of-women-in-the-population-of-federal-employees-if-so-by-how-much-run-a-t-test-and-explain-the-results." class="section level4">
-<h4>Does the mean salary of men differ from the mean salary of women in the population of federal employees? If so, by how much? Run a t-test and explain the results.</h4>
-<pre class="r"><code># your work</code></pre>
-<p><br></p>
-</div>
-</div>
-<div id="inference-for-regression" class="section level2">
-<h2>4. Inference for Regression</h2>
-<div id="regress-salary-on-minority-and-print-out-the-regression-output-summary" class="section level4">
-<h4>Regress salary on minority and print out the regression output (summary):</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="interpret-the-regression-coefficient-on-minority.-what-does-this-regression-tell-us-about-the-relationship-between-salary-and-minority-status-in-the-population-of-federal-employees-in-1994" class="section level4">
-<h4>Interpret the regression coefficient on minority. What does this regression tell us about the relationship between salary and minority status in the population of federal employees in 1994?</h4>
-<pre><code>... your written answer ...</code></pre>
-</div>
-<div id="print-confidence-intervals-for-the-regression-above" class="section level4">
-<h4>Print confidence intervals for the regression above:</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="interpret-the-confidence-interval-for-minority" class="section level4">
-<h4>Interpret the confidence interval for minority:</h4>
-<pre><code>... Your written answer ...</code></pre>
-</div>
-<div id="regress-salary-sal-on-yos-edyrs-male-patco-vet-age-.-print-out-regression-summary-and-confidence-intervals." class="section level4">
-<h4>Regress salary <code>sal</code> on <code>yos</code> + <code>edyrs</code> + <code>male</code> + <code>patco</code> + <code>vet</code> + <code>age</code> . Print out regression summary and confidence intervals.</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="what-can-you-conclude-about-the-relationship-between-salary-and-minority-status-in-the-population-how-is-the-result-different-from-the-previous-one-and-why" class="section level4">
-<h4>What can you conclude about the relationship between salary and minority status in the population? How is the result different from the previous one and why?</h4>
-<pre><code>...Your written answer ...</code></pre>
-<p><br></p>
-<hr />
-<p><br></p>
-</div>
-</div>
-</div>
 <div id="inference-for-categorical-data" class="section level1">
 <h1>INFERENCE FOR CATEGORICAL DATA</h1>
 <div id="load-gss98-dataset-and-library-descr" class="section level4">
 <h4>Load <code>gss98</code> dataset and library <code>descr</code></h4>
-<pre class="r"><code># your work</code></pre>
-<p>Variable <code>NATEDUC</code> measures American’s attitudes towards public spending on education using the following survey question: <em>Are we spending too much, too little, or about the right amount on improving the nation’s education system?</em></p>
-</div>
-<div id="construct-a-contingency-table-for-nateduc-as-the-response-variable-and-ideology-as-the-explanatory-variable-use-one-of-the-two-methods-presented-in-the-course-materials" class="section level4">
-<h4>Construct a contingency table for <code>NATEDUC</code> as the response variable and <code>IDEOLOGY</code> as the explanatory variable (use one of the two methods presented in the course materials):</h4>
-<pre class="r"><code># your work</code></pre>
-</div>
-<div id="describe-the-relationship-between-nateduc-and-ideology-in-the-sample" class="section level4">
-<h4>Describe the relationship between <code>NATEDUC</code> and <code>IDEOLOGY</code> in the sample?</h4>
-<pre><code>... Your written answer ...</code></pre>
-</div>
-<div id="do-the-attitudes-towards-public-spending-on-education-change-across-different-ideologies-in-the-u.s.-population" class="section level4">
-<h4>Do the attitudes towards public spending on education change across different ideologies in the U.S. population?</h4>
-<pre><code>... Your written answer ...</code></pre>
+<pre class="r"><code>library(dplyr)  # library with handy functions to manipulate data
+library(descr)  # library with functions that construct user-friendly contingency tables
+load(&quot;Datasets/gss98.RData&quot;); names(gss98)</code></pre>
+<pre><code>##  [1] &quot;X.1&quot;      &quot;X&quot;        &quot;SEX&quot;      &quot;RACE&quot;     &quot;RELIG&quot;    &quot;FUND&quot;    
+##  [7] &quot;MARITAL&quot;  &quot;ATTEND&quot;   &quot;PREMARSX&quot; &quot;XMARSEX&quot;  &quot;HOMOSEX&quot;  &quot;TEENSEX&quot; 
+## [13] &quot;ABANY&quot;    &quot;CAPPUN&quot;   &quot;GUNLAW&quot;   &quot;GRASS&quot;    &quot;PRAYER&quot;   &quot;NATCITY&quot; 
+## [19] &quot;NATHEAL&quot;  &quot;NATCRIME&quot; &quot;NATDRUG&quot;  &quot;NATEDUC&quot;  &quot;NATRACE&quot;  &quot;NATFARE&quot; 
+## [25] &quot;NATROAD&quot;  &quot;NATMASS&quot;  &quot;CONCLERG&quot; &quot;CONEDUC&quot;  &quot;CONFED&quot;   &quot;CONPRESS&quot;
+## [31] &quot;CONJUDGE&quot; &quot;CONLEGIS&quot; &quot;FECHLD&quot;   &quot;FEHELP&quot;   &quot;FEPRESCH&quot; &quot;FEFAM&quot;   
+## [37] &quot;RACDIF1&quot;  &quot;LIVEBLKS&quot; &quot;MARBLK&quot;   &quot;DISCAFF&quot;  &quot;PARTY&quot;    &quot;IDEOLOGY&quot;
+## [43] &quot;AGESUM&quot;   &quot;INCOME&quot;   &quot;EDUC2&quot;    &quot;REGION2&quot;  &quot;CITY&quot;     &quot;RURAL&quot;   
+## [49] &quot;PROT&quot;     &quot;NEWFUND&quot;</code></pre>
+<p>Variable <code>NATHEAL</code> measures American’s attitudes towards public spending on healthcare using the following survey question: <em>Are we spending too much, too little, or about the right amount on improving and protecting the nation’s health?</em></p>
+<p>American’s attitudes towards public spending on healthcare can be related to various individual characteristics. Let’s explore if these attitudes are associated with gender and political ideology.</p>
+<p>The following function constructs a contingency table for <code>NATHEAL</code> as the response variable and <code>SEX</code> as the explanatory variable:</p>
+<pre class="r"><code>CrossTable(gss98$NATHEAL, gss98$SEX, prop.r = F, prop.c = T, prop.t = F, prop.chisq = F, chisq = TRUE, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |          Column Percent | 
+## |-------------------------|
+## 
+## =======================================
+##                  gss98$SEX
+## gss98$NATHEAL    female    male   Total
+## ---------------------------------------
+## Too little         208     133     341 
+##                   73.2%   67.9%        
+## ---------------------------------------
+## About right         61      54     115 
+##                   21.5%   27.6%        
+## ---------------------------------------
+## Too much            15       9      24 
+##                    5.3%    4.6%        
+## ---------------------------------------
+## Total              284     196     480 
+##                   59.2%   40.8%        
+## =======================================
+## 
+## Statistics for All Table Factors
+## 
+## Pearson&#39;s Chi-squared test 
+## ------------------------------------------------------------
+## Chi^2 = 2.367944      d.f. = 2      p = 0.306 
+## 
+##         Minimum expected frequency: 9.8</code></pre>
+<p>Alternative way generate the same crosstab (without using package <code>descr</code>):</p>
+<pre class="r"><code>prop.table(table(gss98$NATHEAL, gss98$SEX), 2) %&gt;% round(digits = 2)</code></pre>
+<pre><code>##              
+##               female male
+##   Too little    0.73 0.68
+##   About right   0.21 0.28
+##   Too much      0.05 0.05</code></pre>
+<pre class="r"><code>chisq.test(table(gss98$NATHEAL, gss98$SEX))</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  table(gss98$NATHEAL, gss98$SEX)
+## X-squared = 2.3679, df = 2, p-value = 0.3061</code></pre>
+<p><strong>INTERPRETATION:</strong></p>
+<p>In the sample, 73.2 percent of women and 67.9 percent of men said that we are spending too little on improving and protecting the nation’s health. Women are 5.1 percent more likely to believe that we are spending too little on healthcare. However, the high p-value of the chi-squared statistics (p = 0.306 &gt; 0.05) suggests that this sample is highly likely from a population with no relationship between the attitudes towards spending on public health and gender. In other words, there we cannot reject the null hypothesis that there is no relationship between the two variables, so we must tentatively accept it. Overall, our test does not provide evidence supporting that in the U.S. population, women have different views from men.</p>
 <p><br></p>
-<hr />
-<p><br></p>
-<p>Knit and publish your work on RPubs.</p>
+<p>Let’s see if people that have different political ideologies also have different views on public health spending:</p>
+<pre class="r"><code>CrossTable(gss98$NATHEAL, gss98$IDEOLOGY, prop.r = F, prop.c = T, prop.t = F, prop.chisq = F, chisq = TRUE, format = &quot;SPSS&quot;)</code></pre>
+<pre><code>##    Cell Contents 
+## |-------------------------|
+## |                   Count | 
+## |          Column Percent | 
+## |-------------------------|
+## 
+## ==========================================================
+##                  gss98$IDEOLOGY
+## gss98$NATHEAL    liberal   moderate   conservative   Total
+## ----------------------------------------------------------
+## Too little          104        121            101     326 
+##                    73.2%      76.6%          64.3%        
+## ----------------------------------------------------------
+## About right          32         34             43     109 
+##                    22.5%      21.5%          27.4%        
+## ----------------------------------------------------------
+## Too much              6          3             13      22 
+##                     4.2%       1.9%           8.3%        
+## ----------------------------------------------------------
+## Total               142        158            157     457 
+##                    31.1%      34.6%          34.4%        
+## ==========================================================
+## 
+## Statistics for All Table Factors
+## 
+## Pearson&#39;s Chi-squared test 
+## ------------------------------------------------------------
+## Chi^2 = 9.858755      d.f. = 4      p = 0.0429 
+## 
+##         Minimum expected frequency: 6.835886</code></pre>
+<p>Alternative code (without using package <code>descr</code>):</p>
+<pre class="r"><code>prop.table(table(gss98$NATHEAL, gss98$IDEOLOGY), 2) %&gt;% round(digits = 2)</code></pre>
+<pre><code>##              
+##               liberal moderate conservative
+##   Too little     0.73     0.77         0.64
+##   About right    0.23     0.22         0.27
+##   Too much       0.04     0.02         0.08</code></pre>
+<pre class="r"><code>chisq.test(table(gss98$NATHEAL, gss98$IDEOLOGY))</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  table(gss98$NATHEAL, gss98$IDEOLOGY)
+## X-squared = 9.8588, df = 4, p-value = 0.04288</code></pre>
+<p><strong>INTERPRETATION:</strong></p>
+<p>The crosstab shows that in the sample, 73.2 percent of liberals, 76.6 percent of moderates, and only 64.3 percent of conservatives answered that we are spending too little on improving and protecting the nation’s health. In the sample, liberals and moderates are correspondingly 8.9 and 12.3 percentage points more likely than conservatives to believe that we are spending too little on healthcare.</p>
+<p><em>Is there evidence that public attitudes towards spending on healthcare differ across groups with different political ideologies in the population of U.S. residents?</em></p>
+<p>The chi-square statistic has a p-value of 0.04, which is less than the commonly accepted critical level of 0.05. This suggests that if there were no relationship between the two variables in the population, the probability of obtaining the chi-square of 9.86 would be 0.04 - a very unlikely outcome. Thus, the test provides evidence that allows us to reject the null hypothesis of no relationship, and we can conclude that the attitudes towards spending on public healthcare and political ideology are related in the population of U.S. residents.</p>
 </div>
 </div>
 
