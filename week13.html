@@ -12,7 +12,7 @@
 <meta name="author" content="Yuriy Davydenko" />
 
 
-<title>Inference for Numerical Data</title>
+<title>Inference for a Population Mean</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -406,7 +406,7 @@ $(document).ready(function () {
       <a href="week12.html">Week 12 - Normal Distributions</a>
     </li>
     <li>
-      <a href="week13.html">Week 13 - Inference for Numerical Data</a>
+      <a href="week13.html">Week 13 - Inference for a Population Mean</a>
     </li>
     <li>
       <a href="week141.html">Week 14.1 - Inference for Linear Regression</a>
@@ -508,9 +508,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Inference for Numerical Data</h1>
+<h1 class="title toc-ignore">Inference for a Population Mean</h1>
 <h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">April 26 2020</h4>
+<h4 class="date">April 28 2020</h4>
 
 </div>
 
@@ -531,34 +531,46 @@ $(document).ready(function () {
 <li><a href="Datasets/OPM94.RData">Download Dataset ‘OPM94’ (click “Save As”)</a></li>
 </ul>
 <p><br> <br></p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)</code></pre>
 <div id="load-dataset" class="section level3">
 <h3>Load Dataset</h3>
 <pre class="r"><code>load(&quot;Datasets/OPM94.RData&quot;)</code></pre>
+<p><br></p>
 </div>
 <div id="confidence-interval-for-a-population-mean-calculated-manually-mean-edyrs" class="section level3">
 <h3>Confidence Interval for a Population Mean Calculated Manually (mean edyrs)</h3>
-<p>Sample mean:</p>
+<p>Sample <strong><em>mean</em></strong>:</p>
 <pre class="r"><code>x_bar &lt;- mean(opm94$edyrs, na.rm = TRUE)
 x_bar</code></pre>
 <pre><code>## [1] 14.366</code></pre>
-<p>Sample standard deviation:</p>
+<p>Sample <strong><em>standard deviation</em></strong>:</p>
 <pre class="r"><code>sd_x &lt;- sd(opm94$edyrs, na.rm = TRUE)
 sd_x</code></pre>
 <pre><code>## [1] 2.263441</code></pre>
-<p>Standard error (standard deviation of the sample mean/of the sampling distribution for the sample mean):</p>
+<p><strong><em>Standard error</em></strong> (standard deviation of the sample mean/of the sampling distribution for the sample mean):</p>
 <pre class="r"><code>se &lt;- sd_x/sqrt(1000)
 se</code></pre>
 <pre><code>## [1] 0.0715763</code></pre>
-<p>The critical value of the t-statistic for 95% confidence level:</p>
-<pre class="r"><code>t &lt;- qt(0.975, 999, lower.tail = TRUE)     
+<p>The critical value of the t-statistic for 95% confidence level: <img src="week13_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The shaded area represent 95% of the total area under the t-distribution. Each of the tail areas are 2.5% of the total area. To find the critical value of t* for that interval, we need to find a t value corresponding either 0.975 (97.5%) of the distribution in the lower tail or 0.025 (2.5%) of the distribution in the upper tail.</p>
+<p>Calculation of the critical value t* using <code>qt()</code> function:</p>
+<pre class="r"><code>t &lt;- qt(0.975, 999, lower.tail = TRUE)    # 97.5% of the distribution in the lower tail 
 t</code></pre>
 <pre><code>## [1] 1.962341</code></pre>
+<pre class="r"><code>t &lt;- qt(0.025, 999, lower.tail = FALSE)   # 2.5% of the distribution in the upper tail  
+t</code></pre>
+<pre><code>## [1] 1.962341</code></pre>
+<p>You can also find the critical value of t* using the visual applet at <a href="https://yuriygdv.github.io/pmap4041spring2020/app-t-distr.html" class="uri">https://yuriygdv.github.io/pmap4041spring2020/app-t-distr.html</a></p>
 <p>95% confidence interval for the mean years of education <code>edyrs</code> in the population of federal employees:</p>
 <pre class="r"><code>x_bar - t*se      # lower bound</code></pre>
 <pre><code>## [1] 14.22554</code></pre>
 <pre class="r"><code>x_bar + t*se      # upper bound</code></pre>
 <pre><code>## [1] 14.50646</code></pre>
-<p><strong>Conclusion:</strong> We are 95% confident that in the population of federal employees in 1994, the mean value of years of education was between 14.2255429 and 14.5064571</p>
+<p><br></p>
+<p><strong>Conclusion:</strong></p>
+<pre><code>We are 95% confident that in the population of federal employees in 1994, the mean value of years of education was between 14.2255429 and 14.5064571 </code></pre>
+<p><br></p>
 </div>
 <div id="confidence-interval-using-t.test" class="section level3">
 <h3>Confidence Interval Using t.test</h3>
@@ -575,8 +587,18 @@ t</code></pre>
 ## sample estimates:
 ## mean of x 
 ##    14.366</code></pre>
+<p><strong>Conclusion:</strong></p>
+<pre><code>As we can see in the output, the 95 percent confidence interval is 14.22554 to 14.50646, which corresponds the results calculated manually.</code></pre>
 <p><br></p>
-<p>Is the mean number of years of education in the population of federal employees different from 14?</p>
+</div>
+<div id="is-the-mean-number-of-years-of-education-in-the-population-of-federal-employees-different-from-14" class="section level3">
+<h3>Is the mean number of years of education in the population of federal employees different from 14?</h3>
+<ul>
+<li><p>Our null hypothesis <strong>H0</strong>: μ = 14 (the population mean equals 14)</p></li>
+<li><p>Our alternative hypothesis <strong>H1</strong>: μ ≠ 14 (the population mean is not equal 14 )</p></li>
+<li><p>We have a large sample size (n=1000 &gt; 30), so the conditions for inference are satisfied.</p></li>
+</ul>
+<p>Let’s run a t-test specifying the value of μ described in H0:</p>
 <pre class="r"><code>t.test(opm94$edyrs, mu = 14, conf.level = 0.95  )</code></pre>
 <pre><code>## 
 ##  One Sample t-test
@@ -589,9 +611,18 @@ t</code></pre>
 ## sample estimates:
 ## mean of x 
 ##    14.366</code></pre>
-<p><strong>Conclusion:</strong> Yes, because t is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean <code>edyrs</code> in the population equals 14. Hence, we can be 95% confident that it’s different from 14 in the population of federal employees.</p>
+<p><strong>Conclusion:</strong></p>
+<pre><code>Yes, because t is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean `edyrs` in the population equals 14. Hence, we can be 95% confident that it&#39;s different from 14 in the population of federal employees. </code></pre>
 <p><br></p>
-<p>Is the mean number of years of education in the population of federal employees greater than 14?</p>
+</div>
+<div id="is-the-mean-number-of-years-of-education-in-the-population-of-federal-employees-greater-than-14" class="section level3">
+<h3>Is the mean number of years of education in the population of federal employees greater than 14?</h3>
+<ul>
+<li><p>Our null hypothesis <strong>H0</strong>: μ = 14 (the population mean equals 14)</p></li>
+<li><p>Our alternative hypothesis <strong>H1</strong>: μ &gt; 14 (the population mean is greater than 14 )</p></li>
+<li><p>We have a large sample size (n=1000 &gt; 30), so the conditions for inference are satisfied.</p></li>
+</ul>
+<p>Let’s run a t-test specifying the value of μ described in H0 and the type of alternative hypothesis:</p>
 <pre class="r"><code>t.test(opm94$edyrs, mu = 14, alternative = &quot;greater&quot;, conf.level = 0.95  )</code></pre>
 <pre><code>## 
 ##  One Sample t-test
@@ -604,9 +635,18 @@ t</code></pre>
 ## sample estimates:
 ## mean of x 
 ##    14.366</code></pre>
-<p><strong>Conclusion:</strong> Yes, because the t-statistic is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean <code>edyrs</code> in the population is less or equal to 14. Hence, we can be 95% confident that the mean <code>edyrs</code> in the population of federal employees is greater than 14.</p>
+<p><strong>Conclusion:</strong></p>
+<pre><code>Yes, because the t-statistic is greater than the critical value of 1.96 (and p-value is less than 0.05), we can reject the null hypothesis that the mean `edyrs` in the population is less or equal to 14. Hence, we can be 95% confident that the mean `edyrs` in the population of federal employees is greater than 14.</code></pre>
 <p><br></p>
-<p>Is the mean number of years of education in the population of federal employees different from 14.5?</p>
+</div>
+<div id="is-the-mean-number-of-years-of-education-in-the-population-of-federal-employees-different-from-14.5" class="section level3">
+<h3>Is the mean number of years of education in the population of federal employees different from 14.5?</h3>
+<ul>
+<li><p>Our null hypothesis <strong>H0</strong>: μ = 14 (the population mean equals 14.5)</p></li>
+<li><p>Our alternative hypothesis <strong>H1</strong>: μ ≠ 14 (the population mean is not equal 14.5)</p></li>
+<li><p>We have a large sample size (n=1000 &gt; 30), so the conditions for inference are satisfied.</p></li>
+</ul>
+<p>Let’s run a t-test specifying the value of μ described in H0:</p>
 <pre class="r"><code>t.test(opm94$edyrs, mu = 14.5, conf.level = 0.95  )</code></pre>
 <pre><code>## 
 ##  One Sample t-test
@@ -619,9 +659,18 @@ t</code></pre>
 ## sample estimates:
 ## mean of x 
 ##    14.366</code></pre>
-<p><strong>Conclusion:</strong> No, because the t-statistic is lower than the critical value of 1.96 (and p-value is greater than 0.05), we cannot reject the null hypothesis that the true mean <code>edyrs</code> in the population is different from 14.5. Hence, we tentatively accept the null hypothesis.</p>
+<p><strong>Conclusion:</strong></p>
+<pre><code>No, because the t-statistic is lower than the critical value of 1.96 (and p-value is greater than 0.05), we cannot reject the null hypothesis that the true mean `edyrs` in the population is different from 14.5. Hence, we tentatively accept the null hypothesis.</code></pre>
 <p><br></p>
-<p>Does the mean salary of veterans differ from the mean salary of those who don’t receive veteran preferences in the population of federal employees?</p>
+</div>
+<div id="does-the-mean-salary-of-veterans-differ-from-the-mean-salary-of-those-who-dont-receive-veteran-preferences-in-the-population-of-federal-employees" class="section level3">
+<h3>Does the mean salary of veterans differ from the mean salary of those who don’t receive veteran preferences in the population of federal employees?</h3>
+<ul>
+<li><p>Our null hypothesis <strong>H0</strong>: μ = 0 (the mean difference in salaries equals 0)</p></li>
+<li><p>Our alternative hypothesis <strong>H1</strong>: μ ≠ 0 (the mean difference in salaries of veterans and nonveterans is not equal 0)</p></li>
+<li><p>We have a large sample size (n=1000 &gt; 30), so the conditions for inference are satisfied.</p></li>
+</ul>
+<p>Let’s run a t-test specifying the the outcome vaiable <code>sal</code> and the factor/categorical variable to test the difference for:</p>
 <pre class="r"><code>t.test(sal ~ vet, data = opm94)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -634,7 +683,10 @@ t</code></pre>
 ## sample estimates:
 ##  mean in group no mean in group yes 
 ##          39439.66          45109.51</code></pre>
-<p><strong>Conclusion:</strong> Yes, the difference in the mean salary is statistically significantly different from zero.</p>
+<p><strong>Conclusion:</strong></p>
+<pre><code>In the t-test output, we can see that t = -4.04 (the absolute value of the t-statistic is greater than 1.96) and p-value = 6.559e-05 (= 0.00006559), which is much smaller than our conventional significance level of alpha = 0.05, which implies that if in the population of federal employees the difference in mean salaries of veterans and nonveterans was equal 0, obtaining the t-statistics of 4.04 or larger would be extremely unlikely. This provides us with evidence that the difference in salaries in the population is not equal to zero. In other words, the difference in the mean salary is statistically significantly different from zero in the population of federal employees.
+
+According to the confidence interval, we can be 95 percent confident that veterans in the federal government receive a mean salary that is $2,909 to $8,429 higher than the mean salary of nonveterans.</code></pre>
 </div>
 
 
