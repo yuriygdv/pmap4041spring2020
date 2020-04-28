@@ -555,10 +555,10 @@ se</code></pre>
 <p>The critical value of the t-statistic for 95% confidence level: <img src="week13_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>The shaded area represent 95% of the total area under the t-distribution. Each of the tail areas are 2.5% of the total area. To find the critical value of t* for that interval, we need to find a t value corresponding either 0.975 (97.5%) of the distribution in the lower tail or 0.025 (2.5%) of the distribution in the upper tail.</p>
 <p>Calculation of the critical value t* using <code>qt()</code> function:</p>
-<pre class="r"><code>t &lt;- qt(0.975, 999, lower.tail = TRUE)    # 97.5% of the distribution in the lower tail 
+<pre class="r"><code>t &lt;- qt(p = 0.975, df = 999, lower.tail = TRUE)    # 97.5% of the distribution in the lower tail 
 t</code></pre>
 <pre><code>## [1] 1.962341</code></pre>
-<pre class="r"><code>t &lt;- qt(0.025, 999, lower.tail = FALSE)   # 2.5% of the distribution in the upper tail  
+<pre class="r"><code>t &lt;- qt(p = 0.025, df = 999, lower.tail = FALSE)   # 2.5% of the distribution in the upper tail  
 t</code></pre>
 <pre><code>## [1] 1.962341</code></pre>
 <p>You can also find the critical value of t* using the visual applet at <a href="https://yuriygdv.github.io/pmap4041spring2020/app-t-distr.html" class="uri">https://yuriygdv.github.io/pmap4041spring2020/app-t-distr.html</a></p>
