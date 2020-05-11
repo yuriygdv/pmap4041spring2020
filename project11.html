@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Yuriy Davydenko" />
+<meta name="author" content="" />
 
 
-<title>Computer Assignment 6: Contingency Tables</title>
+<title>Data Analysis Project - Peer Review</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -508,95 +508,22 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Computer Assignment 6: Contingency Tables</h1>
-<h4 class="author">Yuriy Davydenko</h4>
-<h4 class="date">May 11 2020</h4>
+<h1 class="title toc-ignore">Data Analysis Project - Peer Review</h1>
 
 </div>
 
 
+<style type="text/css">
+.main-container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 <p><br></p>
-<p>Download the datasets for this class:</p>
-<ul>
-<li><a href="Datasets/gss98.RData">Dataset ‘gss98’ (click “Save As”)</a></li>
-</ul>
-<p>The <a href="http://www.icpsr.umich.edu/cgi-bin/file?comp=none&amp;study=34802&amp;ds=1&amp;file_id=1136502&amp;path=ICPSR">codebook for the survey</a> to find the question wording for a variable</p>
-<p>For those who prefer to work with RCloud, a project with the same materials can be accessed using the following link:</p>
-<ul>
-<li><a href="https://rstudio.cloud/project/1023807">RCloud Project for Week 10/Computer Assignment 6</a></li>
-</ul>
-<p><br> <br></p>
-<div id="packageslibararies" class="section level2">
-<h2>Packages/Libararies</h2>
-<p>Load the necessary packages:</p>
-<pre class="r"><code>library(descr)
-library(dplyr)
-library(ggplot2)</code></pre>
-</div>
-<div id="data" class="section level2">
-<h2>Data</h2>
-<p>Load General Social Survey 98 (<code>gss98.RData</code>):</p>
-<pre class="r"><code>load(&quot;Datasets/gss98.RData&quot;)</code></pre>
-</div>
-<div id="crosstabs" class="section level2">
-<h2>Crosstabs</h2>
-<p>Have R create a CROSSTAB with <code>CAPPUN</code> as the dependent variable and <code>SEX</code> as the independent variable:</p>
-<pre class="r"><code>CrossTable(gss98$CAPPUN, gss98$SEX, prop.r = T, prop.c = T, prop.t = T, prop.chisq = F, format = &quot;SPSS&quot;)</code></pre>
-<pre><code>##    Cell Contents 
-## |-------------------------|
-## |                   Count | 
-## |             Row Percent | 
-## |          Column Percent | 
-## |           Total Percent | 
-## |-------------------------|
-## 
-## ======================================
-##                 gss98$SEX
-## gss98$CAPPUN    female    male   Total
-## --------------------------------------
-## Favor             348     309     657 
-##                  53.0%   47.0%   71.6%
-##                  67.1%   77.4%        
-##                  37.9%   33.7%        
-## --------------------------------------
-## Oppose            171      90     261 
-##                  65.5%   34.5%   28.4%
-##                  32.9%   22.6%        
-##                  18.6%    9.8%        
-## --------------------------------------
-## Total             519     399     918 
-##                  56.5%   43.5%        
-## ======================================</code></pre>
-<p><strong>Answer the following questions based on this table:</strong></p>
-<pre><code>a) Calculate the row, column, and total percentages for the first row, checking your answers against the computer output.
-
-
-b) Give brief explanations of the nine percentages in the first row (e.g., 53.0 percent of the ________ are _______).
-
-
-c) What percentage of the men oppose capital punishment for murder?
-
-
-f) What percentage of the women oppose capital punishment for murder?
-
-
-g) What percentage of those who oppose capital punishment for murder are men?
-
-
-h) What percentage of those who oppose capital punishment for murder are women?
-
-
-i) What percentage of the entire group are men?
-
-
-j) What percentage of the entire group oppose capital punishment for murder? 
-
-
-k) What percentage of the entire group are men who oppose capital punishment for murder?</code></pre>
-<p><br> <br></p>
-<hr />
-<p><em>Knit your report &amp; publish it on RPubs</em></p>
-</div>
+<iframe src="https://rpubs.com/kchen11/606953" width="100%" height="1200px">
+</iframe>
+<p><br> <iframe title="" src="https://rpubs.com/kchen11/606953"></iframe></p>
 
 
 
